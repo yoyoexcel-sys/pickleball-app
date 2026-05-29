@@ -1,0 +1,17 @@
+{
+  "name": "媛大人x匹克球",
+  "short_name": "匹克球",
+  "description": "高配低电量 · 人菜瘾大 · 球可以菜人不能怂",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#F8F7F4",
+  "theme_color": "#534AB7",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎾</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
