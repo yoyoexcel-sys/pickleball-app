@@ -298,9 +298,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
       <div class="more-group">
         <div class="more-group-title">文档资料</div>
         <div class="more-card">
-          <div class="more-row"><span class="mr-icon">📋</span><span class="mr-text">账号规划策略</span><span class="mr-arrow">›</span></div>
-          <div class="more-row"><span class="mr-icon">🧬</span><span class="mr-text">人格画像解码</span><span class="mr-arrow">›</span></div>
-          <div class="more-row"><span class="mr-icon">💰</span><span class="mr-text">流量变现报告</span><span class="mr-arrow">›</span></div>
+          <div class="more-row" onclick="location.href='docs/plan.html'"><span class="mr-icon">📋</span><span class="mr-text">账号规划策略</span><span class="mr-arrow">›</span></div>
+          <div class="more-row" onclick="location.href='docs/persona.html'"><span class="mr-icon">🧬</span><span class="mr-text">人格画像解码</span><span class="mr-arrow">›</span></div>
+          <div class="more-row" onclick="location.href='docs/monetization.html'"><span class="mr-icon">💰</span><span class="mr-text">流量变现报告</span><span class="mr-arrow">›</span></div>
         </div>
       </div>
       <div style="text-align:center;padding:20px;color:var(--text3);font-size:12px">球可以菜，人不能怂 🐾</div>
@@ -428,6 +428,7 @@ function load() {
 
 // ===== CLOUD SYNC =====
 const SYNC_API = 'https://jsonblob.com/api/jsonBlob';
+const DIR_BLOB_ID = '019e725f-f60a-7896-901f-9a2fbbce327f';
 
 function updateSyncUI(connected) {
   const dot = document.getElementById('syncDot');
@@ -458,6 +459,7 @@ function genCode() {
 async function createSyncRoom() {
   try {
     const code = genCode();
+    // Step 1: Create data blob
     const res = await fetch(SYNC_API, {
       method: 'POST',
       headers: {'Content-Type':'application/json','Accept':'application/json'},
@@ -466,9 +468,19 @@ async function createSyncRoom() {
     if (!res.ok) throw new Error('Create failed');
     const loc = res.headers.get('Location') || res.headers.get('location');
     if (!loc) throw new Error('No location');
-    const id = loc.split('/').pop();
+    const blobId = loc.split('/').pop();
+    // Step 2: Register to shared directory
+    const dirRes = await fetch(SYNC_API + '/' + DIR_BLOB_ID);
+    let dir = {};
+    if (dirRes.ok) dir = await dirRes.json();
+    dir[code] = {blobId, ts: Date.now()};
+    await fetch(SYNC_API + '/' + DIR_BLOB_ID, {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(dir)
+    });
     state.syncCode = code;
-    state.syncBlobId = id;
+    state.syncBlobId = blobId;
     state.lastSyncTime = Date.now();
     save();
     updateSyncUI(true);
@@ -480,16 +492,30 @@ async function createSyncRoom() {
   }
 }
 
-async function joinSyncRoom(code) {
-  code = code.toUpperCase().trim();
+async function joinByCode() {
+  const input = document.getElementById('joinCodeInput');
+  const code = input?.value?.toUpperCase()?.trim();
+  if (!code || code.length < 4) { toast('请输入有效的同步代码'); return; }
+  toast('正在查找房间...');
   try {
-    // Try to find blob by listing... jsonblob doesn't support search
-    // So we store the code in the blob and the user needs the full blob ID
-    // Alternative approach: encode syncCode + blobId together
-    toast('请输入完整的同步链接或房间ID');
-    return;
+    const dirRes = await fetch(SYNC_API + '/' + DIR_BLOB_ID);
+    if (!dirRes.ok) throw new Error('Dir not found');
+    const dir = await dirRes.json();
+    const entry = dir[code];
+    if (!entry) { toast('未找到该房间代码，请检查输入'); return; }
+    // Set connection
+    state.syncCode = code;
+    state.syncBlobId = entry.blobId;
+    state.lastSyncTime = Date.now();
+    save();
+    updateSyncUI(true);
+    toast('已加入房间！正在同步数据...');
+    renderSyncSheet();
+    // Pull data
+    await pullSync();
   } catch(e) {
-    toast('连接失败');
+    toast('连接失败：' + (e.message || '网络错误'));
+    console.error(e);
   }
 }
 
