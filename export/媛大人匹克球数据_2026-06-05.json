@@ -1,0 +1,314 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "确定账号简介（三选一）",
+      "tag": "ops",
+      "tagLabel": "基建",
+      "priority": "high",
+      "time": "30min",
+      "phase": 1,
+      "status": "done"
+    },
+    {
+      "id": 2,
+      "title": "小红书账号搭建（头像/封面/标签）",
+      "tag": "ops",
+      "tagLabel": "基建",
+      "priority": "high",
+      "time": "1h",
+      "phase": 1,
+      "status": "done"
+    },
+    {
+      "id": 3,
+      "title": "抖音/视频号同步搭建",
+      "tag": "ops",
+      "tagLabel": "基建",
+      "priority": "mid",
+      "time": "1h",
+      "phase": 1,
+      "status": "done"
+    },
+    {
+      "id": 4,
+      "title": "新手指南PDF转小红书图文版（3-5条）",
+      "tag": "content",
+      "tagLabel": "内容",
+      "priority": "high",
+      "time": "2h",
+      "phase": 1,
+      "status": "doing"
+    },
+    {
+      "id": 5,
+      "title": "拍第1条过渡视频（我发现了匹克球）",
+      "tag": "content",
+      "tagLabel": "内容",
+      "priority": "high",
+      "time": "1.5h",
+      "phase": 1,
+      "status": "todo"
+    },
+    {
+      "id": 6,
+      "title": "设计评论区/私信自动回复话术",
+      "tag": "growth",
+      "tagLabel": "增长",
+      "priority": "mid",
+      "time": "30min",
+      "phase": 1,
+      "status": "todo"
+    },
+    {
+      "id": 7,
+      "title": "加入2-3个厦门匹克球社群",
+      "tag": "growth",
+      "tagLabel": "增长",
+      "priority": "mid",
+      "time": "1h",
+      "phase": 1,
+      "status": "todo"
+    },
+    {
+      "id": 8,
+      "title": "建立厦门匹克球新手微信群",
+      "tag": "growth",
+      "tagLabel": "增长",
+      "priority": "low",
+      "time": "30min",
+      "phase": 1,
+      "status": "todo"
+    },
+    {
+      "id": 9,
+      "title": "拍第2条视频（反常识切入型）",
+      "tag": "content",
+      "tagLabel": "内容",
+      "priority": "high",
+      "time": "1.5h",
+      "phase": 1,
+      "status": "todo"
+    },
+    {
+      "id": 10,
+      "title": "拍第3条视频（带妞妞去打球）",
+      "tag": "content",
+      "tagLabel": "内容",
+      "priority": "mid",
+      "time": "1.5h",
+      "phase": 1,
+      "status": "todo"
+    },
+    {
+      "id": 11,
+      "title": "制作AI效率工具清单（引流钩子2）",
+      "tag": "product",
+      "tagLabel": "产品",
+      "priority": "low",
+      "time": "3h",
+      "phase": 1,
+      "status": "todo"
+    },
+    {
+      "id": 12,
+      "title": "测试不同内容引流数据→优化话术",
+      "tag": "growth",
+      "tagLabel": "增长",
+      "priority": "mid",
+      "time": "2h",
+      "phase": 1,
+      "status": "todo"
+    },
+    {
+      "id": 13,
+      "title": "第一次社群新手问答直播/文字",
+      "tag": "growth",
+      "tagLabel": "增长",
+      "priority": "low",
+      "time": "1h",
+      "phase": 1,
+      "status": "todo"
+    },
+    {
+      "id": "13b",
+      "title": "研究大丸子爆款公式，输出3条匹克球版选题",
+      "tag": "content",
+      "tagLabel": "内容",
+      "priority": "high",
+      "time": "2h",
+      "phase": 1,
+      "status": "todo"
+    },
+    {
+      "id": "13c",
+      "title": "每条视频带OOTD穿搭（学大丸子穿搭种草模式）",
+      "tag": "content",
+      "tagLabel": "内容",
+      "priority": "mid",
+      "time": "0",
+      "phase": 1,
+      "status": "todo"
+    },
+    {
+      "id": 14,
+      "title": "制作新手避坑卡（49元产品）",
+      "tag": "product",
+      "tagLabel": "产品",
+      "priority": "high",
+      "time": "4h",
+      "phase": 2,
+      "status": "todo"
+    },
+    {
+      "id": 15,
+      "title": "上架第一个低价产品",
+      "tag": "product",
+      "tagLabel": "产品",
+      "priority": "high",
+      "time": "2h",
+      "phase": 2,
+      "status": "todo"
+    },
+    {
+      "id": 16,
+      "title": "主动联系2-3个匹克球品牌谈合作",
+      "tag": "brand",
+      "tagLabel": "品牌",
+      "priority": "mid",
+      "time": "3h",
+      "phase": 3,
+      "status": "todo"
+    },
+    {
+      "id": "16b",
+      "title": "准备3条高质量装备测评+OOTD（学大丸子变现模式）",
+      "tag": "brand",
+      "tagLabel": "品牌",
+      "priority": "high",
+      "time": "4h",
+      "phase": 3,
+      "status": "todo"
+    },
+    {
+      "id": 17,
+      "title": "招募第1期球友共学营（199元）",
+      "tag": "product",
+      "tagLabel": "产品",
+      "priority": "high",
+      "time": "5h",
+      "phase": 3,
+      "status": "todo"
+    },
+    {
+      "id": 18,
+      "title": "组织第一次厦门线下新手局",
+      "tag": "brand",
+      "tagLabel": "品牌",
+      "priority": "mid",
+      "time": "4h",
+      "phase": 3,
+      "status": "todo"
+    }
+  ],
+  "milestones": [
+    {
+      "id": 1,
+      "title": "策略定稿：三份核心文档交付",
+      "desc": "账号规划、人格画像、流量变现报告",
+      "icon": "📋",
+      "type": "ms-strategy",
+      "checks": [
+        "竞品分析",
+        "定位确认",
+        "产品矩阵",
+        "90天计划"
+      ],
+      "date": "2026-05-29",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "title": "冷启动：第一条视频发布",
+      "desc": "小红书+抖音同步，我发现了匹克球",
+      "icon": "🚀",
+      "type": "ms-launch",
+      "checks": [
+        "账号搭建完成",
+        "第1条视频上线",
+        "评论区引流开启"
+      ],
+      "date": "W1 目标",
+      "status": "todo"
+    },
+    {
+      "id": 3,
+      "title": "蓄水达标：小红书500粉",
+      "desc": "验证匹克球新手标签能吸引到人",
+      "icon": "📈",
+      "type": "ms-growth",
+      "checks": [
+        "粉丝500+",
+        "微信100+",
+        "新手群50+"
+      ],
+      "date": "W4 目标",
+      "status": "todo"
+    },
+    {
+      "id": 4,
+      "title": "第一个付费产品上架",
+      "desc": "新手避坑卡 49元，验证付费意愿",
+      "icon": "💰",
+      "type": "ms-product",
+      "checks": [
+        "产品制作完成",
+        "上架测试",
+        "首10单成交"
+      ],
+      "date": "W5-W6",
+      "status": "todo"
+    },
+    {
+      "id": 5,
+      "title": "第一笔品牌合作收入",
+      "desc": "装备测评或场馆探店，0→1突破",
+      "icon": "🤝",
+      "type": "ms-brand",
+      "checks": [
+        "主动联系3+品牌",
+        "拿到报价",
+        "发布首条商务"
+      ],
+      "date": "W9-W12",
+      "status": "todo"
+    },
+    {
+      "id": 6,
+      "title": "商业模式跑通：月入5000+",
+      "desc": "多SKU+品牌合作+社群收入",
+      "icon": "🎯",
+      "type": "ms-growth",
+      "checks": [
+        "月收入5000+",
+        "第二期共学营",
+        "品牌长期合作"
+      ],
+      "date": "W12 目标",
+      "status": "todo"
+    }
+  ],
+  "currentPhase": 1,
+  "stats": {
+    "weekPosts": 0,
+    "followers": 0,
+    "weixin": 0,
+    "buffer": 0
+  },
+  "weeklyDone": {},
+  "streak": 1,
+  "lastActiveDate": "Fri Jun 05 2026",
+  "syncCode": null,
+  "syncBlobId": null,
+  "lastSyncTime": null
+}

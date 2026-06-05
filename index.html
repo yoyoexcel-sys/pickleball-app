@@ -301,6 +301,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
           <div class="more-row" onclick="location.href='docs/plan.html'"><span class="mr-icon">📋</span><span class="mr-text">账号规划策略</span><span class="mr-arrow">›</span></div>
           <div class="more-row" onclick="location.href='docs/persona.html'"><span class="mr-icon">🧬</span><span class="mr-text">人格画像解码</span><span class="mr-arrow">›</span></div>
           <div class="more-row" onclick="location.href='docs/monetization.html'"><span class="mr-icon">💰</span><span class="mr-text">流量变现报告</span><span class="mr-arrow">›</span></div>
+          <div class="more-row" onclick="location.href='docs/competitor.html'"><span class="mr-icon">🔍</span><span class="mr-text">竞品深度分析</span><span class="mr-badge">新</span><span class="mr-arrow">›</span></div>
         </div>
       </div>
       <div style="text-align:center;padding:20px;color:var(--text3);font-size:12px">球可以菜，人不能怂 🐾</div>
@@ -347,9 +348,12 @@ const DEFAULT_TASKS = [
   {id:11,title:"制作AI效率工具清单（引流钩子2）",tag:"product",tagLabel:"产品",priority:"low",time:"3h",phase:1,status:"todo"},
   {id:12,title:"测试不同内容引流数据→优化话术",tag:"growth",tagLabel:"增长",priority:"mid",time:"2h",phase:1,status:"todo"},
   {id:13,title:"第一次社群新手问答直播/文字",tag:"growth",tagLabel:"增长",priority:"low",time:"1h",phase:1,status:"todo"},
+  {id:13b,title:"研究大丸子爆款公式，输出3条匹克球版选题",tag:"content",tagLabel:"内容",priority:"high",time:"2h",phase:1,status:"todo"},
+  {id:13c,title:"每条视频带OOTD穿搭（学大丸子穿搭种草模式）",tag:"content",tagLabel:"内容",priority:"mid",time:"0",phase:1,status:"todo"},
   {id:14,title:"制作新手避坑卡（49元产品）",tag:"product",tagLabel:"产品",priority:"high",time:"4h",phase:2,status:"todo"},
   {id:15,title:"上架第一个低价产品",tag:"product",tagLabel:"产品",priority:"high",time:"2h",phase:2,status:"todo"},
   {id:16,title:"主动联系2-3个匹克球品牌谈合作",tag:"brand",tagLabel:"品牌",priority:"mid",time:"3h",phase:3,status:"todo"},
+  {id:16b,title:"准备3条高质量装备测评+OOTD（学大丸子变现模式）",tag:"brand",tagLabel:"品牌",priority:"high",time:"4h",phase:3,status:"todo"},
   {id:17,title:"招募第1期球友共学营（199元）",tag:"product",tagLabel:"产品",priority:"high",time:"5h",phase:3,status:"todo"},
   {id:18,title:"组织第一次厦门线下新手局",tag:"brand",tagLabel:"品牌",priority:"mid",time:"4h",phase:3,status:"todo"},
 ];
@@ -458,27 +462,33 @@ function genCode() {
 
 async function createSyncRoom() {
   try {
+    toast('正在创建同步房间...');
     const code = genCode();
-    // Step 1: Create data blob
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 15000);
     const res = await fetch(SYNC_API, {
       method: 'POST',
       headers: {'Content-Type':'application/json','Accept':'application/json'},
-      body: JSON.stringify({code, data: state, ts: Date.now()})
+      body: JSON.stringify({code, data: state, ts: Date.now()}),
+      signal: ctrl.signal
     });
-    if (!res.ok) throw new Error('Create failed');
+    clearTimeout(timer);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const loc = res.headers.get('Location') || res.headers.get('location');
-    if (!loc) throw new Error('No location');
+    if (!loc) throw new Error('No location header');
     const blobId = loc.split('/').pop();
     // Step 2: Register to shared directory
-    const dirRes = await fetch(SYNC_API + '/' + DIR_BLOB_ID);
-    let dir = {};
-    if (dirRes.ok) dir = await dirRes.json();
-    dir[code] = {blobId, ts: Date.now()};
-    await fetch(SYNC_API + '/' + DIR_BLOB_ID, {
-      method: 'PUT',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(dir)
-    });
+    try {
+      const dirRes = await fetch(SYNC_API + '/' + DIR_BLOB_ID);
+      let dir = {};
+      if (dirRes.ok) dir = await dirRes.json();
+      dir[code] = {blobId, ts: Date.now()};
+      await fetch(SYNC_API + '/' + DIR_BLOB_ID, {
+        method: 'PUT',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(dir)
+      });
+    } catch(de) { console.warn('Dir register failed', de); }
     state.syncCode = code;
     state.syncBlobId = blobId;
     state.lastSyncTime = Date.now();
@@ -487,9 +497,29 @@ async function createSyncRoom() {
     toast('同步房间已创建！代码：' + code);
     renderSyncSheet();
   } catch(e) {
-    toast('创建失败，请检查网络');
-    console.error(e);
+    if (e.name === 'AbortError') {
+      toast('请求超时，请检查网络后重试');
+    } else {
+      toast('创建失败（' + e.message + '），可尝试手动连接');
+    }
+    renderSyncSheet();
   }
+}
+
+function manualConnect() {
+  const codeEl = document.getElementById('manualCode');
+  const blobEl = document.getElementById('manualBlobId');
+  const code = codeEl?.value?.toUpperCase()?.trim();
+  const blobId = blobEl?.value?.trim();
+  if (!code || !blobId) { toast('请填写同步代码和Blob ID'); return; }
+  state.syncCode = code;
+  state.syncBlobId = blobId;
+  state.lastSyncTime = Date.now();
+  save();
+  updateSyncUI(true);
+  toast('手动连接成功！代码：' + code);
+  pushSync();
+  renderSyncSheet();
 }
 
 async function joinByCode() {
@@ -806,14 +836,26 @@ function closeSheet(e) {
 }
 
 function renderSyncSheet() {
-  const hasCode = !!state.syncCode;
+  const hasCode = !!state.syncCode && !!state.syncBlobId;
   return `
-    <div class="modal-title">☁️ 云同步</div>
+    <div class="modal-title">☁️ 数据同步</div>
     <div class="sync-panel">
       <p style="font-size:13px;color:var(--text2);margin-bottom:16px">在手机和电脑之间同步你的所有进度数据。</p>
+      <div style="padding:12px;background:var(--amber-l);border-radius:10px;margin-bottom:16px;text-align:left">
+        <div style="font-size:12px;color:var(--amber);font-weight:600;margin-bottom:6px">推荐方式：导出 → 导入（最稳定）</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">
+          1. 在此设备点击「导出数据」，下载JSON文件<br>
+          2. 将文件传到手机（微信发给自己/airdrop/网盘）<br>
+          3. 手机打开应用，点「导入数据」，选择该文件
+        </div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button class="sync-btn sync-btn-primary" style="flex:1" onclick="exportData()">📥 导出数据</button>
+          <button class="sync-btn sync-btn-secondary" style="flex:1" onclick="importData()">📤 导入数据</button>
+        </div>
+      </div>
       ${hasCode ? `
-        <div style="margin:16px 0;padding:16px;background:var(--green-l);border-radius:12px;text-align:center">
-          <div style="font-size:13px;color:var(--green);font-weight:600;margin-bottom:8px">✅ 已连接</div>
+        <div style="margin:12px 0;padding:16px;background:var(--green-l);border-radius:12px;text-align:center">
+          <div style="font-size:13px;color:var(--green);font-weight:600;margin-bottom:8px">✅ 云同步已连接</div>
           <div style="font-size:28px;font-weight:700;letter-spacing:4px;color:var(--green)">${state.syncCode}</div>
           <div style="font-size:11px;color:var(--text3);margin-top:6px">在另一台设备上输入此代码即可同步</div>
         </div>
@@ -822,12 +864,14 @@ function renderSyncSheet() {
           <button class="sync-btn sync-btn-secondary" style="flex:1" onclick="disconnectSync()">断开连接</button>
         </div>
       ` : `
-        <button class="sync-btn sync-btn-primary" style="width:100%;padding:14px" onclick="createSyncRoom()">创建同步房间</button>
-        <div style="margin-top:16px">
-          <div style="font-size:13px;color:var(--text2);margin-bottom:8px">已有同步代码？</div>
-          <div class="sync-code-box">
-            <input class="sync-code" id="joinCodeInput" placeholder="输入代码" maxlength="6" autocapitalize="characters" autocomplete="off" spellcheck="false">
-            <button class="sync-btn sync-btn-secondary" onclick="joinByCode()">加入</button>
+        <div style="text-align:left">
+          <div style="font-size:12px;color:var(--text3);margin-bottom:10px">云同步（需要网络能访问jsonblob.com）</div>
+          <button class="sync-btn sync-btn-primary" style="width:100%;padding:14px;margin-bottom:10px" onclick="createSyncRoom()">创建同步房间</button>
+          <div style="margin-top:12px">
+            <div style="font-size:12px;color:var(--text3);margin-bottom:8px">已有同步代码和Blob ID？</div>
+            <input class="sync-code" id="manualCode" placeholder="6位同步代码" maxlength="6" style="width:100%;margin-bottom:6px;font-size:16px">
+            <input class="sync-code" id="manualBlobId" placeholder="Blob ID（UUID格式）" style="width:100%;margin-bottom:8px;font-size:11px;letter-spacing:0">
+            <button class="sync-btn sync-btn-secondary" style="width:100%" onclick="manualConnect()">手动连接</button>
           </div>
         </div>
       `}
@@ -954,7 +998,7 @@ function renderSOP(type) {
         {n:'1',title:'数据看板',sub:'5min：查看各平台数据，重点关注收藏/评论/涨粉'},
         {n:'2',title:'找出TOP内容',sub:'5min：哪条数据最好？为什么？记录到选题库'},
         {n:'3',title:'评论区扫雷',sub:'10min：找有价值的评论/问题 = 下周选题'},
-        {n:'4',title:'竞品检查',sub:'5min：看看大丸子、大刚博士发了什么'},
+        {n:'4',title:'竞品检查',sub:'5min：看看大丸子、大刚博士发了什么，参考竞品分析文档'},
         {n:'5',title:'下周计划',sub:'5min：定3个选题+1个额外任务'},
       ]
     },

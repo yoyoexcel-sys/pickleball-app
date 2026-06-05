@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#534AB7">
+<title>竞品深度分析</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue',sans-serif;background:#F8F7F4;color:#1A1A1A;font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.back-btn{position:fixed;top:calc(env(safe-area-inset-top) + 8px);left:12px;z-index:100;background:rgba(83,74,183,.9);color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;backdrop-filter:blur(8px);cursor:pointer}
+.doc-header{background:linear-gradient(135deg,#534AB7 0%,#3D3590 100%);color:#fff;padding:60px 20px 30px;text-align:center}
+.doc-header h1{font-size:22px;font-weight:700}
+.doc-header p{font-size:13px;opacity:.8;margin-top:6px}
+.doc-body{max-width:680px;margin:0 auto;padding:20px}
+.doc-section{background:#fff;border-radius:14px;padding:20px;margin-bottom:16px;border:1px solid #E8E6E1}
+.doc-section h2{font-size:17px;font-weight:700;color:#534AB7;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #EEEDFE}
+.doc-section h3{font-size:15px;font-weight:600;margin:16px 0 8px;color:#1A1A1A}
+.doc-section p{margin-bottom:10px;color:#333}
+.doc-section ul{padding-left:20px;margin-bottom:12px}
+.doc-section li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+th{background:#EEEDFE;color:#534AB7;padding:10px;text-align:left;font-weight:600}
+td{padding:10px;border-bottom:1px solid #E8E6E1;vertical-align:top}
+tr:nth-child(even){background:#FAFAF8}
+.highlight{background:#E1F5EE;padding:12px 16px;border-radius:10px;margin:12px 0;font-size:14px;color:#0F6E56;border-left:3px solid #0F6E56}
+.quote{background:#EEEDFE;padding:14px 16px;border-radius:10px;margin:12px 0;font-size:14px;color:#534AB7;font-weight:500;border-left:3px solid #534AB7}
+.tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:500;margin:2px}
+.tag-purple{background:#EEEDFE;color:#534AB7}
+.tag-teal{background:#E1F5EE;color:#0F6E56}
+.tag-coral{background:#FAECE7;color:#D85A30}
+.tag-pink{background:#FBEAF0;color:#D4537E}
+.tag-blue{background:#E6F1FB;color:#378ADD}
+.tag-amber{background:#FAEEDA;color:#BA7517}
+.formula-box{background:#FAFAF8;border-radius:12px;padding:16px;margin:12px 0;border:1px dashed #E8E6E1}
+.formula-box h4{font-size:14px;font-weight:600;color:#D85A30;margin-bottom:8px}
+.formula-box .formula{font-size:16px;font-weight:700;color:#534AB7;margin:8px 0}
+.formula-box p{font-size:13px;color:#666}
+.pyramid{background:#FAFAF8;border-radius:14px;padding:20px;margin:12px 0}
+.pyramid-level{padding:14px 16px;margin-bottom:8px;border-radius:10px;font-size:14px;font-weight:500}
+.pyramid-level .pct{font-size:12px;opacity:.7;float:right}
+.p-20{background:#FBEAF0;color:#D4537E;border-left:3px solid #D4537E}
+.p-50{background:#EEEDFE;color:#534AB7;border-left:3px solid #534AB7}
+.p-20b{background:#E1F5EE;color:#0F6E56;border-left:3px solid #0F6E56}
+.p-10{background:#E6F1FB;color:#378ADD;border-left:3px solid #378ADD}
+.vs-table{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;margin:16px 0}
+.vs-col{background:#fff;border-radius:12px;padding:16px;border:1px solid #E8E6E1}
+.vs-col h4{font-size:15px;font-weight:700;margin-bottom:10px;text-align:center}
+.vs-arrow{display:flex;align-items:center;justify-content:center;font-size:20px;color:#534AB7}
+.checklist{display:flex;flex-direction:column;gap:8px}
+.check-item{display:flex;align-items:flex-start;gap:8px;font-size:14px}
+.check-box{width:18px;height:18px;border:2px solid #E8E6E1;border-radius:4px;flex-shrink:0;margin-top:1px}
+.action-week{background:#FAFAF8;border-radius:12px;padding:16px;margin:10px 0;border-left:3px solid #534AB7}
+.action-week h4{font-size:14px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.action-week ul{list-style:none;padding-left:0}
+.action-week li{padding:4px 0;font-size:13px;color:#444}
+.action-week li::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.w1 li::before{background:#D4537E}
+.w2 li::before{background:#534AB7}
+.w3 li::before{background:#0F6E56}
+.w4 li::before{background:#378ADD}
+.title-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500;vertical-align:middle;margin-left:6px}
+</style>
+</head>
+<body>
+<button class="back-btn" onclick="history.back()">← 返回App</button>
+
+<div class="doc-header">
+  <h1>🔍 竞品深度分析：网球大丸子</h1>
+  <p>调研日期：2026-06-04 · 为媛大人匹克球赛道定制</p>
+</div>
+
+<div class="doc-body">
+
+<!-- ====== 第一部分：账号画像 ====== -->
+<div class="doc-section">
+<h2>一、账号基础画像</h2>
+<table>
+<tr><th>维度</th><th>信息</th></tr>
+<tr><td><strong>账号名</strong></td><td>网球大丸子 🍡</td></tr>
+<tr><td><strong>百科词条</strong></td><td>大丸子（百度百科已收录）</td></tr>
+<tr><td><strong>B站 UID</strong></td><td>145776505</td></tr>
+<tr><td><strong>B站签名</strong></td><td>Yonex签约博主 / 看球17年"网"瘾小趴菜 / 高原缺氧狂奔女战士</td></tr>
+<tr><td><strong>抖音号</strong></td><td>58313826</td></tr>
+<tr><td><strong>头条号</strong></td><td>运筹帷幄网球大丸子</td></tr>
+<tr><td><strong>Tennis123</strong></td><td>樱桃大丸子（有分级赛参赛记录）</td></tr>
+<tr><td><strong>核心身份</strong></td><td><span class="tag tag-teal">Yonex签约博主</span> 品牌背书</td></tr>
+<tr><td><strong>粉丝量</strong></td><td>约23万（抖音，2025年7月数据）</td></tr>
+<tr><td><strong>媒体背书</strong></td><td>曾被 CCTV / 广州台报道</td></tr>
+</table>
+
+<div class="highlight">
+<strong>核心定位：</strong>不是技术大神，是"和你一起进步的球友"。自评约 NTRP 3.0（业余中等偏上），在 Tennis123 分级赛有参赛记录。她的成功在于——替每个"菜但热爱"的普通人发声。
+</div>
+</div>
+
+<!-- ====== 第二部分：人设方程式 ====== -->
+<div class="doc-section">
+<h2>二、人设方程式</h2>
+<div class="quote" style="font-size:15px;text-align:center">
+热爱 + 真实 + 有趣 + 专业 = "又菜又爱玩"的邻家球友
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0">
+  <div class="highlight" style="border-left-color:#0F6E56">
+    <strong style="color:#0F6E56">热爱</strong><br>
+    看球17年死忠粉 + 坚持练球的业余选手
+  </div>
+  <div class="highlight" style="border-left-color:#D85A30">
+    <strong style="color:#D85A30">真实</strong><br>
+    水货自认 + 进步可见 + 菜但努力
+  </div>
+  <div class="highlight" style="border-left-color:#534AB7">
+    <strong style="color:#534AB7">有趣</strong><br>
+    自黑幽默 + 搞笑剪辑 + 球场整活
+  </div>
+  <div class="highlight" style="border-left-color:#378ADD">
+    <strong style="color:#378ADD">专业</strong><br>
+    Yonex签约 + 装备测评 + 分级赛实战
+  </div>
+</div>
+</div>
+
+<!-- ====== 第三部分：内容金字塔 ====== -->
+<div class="doc-section">
+<h2>三、内容策略金字塔</h2>
+<div class="pyramid">
+  <div class="pyramid-level p-20">
+    <span class="pct">20%</span>
+    <strong>爆款流量层</strong> — 网球穿搭OOTD / 装备测评 / 搞笑片段<br>
+    <span style="font-size:12px;opacity:.8">作用：引流 + 涨粉 + 品牌合作入口</span>
+  </div>
+  <div class="pyramid-level p-50">
+    <span class="pct">50%</span>
+    <strong>核心内容层</strong> — 训练Vlog / 比赛记录 / 进步复盘<br>
+    <span style="font-size:12px;opacity:.8">作用：粉丝粘性 + 社区认同 + 真实感</span>
+  </div>
+  <div class="pyramid-level p-20b">
+    <span class="pct">20%</span>
+    <strong>差异化内容层</strong> — 网球+旅行 / 年终总结 / 深度故事<br>
+    <span style="font-size:12px;opacity:.8">作用：人设记忆点 + 内容壁垒</span>
+  </div>
+  <div class="pyramid-level p-10">
+    <span class="pct">10%</span>
+    <strong>商业内容层</strong> — Yonex装备展示 / 品牌合作 / 带货<br>
+    <span style="font-size:12px;opacity:.8">作用：变现闭环</span>
+  </div>
+</div>
+</div>
+
+<!-- ====== 第四部分：爆款公式 ====== -->
+<div class="doc-section">
+<h2>四、三大爆款内容公式</h2>
+
+<div class="formula-box">
+  <h4>公式1：自黑 + 反转 = 共鸣炸弹</h4>
+  <div class="formula">"有人说我是网球水货博主，但是我真的有在好好练球啊"</div>
+  <p>先接受负面标签 → 再用训练画面反转 → 情绪路径：质疑→认同→好感</p>
+  <p style="color:#0F6E56;font-weight:500">底层逻辑：替所有"菜但热爱"的人说话</p>
+</div>
+
+<div class="formula-box">
+  <h4>公式2：穿搭 + 场景 = 种草密码</h4>
+  <div class="formula">"今日穿搭 彭派奇网球卫衣 / Yli摇粒绒阔腿裤"</div>
+  <p>每条视频必带OOTD → 穿搭标签化（品牌+品类）→ 网球场景自然植入</p>
+  <p style="color:#0F6E56;font-weight:500">底层逻辑：运动场景是天然的"穿搭秀场"</p>
+</div>
+
+<div class="formula-box">
+  <h4>公式3：娱乐 + 技术 = 双频吸引</h4>
+  <div class="formula">"你们说我一个网球博主天天搞笑带货不务正业。听劝听劝，看看比赛吧"</div>
+  <p>搞笑内容吸引泛粉 → 比赛内容留住网球粉 → 先满足娱乐需求再证明专业</p>
+  <p style="color:#0F6E56;font-weight:500">底层逻辑：降低门槛，先搞笑再认真</p>
+</div>
+</div>
+
+<!-- ====== 第五部分：标签策略 ====== -->
+<div class="doc-section">
+<h2>五、标签与视觉策略</h2>
+
+<h3>高频标签（每条必带）</h3>
+<div style="margin:8px 0">
+  <span class="tag tag-purple">#网球</span>
+  <span class="tag tag-purple">#网球日常</span>
+  <span class="tag tag-purple">#网球穿搭</span>
+  <span class="tag tag-purple">#网球训练</span>
+</div>
+
+<h3>场景标签（按内容类型）</h3>
+<table>
+<tr><th>类型</th><th>常用标签</th></tr>
+<tr><td>装备类</td><td>#网球装备 #网拍穿线</td></tr>
+<tr><td>穿搭类</td><td>#运动穿搭 #美利奴羊毛 #网球裙</td></tr>
+<tr><td>比赛类</td><td>#网球比赛</td></tr>
+<tr><td>品牌类</td><td>#澳网</td></tr>
+<tr><td>人群标签</td><td>#网球女生（精准触达女性网球爱好者）</td></tr>
+</table>
+
+<h3>视觉风格</h3>
+<ul>
+  <li><strong>人设标签</strong>：🍡丸子emoji / 搞笑女 / 又菜又爱玩</li>
+  <li><strong>穿搭标签</strong>：运动感+时尚感并存，常穿美利奴羊毛、速干衣、网球裙</li>
+  <li><strong>视频节奏</strong>：抖音15-60秒快剪，B站5-15分钟深度</li>
+  <li><strong>拍摄场景</strong>：实际球场（真实感优先）</li>
+</ul>
+</div>
+
+<!-- ====== 第六部分：变现模式 ====== -->
+<div class="doc-section">
+<h2>六、商业变现模式</h2>
+<table>
+<tr><th>层级</th><th>形式</th><th>合作品牌示例</th></tr>
+<tr><td><span class="tag tag-teal">品牌签约</span></td><td>官方签约博主（年度合作）</td><td>Yonex</td></tr>
+<tr><td><span class="tag tag-blue">装备测评</span></td><td>深度测评+穿搭植入</td><td>百保力(Babolat)、AO</td></tr>
+<tr><td><span class="tag tag-coral">服装带货</span></td><td>OOTD植入+口碑推荐</td><td>乐拉(美利奴)、JSC、Yli、Puma</td></tr>
+</table>
+<div class="quote">
+<strong>变现核心逻辑：</strong>穿搭是最大的变现入口 → 每条视频的OOTD就是一次"活广告" → 品牌合作自然嵌入，粉丝不反感
+</div>
+</div>
+
+<!-- ====== 第七部分：对比分析 ====== -->
+<div class="doc-section">
+<h2>七、媛大人 vs 网球大丸子 差异化对比</h2>
+<table>
+<tr><th>维度</th><th>网球大丸子</th><th>媛大人（匹克球版）</th></tr>
+<tr><td><strong>运动</strong></td><td>网球（成熟红海）</td><td><span class="tag tag-teal">匹克球（新兴蓝海）</span></td></tr>
+<tr><td><strong>人设</strong></td><td>"又菜又爱打"的球友</td><td><span class="tag tag-coral">"35+重启"的探索者</span></td></tr>
+<tr><td><strong>年龄</strong></td><td>泛年轻群体</td><td>35+女性（精准共鸣）</td></tr>
+<tr><td><strong>叙事</strong></td><td>热爱+搞笑+进步</td><td><span class="tag tag-pink">重启+低电量+高配</span></td></tr>
+<tr><td><strong>壁垒</strong></td><td>Yonex签约+17年看球</td><td>MBA思维+创业经历+AI能力</td></tr>
+<tr><td><strong>平台</strong></td><td>抖音+B站+头条</td><td>小红书+抖音</td></tr>
+<tr><td><strong>变现</strong></td><td>品牌签约+穿搭带货</td><td>装备种草+场馆推广+社群</td></tr>
+</table>
+</div>
+
+<!-- ====== 第八部分：独特优势 ====== -->
+<div class="doc-section">
+<h2>八、媛大人的6大独特优势</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+  <div class="highlight" style="border-left-color:#534AB7">
+    <strong style="color:#534AB7">赛道先发</strong><br>
+    <span style="font-size:13px">匹克球早期红利期，竞争远小于网球</span>
+  </div>
+  <div class="highlight" style="border-left-color:#D4537E">
+    <strong style="color:#D4537E">年龄共鸣</strong><br>
+    <span style="font-size:13px">35+女性重启，击中大量中年女性的情感痛点</span>
+  </div>
+  <div class="highlight" style="border-left-color:#378ADD">
+    <strong style="color:#378ADD">MBA思维</strong><br>
+    <span style="font-size:13px">商业分析能力，内容策略更系统化</span>
+  </div>
+  <div class="highlight" style="border-left-color:#0F6E56">
+    <strong style="color:#0F6E56">创业经历</strong><br>
+    <span style="font-size:13px">MCN运营经验，懂内容工业化的逻辑</span>
+  </div>
+  <div class="highlight" style="border-left-color:#BA7517">
+    <strong style="color:#BA7517">AI能力</strong><br>
+    <span style="font-size:13px">用AI辅助内容生产，实现"低电量高效输出"</span>
+  </div>
+  <div class="highlight" style="border-left-color:#D85A30">
+    <strong style="color:#D85A30">厦门本地</strong><br>
+    <span style="font-size:13px">一线旅游城市，匹克球+城市生活有独特素材</span>
+  </div>
+</div>
+</div>
+
+<!-- ====== 第九部分：30天行动 ====== -->
+<div class="doc-section">
+<h2>九、匹克球版30天行动方案</h2>
+
+<div class="action-week w1">
+  <h4><span class="tag tag-pink">第1周</span> 人设基建 + 首批内容</h4>
+  <ul>
+    <li>确定账号名（建议：匹克球媛大人 / 媛大人打匹克）</li>
+    <li>完善主页：头像（运动风）、简介（35+重启×匹克球）、背景图</li>
+    <li>发布3-5条内容（自我介绍/匹克球OOTD/新手学习/网球vs匹克球对比/厦门探店）</li>
+  </ul>
+</div>
+
+<div class="action-week w2">
+  <h4><span class="tag tag-purple">第2周</span> 建立节奏 + 测试爆款</h4>
+  <ul>
+    <li>每天1条，测试不同内容类型的数据反馈</li>
+    <li>穿搭内容：匹克球运动穿搭（运动裙/速干T/发带等）</li>
+    <li>学习记录+自黑内容+评论区互动</li>
+  </ul>
+</div>
+
+<div class="action-week w3">
+  <h4><span class="tag tag-teal">第3周</span> 差异化内容 + 品牌接触</h4>
+  <ul>
+    <li>启动"35+重启"系列：围绕中年女性运动心理</li>
+    <li>厦门本地化内容：匹克球馆测评、球友故事</li>
+    <li>联系匹克球品牌，发送合作意向</li>
+  </ul>
+</div>
+
+<div class="action-week w4">
+  <h4><span class="tag tag-blue">第4周</span> 复盘 + 放大</h4>
+  <ul>
+    <li>数据分析：找出3条数据最好的内容，分析爆款因素</li>
+    <li>加大爆款类型产出，联系本地球友组建匹克球小组</li>
+    <li>规划下月内容日历</li>
+  </ul>
+</div>
+</div>
+
+<!-- ====== 第十部分：标题公式 ====== -->
+<div class="doc-section">
+<h2>十、可复用的标题公式库</h2>
+
+<h3>自黑+反转型</h3>
+<ul>
+  <li>"有人说35+打什么匹克球，但我真的觉得这是最适合中年人的运动"</li>
+  <li>"负债200万的人，在球场上找到了唯一不需要花钱的快乐"</li>
+  <li>"被20岁姑娘完爆后，我发现了匹克球的隐藏好处"</li>
+</ul>
+
+<h3>穿搭+种草型</h3>
+<ul>
+  <li>"35+打匹克球怎么穿？这几件平价单品好看又不尴尬"</li>
+  <li>"匹克球OOTD｜中年人的运动穿搭不需要太拼"</li>
+  <li>"今天穿这身打匹克球，被球友追问了三遍链接"</li>
+</ul>
+
+<h3>新手+成长型</h3>
+<ul>
+  <li>"第7天打匹克球，从手忙脚乱到勉强能对拉"</li>
+  <li>"匹克球新手必看的5个坑，我全踩了一遍"</li>
+  <li>"从0开始打匹克球第30天，我的身体发生了这些变化"</li>
+</ul>
+
+<h3>场景+本地化型</h3>
+<ul>
+  <li>"厦门最好的5个匹克球场地，第3个让我惊艳了"</li>
+  <li>"在厦门海边打匹克球是什么体验？"</li>
+  <li>"探店厦门网胜体育，中年人的匹克球天堂"</li>
+</ul>
+</div>
+
+<!-- ====== 第十一部分：标签策略 ====== -->
+<div class="doc-section">
+<h2>十一、匹克球版标签策略</h2>
+
+<h3>必带标签（每条）</h3>
+<div style="margin:8px 0">
+  <span class="tag tag-teal">#匹克球</span>
+  <span class="tag tag-teal">#匹克球日常</span>
+  <span class="tag tag-teal">#运动穿搭</span>
+</div>
+
+<h3>场景标签</h3>
+<table>
+<tr><th>类型</th><th>标签</th></tr>
+<tr><td>穿搭类</td><td>#匹克球穿搭 #运动OOTD #35+穿搭</td></tr>
+<tr><td>学习类</td><td>#匹克球新手 #匹克球教学 #运动打卡</td></tr>
+<tr><td>生活类</td><td>#35+重启 #中年运动 #厦门生活</td></tr>
+<tr><td>本地类</td><td>#厦门匹克球 #厦门运动</td></tr>
+<tr><td>蹭流标签</td><td>#网球 #运动女孩 #减肥运动</td></tr>
+</table>
+<div class="quote">
+<strong>蹭流策略：</strong>匹克球搜索热度远低于网球，用 #网球 标签借大盘流量，吸引对网式运动感兴趣的泛人群。
+</div>
+</div>
+
+<!-- ====== 第十二部分：品牌路线图 ====== -->
+<div class="doc-section">
+<h2>十二、品牌合作路线图</h2>
+<div class="pyramid">
+  <div class="pyramid-level p-50">
+    <span class="pct">第1-2个月</span>
+    <strong>建立内容基础</strong>：自费购买装备做真实测评，@品牌官方账号建立存在感
+  </div>
+  <div class="pyramid-level p-20">
+    <span class="pct">第3-4个月</span>
+    <strong>主动出击</strong>：向匹克球品牌发送合作提案，准备3条高质量装备测评+OOTD
+  </div>
+  <div class="pyramid-level p-20b">
+    <span class="pct">第5-6个月</span>
+    <strong>争取签约</strong>：用数据（粉丝量、互动率、穿搭曝光）打动品牌，目标至少1个年度合作
+  </div>
+  <div class="pyramid-level p-10">
+    <span class="pct">长期</span>
+    <strong>变现梯度</strong>：装备测评 → 穿搭种草 → 场馆推广 → 教学课程 → 自有品牌
+  </div>
+</div>
+</div>
+
+<!-- ====== 第十三部分：风险提示 ====== -->
+<div class="doc-section">
+<h2>十三、风险提示</h2>
+<div style="display:flex;flex-direction:column;gap:10px">
+  <div style="padding:10px 14px;background:#FCEBEB;border-radius:10px;border-left:3px solid #E24B4A">
+    <strong style="color:#E24B4A">搜索热度差距</strong><br>
+    <span style="font-size:13px">匹克球搜索热度远低于网球，需要更多教育型内容，承担"科普"角色</span>
+  </div>
+  <div style="padding:10px 14px;background:#FAEEDA;border-radius:10px;border-left:3px solid #BA7517">
+    <strong style="color:#BA7517">变现周期较长</strong><br>
+    <span style="font-size:13px">匹克球品牌少、市场小，品牌合作机会有限，需要耐心</span>
+  </div>
+  <div style="padding:10px 14px;background:#EEEDFE;border-radius:10px;border-left:3px solid #534AB7">
+    <strong style="color:#534AB7">不要照搬</strong><br>
+    <span style="font-size:13px">学结构不学表达，网球和匹克球的调性不同</span>
+  </div>
+  <div style="padding:10px 14px;background:#FBEAF0;border-radius:10px;border-left:3px solid #D4537E">
+    <strong style="color:#D4537E">"负债"人设边界</strong><br>
+    <span style="font-size:13px">真实感有感染力，但不要变成卖惨</span>
+  </div>
+  <div style="padding:10px 14px;background:#E1F5EE;border-radius:10px;border-left:3px solid #0F6E56">
+    <strong style="color:#0F6E56">35+定位双刃剑</strong><br>
+    <span style="font-size:13px">精准触达目标人群，但可能限制泛流量增长</span>
+  </div>
+</div>
+</div>
+
+<div class="doc-section" style="text-align:center;padding:24px">
+  <p style="font-size:16px;font-weight:600;color:#534AB7">大丸子的成功密码 = "热爱真实+自黑搞笑+穿搭种草+品牌背书"</p>
+  <p style="font-size:14px;color:#666;margin-top:8px">媛大人的差异化路径 = 用"35+重启"的独特叙事，在匹克球蓝海里做一个"有MBA思维的中年运动博主"</p>
+  <p style="margin-top:16px;font-size:12px;color:#9B9B9B">球可以菜，人不能怂 🐾</p>
+</div>
+
+</div>
+</body>
+</html>
