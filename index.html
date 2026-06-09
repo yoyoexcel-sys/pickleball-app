@@ -5,27 +5,27 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#FFF9F0">
+<meta name="theme-color" content="#E0F2FE">
 <title>匹克球新手修炼手册 · PickleBoard</title>
-<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogIlBpY2tsZUJvYXJkIiwgInNob3J0X25hbWUiOiAiUGlja2xlQm9hcmQiLCAic3RhcnRfdXJsIjogIi4iLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgImJhY2tncm91bmRfY29sb3IiOiAiI0ZGRjlGMCIsICJ0aGVtZV9jb2xvciI6ICIjRkZGOUYwIn0=">
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogIlBpY2tsZUJvYXJkIiwgInNob3J0X25hbWUiOiAiUGlja2xlQm9hcmQiLCAic3RhcnRfdXJsIjogIi4iLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgImJhY2tncm91bmRfY29sb3IiOiAiI0UwRjJGRSIsICJ0aGVtZV9jb2xvciI6ICIjRTBGMkZFIn0=">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#FFF9F0;--bg2:#FFFFFF;--bg3:#FFF3E6;--bg4:#F5E6D3;
+  --bg:#E0F2FE;--bg2:#FFFFFF;--bg3:#F0F9FF;--bg4:#BAE6FD;
   --green:#10B981;--green-d:#059669;--green-l:#6EE7B7;--green-bg:rgba(16,185,129,.1);
-  --accent:#F59E0B;--accent-d:#D97706;--accent-bg:rgba(245,158,11,.1);
+  --accent:#F43F5E;--accent-d:#E11D48;--accent-bg:rgba(244,63,94,.1);
   --red:#EF4444;--red-bg:rgba(239,68,68,.1);
-  --blue:#6366F1;--blue-bg:rgba(99,102,241,.1);
-  --purple:#EC4899;--purple-bg:rgba(236,72,153,.1);
+  --blue:#0EA5E9;--blue-bg:rgba(14,165,233,.1);
+  --purple:#8B5CF6;--purple-bg:rgba(139,92,246,.1);
   --orange:#F97316;--orange-bg:rgba(249,115,22,.1);
-  --pink:#F472B6;--pink-bg:rgba(244,114,182,.1);
+  --pink:#EC4899;--pink-bg:rgba(236,72,153,.1);
   --teal:#14B8A6;--teal-bg:rgba(20,184,166,.1);
-  --text:#1E1B4B;--text2:#6B7280;--text3:#9CA3AF;
-  --border:#F3E8FF;--radius:16px;--radius-s:10px;
+  --text:#0C4A6E;--text2:#64748B;--text3:#94A3B8;
+  --border:#E0F2FE;--radius:16px;--radius-s:10px;
   --safe-b:env(safe-area-inset-bottom,0px);
   --safe-t:env(safe-area-inset-top,0px);
-  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
-  --shadow-md:0 4px 12px rgba(0,0,0,.08);
+  --shadow:0 1px 3px rgba(14,165,233,.08),0 1px 2px rgba(14,165,233,.04);
+  --shadow-md:0 4px 12px rgba(14,165,233,.12);
 }
 html{font-size:16px;scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;min-height:100dvh;overflow-x:hidden}
@@ -40,9 +40,9 @@ input,textarea,select{font-family:inherit;outline:none;-webkit-appearance:none}
 
 .sidebar{display:none;position:fixed;left:0;top:0;bottom:0;width:220px;background:var(--bg2);border-right:1px solid var(--border);padding:16px 0;z-index:100;flex-direction:column;overflow-y:auto;box-shadow:var(--shadow-md)}
 .sidebar .logo{padding:0 16px 14px;border-bottom:1px solid var(--border);margin-bottom:12px}
-.sidebar .logo h2{font-size:14px;color:var(--purple);font-weight:700;display:flex;align-items:center;gap:6px}
-.sidebar .logo h2 span{font-size:20px}
-.sidebar .logo p{font-size:10px;color:var(--text3);margin-top:3px}
+.sidebar .logo img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--blue);box-shadow:0 2px 8px rgba(99,102,241,.2)}
+.sidebar .logo h2{font-size:14px;color:var(--blue);font-weight:700;display:flex;align-items:center;gap:10px}
+.sidebar .logo p{font-size:10px;color:var(--text3);margin-top:3px;padding-left:46px}
 .nav-section{padding:12px 16px 4px;font-size:9px;text-transform:uppercase;color:var(--text3);letter-spacing:1px;font-weight:600}
 .nav-item{display:flex;align-items:center;gap:9px;padding:9px 16px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s;border-left:3px solid transparent;white-space:nowrap}
 .nav-item:active{background:var(--bg3)}
@@ -65,8 +65,8 @@ input,textarea,select{font-family:inherit;outline:none;-webkit-appearance:none}
 
 .tabbar{display:flex;background:var(--bg2);border-top:1px solid var(--border);padding:6px 4px;padding-bottom:calc(6px + var(--safe-b));flex-shrink:0;z-index:80;box-shadow:0 -1px 4px rgba(0,0,0,.04)}
 .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:var(--text3);font-size:10px;transition:color .15s;position:relative;min-width:0}
-.tab-item.active{color:var(--green)}
-.tab-item.active::before{content:'';position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:20px;height:3px;background:var(--green);border-radius:2px}
+.tab-item.active{color:var(--accent)}
+.tab-item.active::before{content:'';position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:20px;height:3px;background:var(--accent);border-radius:2px}
 .tab-item:active{opacity:.7}
 .tab-icon{font-size:20px;line-height:1}
 .tab-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
@@ -313,7 +313,7 @@ input,textarea,select{font-family:inherit;outline:none;-webkit-appearance:none}
 <body>
 <div class="app">
   <nav class="sidebar">
-    <div class="logo"><h2><span>🎾</span> PickleBoard</h2><p>12周修炼追踪器</p></div>
+    <div class="logo"><h2><img src="assets/avatar.jpg" alt="avatar"> PickleBoard</h2><p>12周修炼追踪器</p></div>
     <div class="nav-section">主要</div>
     <div class="nav-item active" data-page="dashboard">📊 总览仪表盘</div>
     <div class="nav-item" data-page="kanban">📋 12周看板</div>
@@ -572,6 +572,13 @@ function rDash(){
   for(let i=1;i<=12;i++){const w=W[i-1],p=wp(i),pp=Math.round((p.c+p.s1+p.s2+p.s3)/4*100),d=wc(i),n=i===cw_i;
     wc_h+=`<button type="button" class="wk ${d?'done':''} ${n?'now':''}" onclick="owm(${i})"><div class="wh"><span class="wn">W${i}</span><span class="badge ${d?'badge-green':n?'badge-accent':'badge-blue'}">${w.pn}</span></div><div class="wt">${w.coach}</div><div class="wp"><div class="bar"><div class="bf" style="width:${pp}%"></div></div><span class="pc">${pp}%</span></div></button>`}
   el.innerHTML=`
+    <div style="border-radius:var(--radius);overflow:hidden;margin-bottom:12px;position:relative;background:linear-gradient(135deg,#0EA5E9,#38BDF8);box-shadow:var(--shadow-md)">
+      <img src="assets/cover.jpg" style="width:100%;height:180px;object-fit:cover;opacity:.95;display:block" alt="cover">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(transparent,rgba(12,74,110,.7));color:#fff">
+        <div style="font-size:18px;font-weight:800">PickleBoard 🎾</div>
+        <div style="font-size:12px;opacity:.9;margin-top:2px">12周新手修炼计划 · 夏日清凉版</div>
+      </div>
+    </div>
     <div class="grid-2" style="margin-bottom:10px">
       <div class="card stat">${pring(pct)}<div class="lbl">总体进度</div></div>
       <div class="card stat"><div class="val orange">${tc>=1000?(tc/1000).toFixed(1)+'k':tc}</div><div class="lbl">总消耗千卡</div></div>
