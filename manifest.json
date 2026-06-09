@@ -1,16 +1,16 @@
 {
-  "name": "媛大人x匹克球",
-  "short_name": "匹克球",
-  "description": "高配低电量 · 人菜瘾大 · 球可以菜人不能怂",
+  "name": "PickleBoard · 匹克球训练看板",
+  "short_name": "PickleBoard",
+  "description": "12周训练计划、防放弃预警、卡路里追踪、成就徽章",
   "start_url": "https://yoyoexcel-sys.github.io/pickleball-app/index.html",
   "scope": "https://yoyoexcel-sys.github.io/pickleball-app/",
   "display": "standalone",
-  "background_color": "#F8F7F4",
-  "theme_color": "#534AB7",
+  "background_color": "#0f1117",
+  "theme_color": "#0f1117",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎾</text></svg>",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f1117'/><text x='50' y='72' text-anchor='middle' font-size='55'>🎾</text></svg>",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"

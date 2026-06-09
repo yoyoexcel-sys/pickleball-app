@@ -5,1091 +5,1097 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#534AB7">
-<link rel="manifest" href="manifest.json?v=2">
-<meta name="apple-mobile-web-app-title" content="匹克球">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23534AB7'/><text x='50' y='72' text-anchor='middle' font-size='60'>🎾</text></svg>">
-<title>🎾 媛大人x匹克球</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎾</text></svg>">
+<meta name="theme-color" content="#0f1117">
+<title>匹克球新手修炼手册 · PickleBoard</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-mobile-web-app-title" content="PickleBoard">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f1117'/><text x='50' y='72' text-anchor='middle' font-size='55'>🎾</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f1117'/><text x='50' y='72' text-anchor='middle' font-size='55'>🎾</text></svg>">
+<meta name="description" content="匹克球12周训练看板 - 进度追踪、防放弃预警、卡路里记录、成就系统">
+<meta property="og:title" content="PickleBoard · 匹克球训练看板">
+<meta property="og:description" content="12周训练计划、防放弃预警、卡路里追踪、成就徽章，你的匹克球成长伙伴">
+<meta property="og:type" content="website">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F8F7F4;--card:#FFFFFF;--text:#1A1A1A;--text2:#6B6B6B;--text3:#9B9B9B;
-  --border:#E8E6E1;--purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3D3590;
-  --teal:#0F6E56;--teal-l:#E1F5EE;--coral:#D85A30;--coral-l:#FAECE7;
-  --pink:#D4537E;--pink-l:#FBEAF0;--blue:#378ADD;--blue-l:#E6F1FB;
-  --amber:#BA7517;--amber-l:#FAEEDA;--green:#3B6D11;--green-l:#EAF3DE;
-  --red:#E24B4A;--red-l:#FCEBEB;
-  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
-  --nav-h:56px;--status-h:44px;
+  --bg:#0f1117;--bg2:#1a1d27;--bg3:#252836;--bg4:#2e3142;
+  --green:#2ecc71;--green-d:#27ae60;--green-l:#81c784;--green-bg:rgba(46,204,113,.12);
+  --accent:#f39c12;--accent-d:#e67e22;--accent-bg:rgba(243,156,18,.12);
+  --red:#e74c3c;--red-bg:rgba(231,76,60,.12);
+  --blue:#3498db;--blue-bg:rgba(52,152,219,.12);
+  --purple:#9b59b6;--purple-bg:rgba(155,89,182,.12);
+  --orange:#e67e22;--orange-bg:rgba(230,126,34,.12);
+  --text:#e8e8e8;--text2:#9a9aaa;--text3:#666;
+  --border:#2e3142;--radius:12px;--radius-s:8px;
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --safe-t:env(safe-area-inset-top,0px);
 }
-html,body{height:100%;overflow:hidden}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC','Noto Sans SC','Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+html{font-size:16px;scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;min-height:100dvh;overflow-x:hidden}
+a{color:var(--green);text-decoration:none}
+button{cursor:pointer;font-family:inherit;border:none;outline:none;-webkit-appearance:none}
+input,textarea,select{font-family:inherit;outline:none;-webkit-appearance:none}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:2px}
 
-/* ===== App Shell ===== */
-#app{height:100%;display:flex;flex-direction:column;padding-top:var(--safe-top);padding-bottom:var(--safe-bottom)}
-.page{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--nav-h) + 8px);display:none}
-.page.active{display:block}
+.app{display:flex;flex-direction:column;height:100vh;height:100dvh}
 
-/* Status Bar */
-.status-bar{height:var(--status-h);display:flex;align-items:center;justify-content:center;background:var(--purple);color:#fff;font-size:13px;font-weight:600;letter-spacing:.5px;flex-shrink:0;position:relative;z-index:10}
-.status-bar .sync-dot{width:6px;height:6px;border-radius:50%;margin-right:6px;display:inline-block}
-.sync-dot.online{background:#4ADE80;box-shadow:0 0 6px #4ADE80}
-.sync-dot.offline{background:#FBBF24}
-.sync-dot.syncing{background:#60A5FA;animation:pulse 1s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.sidebar{display:none;position:fixed;left:0;top:0;bottom:0;width:220px;background:var(--bg2);border-right:1px solid var(--border);padding:16px 0;z-index:100;flex-direction:column;overflow-y:auto}
+.sidebar .logo{padding:0 16px 14px;border-bottom:1px solid var(--border);margin-bottom:12px}
+.sidebar .logo h2{font-size:14px;color:var(--green);font-weight:700;display:flex;align-items:center;gap:6px}
+.sidebar .logo h2 span{font-size:20px}
+.sidebar .logo p{font-size:10px;color:var(--text3);margin-top:3px}
+.nav-section{padding:12px 16px 4px;font-size:9px;text-transform:uppercase;color:var(--text3);letter-spacing:1px;font-weight:600}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 16px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s;border-left:3px solid transparent;white-space:nowrap}
+.nav-item:active{background:var(--bg3)}
+.nav-item.active{background:var(--green-bg);color:var(--green);border-left-color:var(--green);font-weight:600}
+.sidebar-footer{padding:12px 16px;border-top:1px solid var(--border);font-size:10px;color:var(--text3);margin-top:auto}
 
-/* Bottom Nav */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-h) + var(--safe-bottom));background:var(--card);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:var(--safe-bottom)}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--text3);font-size:10px;font-weight:500;cursor:pointer;transition:color .2s;position:relative;-webkit-user-select:none;user-select:none}
-.nav-item.active{color:var(--purple)}
-.nav-item .nav-icon{font-size:22px;height:28px;display:flex;align-items:center;justify-content:center}
-.nav-item.active::before{content:'';position:absolute;top:-1px;left:25%;right:25%;height:2px;background:var(--purple);border-radius:0 0 2px 2px}
-.nav-badge{position:absolute;top:4px;right:calc(50% - 18px);min-width:16px;height:16px;border-radius:8px;background:var(--coral);color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 
-/* ===== Page: Dashboard ===== */
-.dash-header{background:linear-gradient(135deg,var(--purple) 0%,var(--purple-d) 100%);color:#fff;padding:24px 20px 32px;position:relative;overflow:hidden}
-.dash-header::after{content:'';position:absolute;bottom:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.08)}
-.dash-greeting{font-size:13px;opacity:.8;margin-bottom:4px}
-.dash-title{font-size:22px;font-weight:700}
-.dash-sub{font-size:13px;opacity:.7;margin-top:4px}
-.dash-streak{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);padding:4px 12px;border-radius:20px;font-size:12px;margin-top:12px;backdrop-filter:blur(4px)}
+.topbar{display:none;position:sticky;top:0;z-index:50;background:rgba(15,17,23,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:10px 24px;align-items:center;justify-content:space-between;gap:12px}
+.topbar h1{font-size:16px;font-weight:700}
+.topbar .streak-badge{display:flex;align-items:center;gap:5px;background:var(--accent-bg);color:var(--accent);padding:5px 12px;border-radius:16px;font-size:12px;font-weight:600}
 
-.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:16px;margin-top:-16px;position:relative;z-index:2}
-.stat-card{background:var(--card);border-radius:14px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid var(--border)}
-.stat-label{font-size:12px;color:var(--text3);margin-bottom:4px}
-.stat-num{font-size:26px;font-weight:700;line-height:1.2}
-.stat-sub{font-size:11px;color:var(--text2);margin-top:2px}
-.stat-purple .stat-num{color:var(--purple)}
-.stat-teal .stat-num{color:var(--teal)}
-.stat-coral .stat-num{color:var(--coral)}
-.stat-amber .stat-num{color:var(--amber)}
+.page-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;padding-top:calc(12px + var(--safe-t));flex-shrink:0}
+.page-header h1{font-size:17px;font-weight:700}
+.page-header .streak{display:flex;align-items:center;gap:4px;background:var(--accent-bg);color:var(--accent);padding:4px 10px;border-radius:14px;font-size:12px;font-weight:600}
 
-/* Today Card */
-.section-title{font-size:15px;font-weight:600;padding:16px 20px 8px;color:var(--text)}
-.today-card{margin:0 16px;background:var(--card);border-radius:14px;border:1px solid var(--border);overflow:hidden}
-.today-header{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
-.today-header h3{font-size:15px;font-weight:600}
-.today-tag{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:500}
-.today-tasks{padding:8px 0}
-.today-task{padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:14px}
-.today-task .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.today-task.done{text-decoration:line-through;color:var(--text3)}
-.today-task.done .dot{background:var(--green)!important}
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px 16px;padding-bottom:calc(16px + var(--safe-b))}
+.page{display:none}
+.page.active{display:block;animation:fadeIn .2s ease}
 
-/* Quick Actions */
-.quick-actions{display:flex;gap:10px;padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.quick-actions::-webkit-scrollbar{display:none}
-.qa-btn{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:14px;cursor:pointer;font-size:12px;color:var(--text2);font-weight:500;min-width:80px;transition:all .15s}
-.qa-btn:active{transform:scale(.96);background:var(--bg)}
-.qa-btn .qa-icon{font-size:24px}
-.qa-btn.highlight{background:var(--purple-l);border-color:var(--purple);color:var(--purple)}
+.tabbar{display:flex;background:var(--bg2);border-top:1px solid var(--border);padding:6px 4px;padding-bottom:calc(6px + var(--safe-b));flex-shrink:0;z-index:80}
+.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:var(--text3);font-size:10px;transition:color .15s;position:relative;min-width:0}
+.tab-item.active{color:var(--green)}
+.tab-item.active::before{content:'';position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:20px;height:3px;background:var(--green);border-radius:2px}
+.tab-item:active{opacity:.7}
+.tab-icon{font-size:20px;line-height:1}
+.tab-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 
-/* Phase Progress */
-.phase-bar{display:flex;height:32px;margin:0 16px;border-radius:10px;overflow:hidden;background:var(--border)}
-.phase-seg{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#fff;transition:flex .5s;min-width:0;overflow:hidden}
-.phase-seg span{white-space:nowrap}
-
-/* ===== Page: Tasks ===== */
-.tasks-header{padding:12px 20px;display:flex;align-items:center;justify-content:space-between;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
-.tasks-header h2{font-size:17px;font-weight:600}
-.phase-tabs{display:flex;gap:6px;overflow-x:auto;padding:8px 16px;scrollbar-width:none}
-.phase-tabs::-webkit-scrollbar{display:none}
-.phase-tab{flex-shrink:0;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);background:var(--card);border:1px solid var(--border);cursor:pointer;transition:all .15s;white-space:nowrap}
-.phase-tab.active{background:var(--purple);color:#fff;border-color:var(--purple)}
-
-/* Kanban Columns - horizontal swipe on mobile */
-.kanban-swipe{display:flex;gap:12px;padding:12px 16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;min-height:calc(100vh - 180px)}
-.kanban-swipe::-webkit-scrollbar{display:none}
-.kanban-col{min-width:calc(100vw - 56px);max-width:320px;flex-shrink:0;scroll-snap-align:start}
-@media(min-width:768px){.kanban-col{min-width:280px;max-width:360px}}
-.kcol-header{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;margin-bottom:8px}
-.kcol-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
-.kcol-count{min-width:20px;height:20px;border-radius:6px;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
-.col-todo .kcol-count{background:var(--amber-l);color:var(--amber)}
-.col-doing .kcol-count{background:var(--blue-l);color:var(--blue)}
-.col-done .kcol-count{background:var(--green-l);color:var(--green)}
-
-.task-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer;transition:all .15s}
-.task-card:active{transform:scale(.98);background:var(--bg)}
-.task-card.done-card{opacity:.5}
-.task-card.done-card .tc-title{text-decoration:line-through}
-.tc-tag{display:inline-block;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:500;margin-bottom:6px}
-.tag-content{background:var(--purple-l);color:var(--purple)}
-.tag-product{background:var(--teal-l);color:var(--teal)}
-.tag-growth{background:var(--coral-l);color:var(--coral)}
-.tag-ops{background:var(--amber-l);color:var(--amber)}
-.tag-brand{background:var(--pink-l);color:var(--pink)}
-.tc-title{font-size:14px;font-weight:500;margin-bottom:6px;line-height:1.4}
-.tc-meta{font-size:11px;color:var(--text3);display:flex;gap:10px;align-items:center}
-.tc-priority{width:7px;height:7px;border-radius:50%;display:inline-block}
-.p-high{background:var(--red)}.p-mid{background:var(--amber)}.p-low{background:var(--green)}
-
-/* ===== Page: Milestones ===== */
-.ms-page{padding:16px}
-.ms-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;transition:all .15s}
-.ms-item:active{transform:scale(.98)}
-.ms-item.completed{opacity:.5}
-.ms-item.completed .ms-title{text-decoration:line-through}
-.ms-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.ms-body{flex:1;min-width:0}
-.ms-title{font-size:15px;font-weight:600;margin-bottom:3px}
-.ms-desc{font-size:13px;color:var(--text2);margin-bottom:6px}
-.ms-checks{display:flex;flex-wrap:wrap;gap:6px}
-.ms-check{font-size:11px;padding:2px 8px;border-radius:4px;background:var(--bg);color:var(--text3)}
-.ms-check.done{background:var(--green-l);color:var(--green);text-decoration:line-through}
-.ms-date{font-size:12px;color:var(--purple);font-weight:600;white-space:nowrap;flex-shrink:0}
-
-/* ===== Page: Weekly ===== */
-.weekly-page{padding:16px}
-.wk-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;transition:all .15s}
-.wk-card.is-today{border-color:var(--purple);box-shadow:0 0 0 1px var(--purple-l)}
-.wk-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.wk-day{font-size:16px;font-weight:700}
-.wk-card.is-today .wk-day{color:var(--purple)}
-.wk-label{font-size:11px;padding:3px 10px;border-radius:8px;font-weight:500;background:var(--bg);color:var(--text2)}
-.wk-time{font-size:12px;color:var(--text3);margin-bottom:8px}
-.wk-tasks{display:flex;flex-direction:column;gap:6px}
-.wk-task{display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 10px;background:var(--bg);border-radius:8px;border-left:3px solid var(--purple);cursor:pointer}
-.wk-task.done{opacity:.5;text-decoration:line-through}
-.wk-task[data-type="shoot"]{border-left-color:var(--coral)}
-.wk-task[data-type="edit"]{border-left-color:var(--blue)}
-.wk-task[data-type="post"]{border-left-color:var(--teal)}
-.wk-task[data-type="rest"]{border-left-color:var(--green)}
-
-/* ===== Page: More ===== */
-.more-page{padding:16px}
-.more-group{margin-bottom:20px}
-.more-group-title{font-size:13px;font-weight:600;color:var(--text3);padding:0 4px 8px;text-transform:uppercase;letter-spacing:1px}
-.more-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-.more-row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
-.more-row:last-child{border-bottom:none}
-.more-row:active{background:var(--bg)}
-.more-row .mr-icon{font-size:22px;width:32px;text-align:center;flex-shrink:0}
-.more-row .mr-text{flex:1;font-size:14px;font-weight:500}
-.more-row .mr-arrow{color:var(--text3);font-size:14px}
-.more-row .mr-badge{font-size:11px;padding:2px 8px;border-radius:6px;background:var(--purple-l);color:var(--purple);font-weight:500}
-
-/* Modals / Sheets */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;display:none;align-items:flex-end;justify-content:center}
-.modal-overlay.show{display:flex}
-.modal-sheet{background:var(--card);border-radius:20px 20px 0 0;width:100%;max-width:500px;max-height:85vh;overflow-y:auto;padding:20px;padding-bottom:calc(20px + var(--safe-bottom));animation:slideUp .3s ease}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-handle{width:36px;height:4px;background:var(--border);border-radius:4px;margin:0 auto 16px}
-.modal-title{font-size:18px;font-weight:700;margin-bottom:16px}
-
-/* SOP Content */
-.sop-block{background:var(--bg);border-radius:12px;padding:16px;margin-bottom:12px}
-.sop-step{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
-.sop-num{width:22px;height:22px;border-radius:50%;background:var(--purple-l);color:var(--purple);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.sop-text{font-size:13px;line-height:1.5}
-.sop-text strong{font-weight:600}
-.sop-sub{font-size:11px;color:var(--text3);margin-top:2px}
-
-/* Anti Quit */
-.quit-meter{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px}
-.quit-meter-label{font-size:13px;color:var(--text2);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
-.quit-meter-val{font-size:22px;font-weight:700}
-.quit-bar{height:6px;background:var(--border);border-radius:6px;overflow:hidden}
-.quit-fill{height:100%;border-radius:6px;transition:width .5s}
-.quit-tip{font-size:11px;color:var(--text3);margin-top:4px}
-
-/* Sync Panel */
-.sync-panel{text-align:center;padding:10px 0}
-.sync-code-box{display:flex;gap:8px;margin:12px 0}
-.sync-code{flex:1;padding:12px 16px;border:2px solid var(--border);border-radius:12px;font-size:20px;font-weight:700;letter-spacing:4px;text-align:center;text-transform:uppercase;background:var(--bg);color:var(--text)}
-.sync-code:focus{outline:none;border-color:var(--purple)}
-.sync-btn{padding:10px 20px;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit}
-.sync-btn:active{transform:scale(.96)}
-.sync-btn-primary{background:var(--purple);color:#fff}
-.sync-btn-secondary{background:var(--bg);color:var(--text);border:1px solid var(--border)}
-.sync-status{font-size:13px;color:var(--text2);margin-top:12px;padding:10px;background:var(--bg);border-radius:8px}
-
-/* Toast */
-.toast{position:fixed;top:calc(var(--safe-top) + var(--status-h) + 10px);left:50%;transform:translateX(-50%) translateY(-80px);background:var(--text);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:500;z-index:999;transition:transform .3s ease;pointer-events:none;max-width:calc(100vw - 40px);text-align:center}
-.toast.show{transform:translateX(-50%) translateY(0)}
-
-/* Desktop adjustments */
-@media(min-width:768px){
-  .bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:500px;border-radius:16px 16px 0 0;border-left:1px solid var(--border);border-right:1px solid var(--border)}
-  .kanban-col{min-width:280px}
-  .stats-grid{grid-template-columns:repeat(4,1fr)}
-  .dash-header{padding:32px 40px 40px}
-  .phase-tabs{justify-content:center}
+@media(min-width:769px){
+  .sidebar{display:flex}
+  .main{margin-left:220px}
+  .topbar{display:flex}
+  .tabbar{display:none}
+  .page-header{display:none}
+  .content{padding:20px 28px;max-width:1400px}
 }
+
+/* Components */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.card-title{font-size:14px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:400px){.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(2,1fr)}}
+
+.stat{text-align:center;padding:14px 8px}
+.stat .val{font-size:28px;font-weight:800;line-height:1.2}
+.stat .val.green{color:var(--green)}
+.stat .val.accent{color:var(--accent)}
+.stat .val.blue{color:var(--blue)}
+.stat .val.purple{color:var(--purple)}
+.stat .val.orange{color:var(--orange)}
+.stat .val.red{color:var(--red)}
+.stat .lbl{font-size:11px;color:var(--text3);margin-top:4px}
+.stat .sub{font-size:10px;color:var(--text3);margin-top:2px}
+
+.pring{display:inline-flex;align-items:center;justify-content:center;position:relative}
+.pring svg{transform:rotate(-90deg)}
+.pring .pv{position:absolute;font-size:14px;font-weight:800;color:var(--green)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:9px 16px;border-radius:var(--radius-s);font-size:13px;font-weight:600;transition:all .15s;min-height:40px}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:active{background:var(--green-d);transform:scale(.97)}
+.btn-secondary{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:active{background:var(--bg4)}
+.btn-danger{background:var(--red-bg);color:var(--red)}
+.btn-sm{padding:6px 12px;font-size:12px;min-height:32px}
+.btn-full{width:100%}
+
+.badge{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:12px;font-size:10px;font-weight:600}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-accent{background:var(--accent-bg);color:var(--accent)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.badge-purple{background:var(--purple-bg);color:var(--purple)}
+.badge-orange{background:var(--orange-bg);color:var(--orange)}
+
+.wk{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-s);padding:12px;margin-bottom:8px;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;text-align:left;font-family:inherit;color:var(--text);-webkit-appearance:none;appearance:none;width:100%}
+.wk:active{transform:scale(.98);border-color:var(--green)}
+.wk.done{opacity:.6;border-left:3px solid var(--green)}
+.wk.now{border-left:3px solid var(--accent)}
+.wk .wh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.wk .wn{font-size:13px;font-weight:700}
+.wk .wt{font-size:12px;color:var(--text2);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.wk .wp{display:flex;align-items:center;gap:6px;margin-top:8px}
+.wk .wp .bar{flex:1;height:3px;background:var(--bg);border-radius:2px;overflow:hidden}
+.wk .wp .bf{height:100%;background:var(--green);border-radius:2px;transition:width .3s}
+.wk .wp .pc{font-size:10px;color:var(--text3);min-width:28px;text-align:right}
+
+.kboard{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
+.kcol{min-width:260px;flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;scroll-snap-align:start}
+.kcol-h{padding:10px 12px;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.kcol-h .ct{background:var(--bg4);padding:2px 7px;border-radius:8px;font-size:10px;color:var(--text2)}
+.kcol.p1 .kcol-h{background:var(--green-bg);color:var(--green)}
+.kcol.p2 .kcol-h{background:var(--accent-bg);color:var(--accent)}
+.kcol.p3 .kcol-h{background:var(--purple-bg);color:var(--purple)}
+.kcol.p4 .kcol-h{background:var(--blue-bg);color:var(--blue)}
+.kcol-b{padding:10px}
+@media(max-width:768px){.kboard{flex-direction:column}.kcol{min-width:auto}}
+
+.sop{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-s);padding:14px;margin-bottom:10px}
+.sop .sl{font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.sop .st{color:var(--accent);font-weight:600;font-size:11px;text-transform:none;letter-spacing:0}
+.sop ul{padding-left:16px;font-size:13px;color:var(--text2);line-height:1.7}
+.sop ul li{margin-bottom:1px}
+
+.ck{list-style:none;padding:0}
+.ck li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.ck li:last-child{border-bottom:none}
+.ck .cb{width:22px;height:22px;border-radius:6px;border:2px solid var(--bg4);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .15s;cursor:pointer;font-family:inherit;padding:0;background:none;-webkit-appearance:none;appearance:none}
+.ck .cb.on{background:var(--green);border-color:var(--green)}
+.ck .cb.on::after{content:'✓';color:#fff;font-size:12px;font-weight:700}
+.ck .ct{color:var(--text)}
+.ck .ct.on{text-decoration:line-through;color:var(--text3)}
+
+.modal-bg{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:200;display:none;justify-content:center;align-items:flex-end;align-items:center}
+.modal-bg.open{display:flex}
+.modal{background:var(--bg2);border-radius:16px 16px 0 0;width:100%;max-width:720px;max-height:92vh;overflow-y:auto;position:relative;-webkit-overflow-scrolling:touch}
+@media(min-width:769px){.modal{border-radius:16px;margin:20px auto;max-height:85vh}.modal-bg{align-items:center}}
+.modal-h{padding:18px 18px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;position:sticky;top:0;background:var(--bg2);z-index:1}
+.modal-h h2{font-size:17px;font-weight:700}
+.modal-h .sub{font-size:12px;color:var(--text2);margin-top:3px}
+.modal-x{width:30px;height:30px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:16px;flex-shrink:0}
+.modal-b{padding:16px 18px}
+.modal-f{padding:12px 18px;border-top:1px solid var(--border);display:flex;justify-content:end;gap:8px;position:sticky;bottom:0;background:var(--bg2)}
+
+.alert{padding:14px 16px;border-radius:var(--radius-s);margin-bottom:10px;font-size:13px;line-height:1.6}
+.alert.g{background:var(--green-bg);border-left:3px solid var(--green)}
+.alert.y{background:var(--accent-bg);border-left:3px solid var(--accent)}
+.alert.r{background:var(--red-bg);border-left:3px solid var(--red)}
+.alert .at{font-weight:700;margin-bottom:3px}
+
+.ach{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:8px}
+.ach.lock{opacity:.35;filter:grayscale(.7)}
+.ach.on{border-color:var(--accent)}
+.ach .ai{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.ach .ai.gb{background:var(--green-bg)}.ach .ai.ab{background:var(--accent-bg)}.ach .ai.bb{background:var(--blue-bg)}.ach .ai.pb{background:var(--purple-bg)}.ach .ai.ob{background:var(--orange-bg)}
+.ach h4{font-size:13px;font-weight:600}
+.ach p{font-size:11px;color:var(--text3);margin-top:1px}
+
+.log{padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:8px}
+.log .lh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.log .ld{font-size:11px;color:var(--text3)}
+.log .lc{font-size:12px;color:var(--text2)}
+
+.ref{padding:14px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:10px}
+.ref .rq{font-size:13px;font-weight:600;margin-bottom:8px;color:var(--green)}
+.ref textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-s);padding:10px;color:var(--text);font-size:14px;resize:vertical;min-height:56px;line-height:1.5}
+.ref textarea:focus{border-color:var(--green)}
+
+.qm{background:var(--bg3);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.qm .qb{height:6px;background:var(--bg);border-radius:3px;overflow:hidden;margin:10px 0}
+.qm .qf{height:100%;border-radius:3px;transition:width .4s}
+.qm .ql{display:flex;justify-content:space-between;font-size:11px;color:var(--text2)}
+
+.rs{counter-reset:step;padding-left:0;list-style:none}
+.rs li{position:relative;padding-left:44px;margin-bottom:18px}
+.rs li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--green-bg);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.rs li h4{font-size:13px;font-weight:600;margin-bottom:3px}
+.rs li p{font-size:12px;color:var(--text2);line-height:1.5}
+
+/* Heatmap */
+.heatmap{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin:8px 0}
+.hm-cell{aspect-ratio:1;border-radius:3px;position:relative;font-size:9px;display:flex;align-items:center;justify-content:center;color:var(--text3);transition:all .2s}
+.hm-cell.hm-0{background:var(--bg)}
+.hm-cell.hm-1{background:var(--green-bg)}
+.hm-cell.hm-2{background:rgba(46,204,113,.25)}
+.hm-cell.hm-3{background:rgba(46,204,113,.45)}
+.hm-cell.hm-4{background:var(--green)}
+.hm-day{font-size:10px;color:var(--text3);text-align:center;padding:4px 0;font-weight:600}
+.hm-wk{font-size:10px;color:var(--text3);display:flex;align-items:center;justify-content:flex-end;padding-right:4px;min-width:20px}
+
+/* Risk trend */
+.risk-trend{display:flex;align-items:flex-end;gap:2px;height:60px;padding:4px 0}
+.rt-bar{flex:1;min-width:6px;border-radius:2px 2px 0 0;transition:height .3s;position:relative}
+.rt-bar:hover::after{content:attr(data-v);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-size:9px;color:var(--text2);background:var(--bg);padding:1px 3px;border-radius:2px;white-space:nowrap}
+
+/* Restart button */
+.restart-btn{display:flex;align-items:center;gap:12px;padding:16px;background:linear-gradient(135deg,var(--green-bg),rgba(46,204,113,.2));border:2px solid var(--green);border-radius:var(--radius);margin-top:10px;cursor:pointer;transition:all .2s;width:100%;text-align:left;font-family:inherit;color:var(--text)}
+.restart-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(46,204,113,.2)}
+.restart-btn:active{transform:scale(.98)}
+.restart-btn .rb-icon{font-size:28px}
+.restart-btn .rb-title{font-size:15px;font-weight:700;color:var(--green)}
+.restart-btn .rb-desc{font-size:12px;color:var(--text2);margin-top:2px}
+
+/* Week completion */
+.wc-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)}
+.wc-row:last-child{border-bottom:none}
+.wc-label{font-size:12px;color:var(--text2);min-width:36px}
+.wc-bar-bg{flex:1;height:8px;background:var(--bg);border-radius:4px;overflow:hidden}
+.wc-bar-fill{height:100%;border-radius:4px;transition:width .4s}
+.wc-val{font-size:11px;font-weight:700;min-width:40px;text-align:right}
+
+/* Phase card */
+.phase-card{padding:12px;border-radius:var(--radius-s);border:1px solid var(--border);margin-bottom:8px;display:flex;gap:12px;align-items:flex-start}
+.phase-card .pc-icon{font-size:24px;flex-shrink:0}
+.phase-card .pc-title{font-size:13px;font-weight:700}
+.phase-card .pc-desc{font-size:12px;color:var(--text2);line-height:1.5;margin-top:2px}
+
+/* Personal motivation */
+.motivation-box{background:linear-gradient(135deg,rgba(46,204,113,.08),rgba(52,211,153,.12));border:1px solid rgba(46,204,113,.2);border-radius:var(--radius);padding:16px;text-align:center;margin-bottom:12px}
+.motivation-box .mq{font-size:15px;font-weight:600;color:var(--text);line-height:1.6}
+.motivation-box .ma{font-size:12px;color:var(--green);margin-top:6px}
+
+.quote{background:linear-gradient(135deg,rgba(46,204,113,.06),rgba(52,152,219,.06));border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;margin:12px 0}
+.quote .qt{font-size:14px;font-style:italic;line-height:1.6}
+.quote .qa{font-size:11px;color:var(--text3);margin-top:6px}
+
+.toast{position:fixed;bottom:calc(20px + var(--safe-b));left:50%;transform:translateX(-50%) translateY(60px);background:var(--bg3);border:1px solid var(--green);border-radius:var(--radius-s);padding:10px 18px;font-size:13px;z-index:999;opacity:0;transition:all .25s;white-space:nowrap;max-width:calc(100% - 32px);overflow:hidden;text-overflow:ellipsis}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+.sync-box{padding:16px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px}
+.sync-box h3{font-size:14px;font-weight:600;margin-bottom:8px}
+.sync-box p{font-size:12px;color:var(--text2);margin-bottom:10px;line-height:1.5}
+.sync-box textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-s);padding:10px;color:var(--text);font-size:11px;resize:vertical;min-height:60px;word-break:break-all;font-family:monospace}
+.sync-box textarea:focus{border-color:var(--green)}
+.sync-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+
+.rtbl{width:100%;border-collapse:collapse;font-size:12px}
+.rtbl th{text-align:left;padding:8px 6px;color:var(--text3);font-weight:600;border-bottom:1px solid var(--border)}
+.rtbl td{padding:8px 6px;color:var(--text2);border-bottom:1px solid var(--border)}
+.rtbl td:first-child{font-weight:600;color:var(--text)}
+
+/* Calorie / Fitness chart */
+.cal-bar{display:flex;align-items:flex-end;gap:4px;height:120px;padding:0 4px}
+.cal-bar .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}
+.cal-bar .bar-fill{width:100%;border-radius:4px 4px 0 0;transition:height .3s;min-height:2px;position:relative}
+.cal-bar .bar-fill .bar-val{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--text2);white-space:nowrap}
+.cal-bar .bar-label{font-size:9px;color:var(--text3);white-space:nowrap}
+.cal-bar .bar-day.today .bar-fill{box-shadow:0 0 8px rgba(46,204,113,.3)}
+
+.hr-zone{display:flex;height:24px;border-radius:12px;overflow:hidden;margin:8px 0}
+.hr-zone>div{transition:width .3s;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff}
+.hz1{background:#60a5fa}.hz2{background:#34d399}.hz3{background:#fbbf24}.hz4{background:#f97316}.hz5{background:#ef4444}
+
+.intensity-row{display:flex;gap:6px}
+.intensity-btn{flex:1;padding:10px 6px;border-radius:var(--radius-s);background:var(--bg3);border:2px solid var(--border);text-align:center;cursor:pointer;transition:all .15s;font-family:inherit;color:var(--text);-webkit-appearance:none;appearance:none}
+.intensity-btn.sel{border-color:var(--green);background:var(--green-bg)}
+.intensity-btn .int-icon{font-size:18px}
+.intensity-btn .int-label{font-size:11px;font-weight:600;margin-top:2px}
+.intensity-btn .int-desc{font-size:9px;color:var(--text3)}
+
+.cal-est{background:var(--green-bg);border:1px solid var(--border);border-radius:var(--radius-s);padding:10px 14px;text-align:center;margin-top:12px}
+.cal-est .cal-num{font-size:28px;font-weight:800;color:var(--green)}
+.cal-est .cal-unit{font-size:12px;color:var(--text3)}
+.cal-src-label{transition:all .15s;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-user-select:none}
+.cal-src-active{background:var(--green-bg)!important;border-color:var(--green)!important;color:var(--green)!important;font-weight:600}
+
+/* Weight tracker */
+.wt-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.wt-row:last-child{border-bottom:none}
+.wt-date{font-size:12px;color:var(--text3);min-width:80px}
+.wt-val{font-size:15px;font-weight:700;flex:1}
+.wt-diff{font-size:11px;font-weight:600}
+.wt-diff.down{color:var(--green)}.wt-diff.up{color:var(--red)}.wt-diff.same{color:var(--text3)}
+
+.wt-spark{display:flex;align-items:flex-end;gap:2px;height:50px}
+.wt-spark .spark-bar{flex:1;background:var(--green);border-radius:2px 2px 0 0;min-width:3px;transition:height .3s;opacity:.6}
+.wt-spark .spark-bar:last-child{opacity:1}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.streak-fire{animation:pulse 1.5s infinite}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text3)}
+.empty-state .ei{font-size:40px;margin-bottom:10px}
 </style>
 </head>
 <body>
-<div id="app">
-  <!-- Status Bar -->
-  <div class="status-bar" id="statusBar">
-    <span class="sync-dot offline" id="syncDot"></span>
-    <span id="syncText">准备同步</span>
-  </div>
+<div class="app">
+  <nav class="sidebar">
+    <div class="logo"><h2><span>🎾</span> PickleBoard</h2><p>12周修炼追踪器</p></div>
+    <div class="nav-section">主要</div>
+    <div class="nav-item active" data-page="dashboard">📊 总览仪表盘</div>
+    <div class="nav-item" data-page="kanban">📋 12周看板</div>
+    <div class="nav-item" data-page="training">📝 训练日志</div>
+    <div class="nav-section">身体数据</div>
+    <div class="nav-item" data-page="fitness">💪 健身数据</div>
+    <div class="nav-section">追踪</div>
+    <div class="nav-item" data-page="anti-quit">⭐ 防放弃系统</div>
+    <div class="nav-item" data-page="achievements">🏅 成就徽章</div>
+    <div class="nav-item" data-page="reflection">🪞 周度复盘</div>
+    <div class="nav-item" data-page="rules">📖 规则速查</div>
+    <div class="nav-section">其他</div>
+    <div class="nav-item" data-page="sync">🔄 数据同步</div>
+    <div class="nav-item" data-page="settings">⚙️ 数据管理</div>
+    <div class="sidebar-footer">v3.3 · 朱朱的电量</div>
+  </nav>
 
-  <!-- ===== Page: Dashboard ===== -->
-  <div class="page active" id="page-dash">
-    <div class="dash-header">
-      <div class="dash-greeting" id="greeting"></div>
-      <div class="dash-title">媛大人 x 匹克球</div>
-      <div class="dash-sub">高配低电量 · 人菜瘾大 · 球可以菜人不能怂</div>
-      <div class="dash-streak" id="streakBadge">🔥 连续 <span id="streakNum">0</span> 天</div>
-    </div>
-    <div class="stats-grid">
-      <div class="stat-card stat-purple"><div class="stat-label">本周已发布</div><div class="stat-num" id="sWeekPosts">0</div><div class="stat-sub">目标 3 条</div></div>
-      <div class="stat-card stat-teal"><div class="stat-label">小红书粉丝</div><div class="stat-num" id="sFollowers">0</div><div class="stat-sub">首月 500+</div></div>
-      <div class="stat-card stat-coral"><div class="stat-label">微信新增</div><div class="stat-num" id="sWeixin">0</div><div class="stat-sub">首月 100+</div></div>
-      <div class="stat-card stat-amber"><div class="stat-label">缓冲库存</div><div class="stat-num" id="sBuffer">0</div><div class="stat-sub">安全线 3 条</div></div>
-    </div>
-    <div class="phase-bar" id="phaseBar"></div>
-    <div class="section-title">📍 今日聚焦</div>
-    <div class="today-card" id="todayCard"></div>
-    <div class="section-title" style="margin-top:4px">⚡ 快捷操作</div>
-    <div style="padding:0 16px 16px"><div class="quick-actions">
-      <div class="qa-btn highlight" onclick="quickPost()"><div class="qa-icon">✅</div>记录发布</div>
-      <div class="qa-btn" onclick="quickBall()"><div class="qa-icon">🎾</div>记录打球</div>
-      <div class="qa-btn" onclick="quickBuffer()"><div class="qa-icon">📦</div>补库存</div>
-      <div class="qa-btn" onclick="openSheet('sync')"><div class="qa-icon">☁️</div>同步数据</div>
-      <div class="qa-btn" onclick="openSheet('antiquit')"><div class="qa-icon">🛡️</div>防放弃</div>
-    </div></div>
-  </div>
-
-  <!-- ===== Page: Tasks ===== -->
-  <div class="page" id="page-tasks">
-    <div class="tasks-header"><h2>📋 任务看板</h2><span id="taskSummary" style="font-size:12px;color:var(--text3)"></span></div>
-    <div class="phase-tabs" id="phaseTabs"></div>
-    <div class="kanban-swipe" id="kanban"></div>
-  </div>
-
-  <!-- ===== Page: Milestones ===== -->
-  <div class="page" id="page-ms">
-    <div class="tasks-header"><h2>🎯 里程碑</h2></div>
-    <div class="ms-page" id="msList"></div>
-  </div>
-
-  <!-- ===== Page: Weekly ===== -->
-  <div class="page" id="page-weekly">
-    <div class="tasks-header"><h2>📅 本周计划</h2></div>
-    <div class="weekly-page" id="weeklyList"></div>
-  </div>
-
-  <!-- ===== Page: More ===== -->
-  <div class="page" id="page-more">
-    <div class="tasks-header"><h2>⚙️ 更多</h2></div>
-    <div class="more-page">
-      <div class="more-group">
-        <div class="more-group-title">工作方法</div>
-        <div class="more-card">
-          <div class="more-row" onclick="openSheet('sop-content')"><span class="mr-icon">📝</span><span class="mr-text">内容生产SOP</span><span class="mr-arrow">›</span></div>
-          <div class="more-row" onclick="openSheet('sop-weekly')"><span class="mr-icon">📊</span><span class="mr-text">每周复盘SOP</span><span class="mr-arrow">›</span></div>
-          <div class="more-row" onclick="openSheet('sop-wechat')"><span class="mr-icon">📱</span><span class="mr-text">朋友圈运营SOP</span><span class="mr-arrow">›</span></div>
-          <div class="more-row" onclick="openSheet('sop-growth')"><span class="mr-icon">🎯</span><span class="mr-text">引流转化SOP</span><span class="mr-arrow">›</span></div>
-        </div>
+  <div class="main">
+    <div class="topbar">
+      <h1 id="ptitle">总览仪表盘</h1>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="streak-badge" style="cursor:pointer" onclick="go('fitness')"><span>🔥</span><span id="streak-c">0</span><span>天</span></div>
+        <div class="streak-badge" style="background:var(--green-bg);color:var(--green);cursor:pointer" onclick="go('fitness')"><span>⚡</span><span id="cal-c">0</span><span>千卡</span></div>
       </div>
-      <div class="more-group">
-        <div class="more-group-title">数据 & 同步</div>
-        <div class="more-card">
-          <div class="more-row" onclick="openSheet('stats-edit')"><span class="mr-icon">📈</span><span class="mr-text">更新数据</span><span class="mr-badge">重要</span><span class="mr-arrow">›</span></div>
-          <div class="more-row" onclick="openSheet('sync')"><span class="mr-icon">☁️</span><span class="mr-text">云同步设置</span><span class="mr-badge" id="syncBadge">未连接</span><span class="mr-arrow">›</span></div>
-          <div class="more-row" onclick="exportData()"><span class="mr-icon">📥</span><span class="mr-text">导出数据</span><span class="mr-arrow">›</span></div>
-          <div class="more-row" onclick="importData()"><span class="mr-icon">📤</span><span class="mr-text">导入数据</span><span class="mr-arrow">›</span></div>
-        </div>
-      </div>
-      <div class="more-group">
-        <div class="more-group-title">文档资料</div>
-        <div class="more-card">
-          <div class="more-row" onclick="location.href='docs/plan.html'"><span class="mr-icon">📋</span><span class="mr-text">账号规划策略</span><span class="mr-arrow">›</span></div>
-          <div class="more-row" onclick="location.href='docs/persona.html'"><span class="mr-icon">🧬</span><span class="mr-text">人格画像解码</span><span class="mr-arrow">›</span></div>
-          <div class="more-row" onclick="location.href='docs/monetization.html'"><span class="mr-icon">💰</span><span class="mr-text">流量变现报告</span><span class="mr-arrow">›</span></div>
-          <div class="more-row" onclick="location.href='docs/competitor.html'"><span class="mr-icon">🔍</span><span class="mr-text">竞品深度分析</span><span class="mr-badge">新</span><span class="mr-arrow">›</span></div>
-        </div>
-      </div>
-      <div style="text-align:center;padding:20px;color:var(--text3);font-size:12px">球可以菜，人不能怂 🐾</div>
     </div>
-  </div>
-
-  <!-- ===== Bottom Navigation ===== -->
-  <div class="bottom-nav">
-    <div class="nav-item active" data-page="dash"><div class="nav-icon">🏠</div>首页</div>
-    <div class="nav-item" data-page="tasks"><div class="nav-icon">📋</div>任务<span class="nav-badge" id="taskBadge"></span></div>
-    <div class="nav-item" data-page="ms"><div class="nav-icon">🎯</div>里程碑</div>
-    <div class="nav-item" data-page="weekly"><div class="nav-icon">📅</div>周计划</div>
-    <div class="nav-item" data-page="more"><div class="nav-icon">⚙️</div>更多</div>
+    <div class="page-header">
+      <h1 id="mtitle">总览仪表盘</h1>
+      <div style="display:flex;gap:6px;align-items:center">
+        <div class="streak" style="background:var(--accent-bg)"><span class="streak-fire">🔥</span><span id="streak-m">0</span></div>
+        <div class="streak" style="background:var(--green-bg);color:var(--green);font-size:11px"><span>⚡</span><span id="cal-m">0</span></div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="page active" id="pg-dashboard"></div>
+      <div class="page" id="pg-kanban"></div>
+      <div class="page" id="pg-training"></div>
+      <div class="page" id="pg-fitness"></div>
+      <div class="page" id="pg-anti-quit"></div>
+      <div class="page" id="pg-achievements"></div>
+      <div class="page" id="pg-reflection"></div>
+      <div class="page" id="pg-rules"></div>
+      <div class="page" id="pg-sync"></div>
+      <div class="page" id="pg-settings"></div>
+    </div>
+    <div class="tabbar">
+      <div class="tab-item active" data-page="dashboard"><span class="tab-icon">📊</span><span class="tab-label">总览</span></div>
+      <div class="tab-item" data-page="kanban"><span class="tab-icon">📋</span><span class="tab-label">看板</span></div>
+      <div class="tab-item" data-page="training"><span class="tab-icon">📝</span><span class="tab-label">日志</span></div>
+      <div class="tab-item" data-page="fitness"><span class="tab-icon">💪</span><span class="tab-label">健身</span></div>
+      <div class="tab-item" data-page="anti-quit"><span class="tab-icon">⭐</span><span class="tab-label">防放弃</span></div>
+    </div>
   </div>
 </div>
 
-<!-- Modal Overlay -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeSheet(event)">
-  <div class="modal-sheet" id="modalSheet">
-    <div class="modal-handle"></div>
-    <div id="modalContent"></div>
-  </div>
-</div>
+<!-- Week modal -->
+<div class="modal-bg" id="wmodal"><div class="modal"><div class="modal-h"><div><h2 id="wm-title"></h2><div class="sub" id="wm-sub"></div></div><button class="modal-x" onclick="cwm()">×</button></div><div class="modal-b" id="wm-body"></div><div class="modal-f" id="wm-foot"></div></div></div>
+<!-- Log modal -->
+<div class="modal-bg" id="lmodal"><div class="modal" style="max-width:480px"><div class="modal-h"><div><h2>记录训练</h2><div class="sub" id="lm-sub"></div></div><button class="modal-x" onclick="clm()">×</button></div><div class="modal-b" id="lm-body"></div><div class="modal-f"><button class="btn btn-secondary" onclick="clm()">取消</button><button class="btn btn-primary" onclick="savelog()">💾 保存</button></div></div></div>
+<!-- Weight modal -->
+<div class="modal-bg" id="wtmodal"><div class="modal" style="max-width:360px"><div class="modal-h"><div><h2>记录体重</h2></div><button class="modal-x" onclick="document.getElementById('wtmodal').classList.remove('open')">×</button></div><div class="modal-b" id="wt-body"></div><div class="modal-f"><button class="btn btn-secondary" onclick="document.getElementById('wtmodal').classList.remove('open')">取消</button><button class="btn btn-primary" onclick="savewt()">💾 保存</button></div></div></div>
+<!-- More menu (mobile) -->
+<div class="modal-bg" id="mmenu"><div class="modal" style="max-width:320px"><div class="modal-h"><h2>更多功能</h2><button class="modal-x" onclick="document.getElementById('mmenu').classList.remove('open')">×</button></div><div class="modal-b" style="padding:8px 12px">
+  <div class="nav-item" data-page="achievements" style="border-radius:var(--radius-s);margin-bottom:4px">🏅 成就徽章</div>
+  <div class="nav-item" data-page="reflection" style="border-radius:var(--radius-s);margin-bottom:4px">🪞 周度复盘</div>
+  <div class="nav-item" data-page="rules" style="border-radius:var(--radius-s);margin-bottom:4px">📖 规则速查</div>
+  <div class="nav-item" data-page="sync" style="border-radius:var(--radius-s);margin-bottom:4px">🔄 数据同步</div>
+  <div class="nav-item" data-page="settings" style="border-radius:var(--radius-s)">⚙️ 数据管理</div>
+</div></div></div>
 
-<!-- Hidden file input for import -->
-<input type="file" id="importInput" accept=".json" style="display:none" onchange="handleImport(event)">
-
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ===== DATA MODEL =====
-const DEFAULT_TASKS = [
-  {id:1,title:"确定账号简介（三选一）",tag:"ops",tagLabel:"基建",priority:"high",time:"30min",phase:1,status:"done"},
-  {id:2,title:"小红书账号搭建（头像/封面/标签）",tag:"ops",tagLabel:"基建",priority:"high",time:"1h",phase:1,status:"done"},
-  {id:3,title:"抖音/视频号同步搭建",tag:"ops",tagLabel:"基建",priority:"mid",time:"1h",phase:1,status:"done"},
-  {id:4,title:"新手指南PDF转小红书图文版（3-5条）",tag:"content",tagLabel:"内容",priority:"high",time:"2h",phase:1,status:"doing"},
-  {id:5,title:"拍第1条过渡视频（我发现了匹克球）",tag:"content",tagLabel:"内容",priority:"high",time:"1.5h",phase:1,status:"todo"},
-  {id:6,title:"设计评论区/私信自动回复话术",tag:"growth",tagLabel:"增长",priority:"mid",time:"30min",phase:1,status:"todo"},
-  {id:7,title:"加入2-3个厦门匹克球社群",tag:"growth",tagLabel:"增长",priority:"mid",time:"1h",phase:1,status:"todo"},
-  {id:8,title:"建立厦门匹克球新手微信群",tag:"growth",tagLabel:"增长",priority:"low",time:"30min",phase:1,status:"todo"},
-  {id:9,title:"拍第2条视频（反常识切入型）",tag:"content",tagLabel:"内容",priority:"high",time:"1.5h",phase:1,status:"todo"},
-  {id:10,title:"拍第3条视频（带妞妞去打球）",tag:"content",tagLabel:"内容",priority:"mid",time:"1.5h",phase:1,status:"todo"},
-  {id:11,title:"制作AI效率工具清单（引流钩子2）",tag:"product",tagLabel:"产品",priority:"low",time:"3h",phase:1,status:"todo"},
-  {id:12,title:"测试不同内容引流数据→优化话术",tag:"growth",tagLabel:"增长",priority:"mid",time:"2h",phase:1,status:"todo"},
-  {id:13,title:"第一次社群新手问答直播/文字",tag:"growth",tagLabel:"增长",priority:"low",time:"1h",phase:1,status:"todo"},
-  {id:13b,title:"研究大丸子爆款公式，输出3条匹克球版选题",tag:"content",tagLabel:"内容",priority:"high",time:"2h",phase:1,status:"todo"},
-  {id:13c,title:"每条视频带OOTD穿搭（学大丸子穿搭种草模式）",tag:"content",tagLabel:"内容",priority:"mid",time:"0",phase:1,status:"todo"},
-  {id:14,title:"制作新手避坑卡（49元产品）",tag:"product",tagLabel:"产品",priority:"high",time:"4h",phase:2,status:"todo"},
-  {id:15,title:"上架第一个低价产品",tag:"product",tagLabel:"产品",priority:"high",time:"2h",phase:2,status:"todo"},
-  {id:16,title:"主动联系2-3个匹克球品牌谈合作",tag:"brand",tagLabel:"品牌",priority:"mid",time:"3h",phase:3,status:"todo"},
-  {id:16b,title:"准备3条高质量装备测评+OOTD（学大丸子变现模式）",tag:"brand",tagLabel:"品牌",priority:"high",time:"4h",phase:3,status:"todo"},
-  {id:17,title:"招募第1期球友共学营（199元）",tag:"product",tagLabel:"产品",priority:"high",time:"5h",phase:3,status:"todo"},
-  {id:18,title:"组织第一次厦门线下新手局",tag:"brand",tagLabel:"品牌",priority:"mid",time:"4h",phase:3,status:"todo"},
+// ═══════════════ DATA ═══════════════
+const W=[
+{id:1,ph:1,pn:'规范与常识',coach:'大陆式握拍+准备姿势',kp:['虎口对准拍柄侧棱','双膝微屈、重心前倾、拍子在胸前方'],s1:'练习握拍切换（正手↔反手↔大陆式各20次）；对镜检查准备姿势；颠球',s2:'增加重复次数；闭眼握拍确认手感；墙前轻拍球感受弹跳',s3:'复习全部内容；对墙轻轻击球（感受拍面触球）',ms:['能正确切换大陆式握拍','准备姿势自然放松','颠球连续15个']},
+{id:2,ph:1,pn:'规范与常识',coach:'球场常识+计分规则+基本移动',kp:['知道厨房区位置和规则','理解双弹跳规则','学会并步移动'],s1:'球场上走一遍各区域；并步移动（左右各10趟）',s2:'模拟发球站位；正反手交替颠球；并步+跨步组合',s3:'综合复习握拍+准备姿势+移动+颠球；约球友体验第一次对打',ms:['清楚球场各区域','理解双弹跳规则','并步移动流畅']},
+{id:3,ph:2,pn:'基础击球',coach:'上手发球(Underhand Serve)',kp:['发球手低于腰线','拍头低于手腕','发对角线','基线后方不压线'],s1:'对墙练习发球动作；慢动作分解：抛球→引拍→击球→随挥，各30次',s2:'逐步加速但保持动作不变；颠球+发球组合',s3:'发球20分钟（目标连续10个合法发球）；平板支撑升级40秒/组',ms:['发球动作符合规则','连续5个合法发球']},
+{id:4,ph:2,pn:'基础击球',coach:'正手底线击球(Forehand Drive)',kp:['完整转身引拍→击球点在身体前方→随挥到底','动作路径一致'],s1:'对镜空挥正手50次（强调转身和击球点）；录像对比教练示范',s2:'对墙正手连续击球20分钟（离墙3-4米，打同一高度）',s3:'正手+发球组合练习；横向并步训练',ms:['转身引拍连贯','击球点稳定在身体前方']},
+{id:5,ph:2,pn:'基础击球',coach:'反手底线击球(Backhand Drive)',kp:['双手反手握拍','同样强调转身和击球点','不用手腕发力'],s1:'空挥反手50次；正反手切换（正手10→反手10，循环5组）',s2:'对墙反手15分钟+正手10分钟；不用手腕甩球',s3:'正反手随机切换对墙练习；社交对打中刻意用反手',ms:['反手动作规范','正反手切换无卡顿']},
+{id:6,ph:2,pn:'基础击球',coach:'截击(Volley)正手+反手',kp:['网前不落地击球','拍面固定、动作极小','肩膀和小臂发力'],s1:'空挥截击（极小幅度）正手30+反手30；网前对墙快速轻击',s2:'对墙近距离截击（1.5-2米，快速连续轻击）；底线+截击组合',s3:'发球→底线→模拟上网截击；社交对打中尝试截击',ms:['截击幅度小','拍面稳定不乱甩']},
+{id:7,ph:3,pn:'网前技术',coach:'网前小球(Dink)基本动作',kp:['轻触球而非击打球','拍面角度45度','幅度极小','低弧线下落'],s1:'空挥Dink 50次（像"接"球）；对墙近距离轻触练习',s2:'离墙1.5-2米，Dink 20分钟（球打墙上离地矮的同一区域）',s3:'Dink+底线切换；社交对打中尝试Dink',ms:['Dink轻柔可控','球能低弧线过网']},
+{id:8,ph:3,pn:'网前技术',coach:'Dink方向控制—对角线',kp:['对角线Dink最安全','飞行距离长过网高','拍面角度微调'],s1:'空挥Dink对角线（注意拍面角度微调）；对墙模拟',s2:'球场上实际练习Dink对角线（有球友最好）',s3:'Dink正手对角+反手对角切换；综合串联',ms:['控制Dink方向','对角线Dink成功率>60%']},
+{id:9,ph:3,pn:'网前技术',coach:'厨房区进退策略+Dink实战',kp:['球落地后才进厨房区','对方挑高球时退回','Dink对拉'],s1:'模拟厨房区进退：线外并步前进后退；Dink进退节奏',s2:'发球→接发球→底线→Dink→厨房区意识；强化并步进退',s3:'社交对打中练习厨房区意识和Dink策略',ms:['厨房区零犯规','Dink时进退自如']},
+{id:10,ph:4,pn:'综合对打',coach:'第三拍放小球(3rd Shot Drop)',kp:['深球用轻柔放小球过渡','匹克球核心进攻转换技术'],s1:'空挥3rd Shot Drop 40次（"放"球感）；对墙模拟弧线',s2:'发球→对墙回球→3rd Shot Drop 20分钟；弧线控制',s3:'发球→接发→底线→3rd Shot Drop→上网Dink完整流程',ms:['3rd Shot Drop弧线稳定','落点在厨房区内']},
+{id:11,ph:4,pn:'综合对打',coach:'综合模拟对打',kp:['发球→回合→过渡→网前完整流程','模拟比赛场景'],s1:'模拟比赛流程完整循环20分钟',s2:'自设场景练习："对方发球到我反手位"',s3:'约球友模拟比赛（计分）；赛后复盘',ms:['能完成完整回合','比赛流程无卡顿']},
+{id:12,ph:4,pn:'综合对打',coach:'实战计分模拟+查漏补缺',kp:['完整11分制比赛','实时指出问题','总结12周'],s1:'针对最薄弱环节集中练习',s2:'综合复习12周所有技术；多打计分比赛',s3:'🎉 毕业局！完整比赛庆祝蜕变！',ms:['完成完整比赛','能正确使用所有技术']}
+];
+const PH=[{id:1,n:'第一阶段：规范与常识',w:'1-2周'},{id:2,n:'第二阶段：基础击球',w:'3-6周'},{id:3,n:'第三阶段：网前技术',w:'7-9周'},{id:4,n:'第四阶段：综合对打',w:'10-12周'}];
+const AC=[
+{id:'fl',i:'🎯',c:'gb',n:'第一步',d:'完成第一次训练记录'},
+{id:'w1',i:'🌱',c:'gb',n:'萌芽',d:'完成第1周全部训练'},
+{id:'s3',i:'🔥',c:'ab',n:'三日燃',d:'连续3天打卡'},
+{id:'s7',i:'⚡',c:'ab',n:'一周不熄',d:'连续7天打卡'},
+{id:'s14',i:'🌟',c:'ab',n:'两周长明',d:'连续14天打卡'},
+{id:'p1',i:'📋',c:'gb',n:'基础扎实',d:'完成第一阶段'},
+{id:'p2',i:'🎾',c:'ab',n:'击球达人',d:'完成第二阶段'},
+{id:'p3',i:'🏸',c:'pb',n:'网前精灵',d:'完成第三阶段'},
+{id:'p4',i:'🏆',c:'bb',n:'毕业典礼',d:'完成全部12周'},
+{id:'l10',i:'📝',c:'bb',n:'记录者',d:'累计10次训练记录'},
+{id:'l30',i:'📖',c:'bb',n:'日记王',d:'累计30次训练记录'},
+{id:'rf',i:'🪞',c:'pb',n:'自省者',d:'完成第一次周度复盘'},
+{id:'cb',i:'💪',c:'ab',n:'不放弃',d:'中断后重新回来'},
+{id:'all',i:'👑',c:'ab',n:'球王加冕',d:'所有12周100%完成'},
+{id:'cal1',i:'🔥',c:'ob',n:'千卡新手',d:'累计消耗1000千卡'},
+{id:'cal5',i:'⚡',c:'ob',n:'燃脂达人',d:'累计消耗5000千卡'},
+{id:'cal10',i:'💥',c:'ob',n:'热量粉碎机',d:'累计消耗10000千卡'},
+{id:'wt5',i:'📊',c:'gb',n:'体重追踪者',d:'记录体重5次'},
+{id:'wt10',i:'📉',c:'bb',n:'蜕变可见',d:'记录体重10次'}
+];
+const QS=[
+{t:'慢即是快。头一个月宁可击球速度极慢，也要确保动作看起来专业。',a:'修炼心法'},
+{t:'错误动作重复1000次形成的肌肉记忆，需要花3倍的时间去纠正。',a:'训练铁律'},
+{t:'能稳定地回球，比偶尔打出一个漂亮球重要100倍。',a:'核心原则'},
+{t:'墙是最好的教练——它不累，也不会喂坏球。',a:'自练心得'},
+{t:'连续打卡的第3天最难，过了第7天就容易了。',a:'防放弃系统'},
+{t:'每一滴汗水都在重塑你的身体。不要问"多久有效果"，坚持就是答案。',a:'健身心法'}
+];
+const RL=[
+{s:'球场区域',items:[
+{n:'厨房区(Kitchen)',e:'Non-Volley Zone',d:'网前2.1米区域。球未落地时身体任何部位不能接触此区域。'},
+{n:'发球区',e:'Service Court',d:'基线后方、边线内侧。发球必须站基线后方，不能踩线。'},
+{n:'基线',e:'Baseline',d:'球场两端最远线。发球从基线后方发出。'},
+{n:'中线',e:'Centerline',d:'将球场分为左右两半。发球必须发到对角线发球区。'},
+{n:'非截击线',e:'Non-Volley Line',d:'厨房区边界线。球未落地时不能踩线或越线截击。'}
+]},
+{s:'核心计分规则',items:[
+{n:'计分制',d:'11分制，领先2分赢。部分比赛15或21分。'},
+{n:'只有发球方得分',d:'接发球方赢了不得分，但获得发球权。'},
+{n:'双弹跳规则',d:'发球必须落地一次才能接；接发球回球也必须落地。前两次必须等球落地，第三次可截击。'},
+{n:'发球规则',d:'①下手发球 ②拍头低于手腕 ③球低于腰部 ④发对角线 ⑤基线后方不压线'},
+{n:'发球序号',d:'双打初始只有一个发球机会，之后每轮两次（搭档各一次）。'}
+]},
+{s:'常见犯规',items:[
+{n:'厨房区犯规',d:'球未落地时脚踩入厨房区。',a:'截击时始终在线外1步。'},
+{n:'发球犯规',d:'拍头高于手腕/球高于腰部/压基线。',a:'默念"低手低拍头低球后站一步"。'},
+{n:'触网犯规',d:'击球后球拍/身体触碰球网。',a:'截击后自然收拍。'},
+{n:'出界犯规',d:'球落边线外/未入对角线。',a:'发球瞄准对角线中心偏内侧。'}
+]}
 ];
 
-const DEFAULT_MILESTONES = [
-  {id:1,title:"策略定稿：三份核心文档交付",desc:"账号规划、人格画像、流量变现报告",icon:"📋",type:"ms-strategy",checks:["竞品分析","定位确认","产品矩阵","90天计划"],date:"2026-05-29",status:"completed"},
-  {id:2,title:"冷启动：第一条视频发布",desc:"小红书+抖音同步，我发现了匹克球",icon:"🚀",type:"ms-launch",checks:["账号搭建完成","第1条视频上线","评论区引流开启"],date:"W1 目标",status:"todo"},
-  {id:3,title:"蓄水达标：小红书500粉",desc:"验证匹克球新手标签能吸引到人",icon:"📈",type:"ms-growth",checks:["粉丝500+","微信100+","新手群50+"],date:"W4 目标",status:"todo"},
-  {id:4,title:"第一个付费产品上架",desc:"新手避坑卡 49元，验证付费意愿",icon:"💰",type:"ms-product",checks:["产品制作完成","上架测试","首10单成交"],date:"W5-W6",status:"todo"},
-  {id:5,title:"第一笔品牌合作收入",desc:"装备测评或场馆探店，0→1突破",icon:"🤝",type:"ms-brand",checks:["主动联系3+品牌","拿到报价","发布首条商务"],date:"W9-W12",status:"todo"},
-  {id:6,title:"商业模式跑通：月入5000+",desc:"多SKU+品牌合作+社群收入",icon:"🎯",type:"ms-growth",checks:["月收入5000+","第二期共学营","品牌长期合作"],date:"W12 目标",status:"todo"},
-];
-
-const WEEKLY_PLAN = [
-  {day:"周一",label:"文案日",time:"30min · AI辅助",tasks:[{text:"写3条口播文案",type:"write"},{text:"选题会（看数据+评论）",type:"write"}]},
-  {day:"周二",label:"拍摄日",time:"2h · 集中拍摄",tasks:[{text:"换3套衣服拍3条",type:"shoot"},{text:"拍球场素材B-roll",type:"shoot"}]},
-  {day:"周三",label:"剪辑+发布",time:"30min · 剪映",tasks:[{text:"剪辑第1条",type:"edit"},{text:"小红书发布",type:"post"}]},
-  {day:"周四",label:"剪辑+发布",time:"30min · 剪映",tasks:[{text:"剪辑第2条",type:"edit"},{text:"小红书+抖音发布",type:"post"}]},
-  {day:"周五",label:"剪辑+复盘",time:"30min",tasks:[{text:"剪辑第3条",type:"edit"},{text:"三平台同步发布",type:"post"},{text:"周数据复盘",type:"write"}]},
-  {day:"周六",label:"打球+素材",time:"2h · 自然拍摄",tasks:[{text:"去打球（不强求拍）",type:"rest"},{text:"记录球场感受",type:"write"},{text:"发朋友圈日常",type:"post"}]},
-  {day:"周日",label:"休息+充电",time:"自由时间",tasks:[{text:"休息（允许不干活）",type:"rest"},{text:"看竞品内容",type:"write"},{text:"记录灵感",type:"write"}]},
-];
-
-const PHASES = [
-  {id:1,name:"蓄水期",sub:"W1-4 · 纯内容输出",color:"var(--purple)"},
-  {id:2,name:"验证期",sub:"W5-8 · 低价产品上线",color:"var(--teal)"},
-  {id:3,name:"启动期",sub:"W9-12 · 商业闭环",color:"var(--coral)"},
-  {id:4,name:"增长期",sub:"W13+ · 稳定变现",color:"var(--amber)"},
-];
-
-// ===== STATE =====
-let state = {
-  tasks: JSON.parse(JSON.stringify(DEFAULT_TASKS)),
-  milestones: JSON.parse(JSON.stringify(DEFAULT_MILESTONES)),
-  currentPhase: 1,
-  stats: {weekPosts:0,followers:0,weixin:0,buffer:0},
-  weeklyDone: {},
-  streak: 0,
-  lastActiveDate: null,
-  syncCode: null,
-  syncBlobId: null,
-  lastSyncTime: null,
+// Training type MET values & names
+const TT={
+  c:{n:'教练课',met:4.5},
+  s1:{n:'自练#1',met:5.5},
+  s2:{n:'自练#2',met:5.5},
+  s3:{n:'自练#3',met:5.5}
 };
+// Intensity multiplier
+const IM={light:0.75,moderate:1.0,vigorous:1.35};
+const IL={light:{i:'🚶',l:'轻度',d:'微出汗'},moderate:{i:'🏃',l:'中度',d:'明显出汗'},vigorous:{i:'💨',l:'高强度',d:'大汗淋漓'}};
+// HR zone colors & names
+const HZ=[{n:'热身',c:'#60a5fa',min:50,max:60},{n:'燃脂',c:'#34d399',min:60,max:70},{n:'有氧',c:'#fbbf24',min:70,max:80},{n:'无氧',c:'#f97316',min:80,max:90},{n:'极限',c:'#ef4444',min:90,max:100}];
 
-// ===== PERSISTENCE =====
-function save() {
-  localStorage.setItem('pb_app_state', JSON.stringify(state));
+function calcCal(type,intensity,durMin,weightKg){
+  const met=(TT[type]?.met||5)*((IM[intensity]||1));
+  return Math.round(met*3.5*weightKg/200*durMin);
 }
-function load() {
-  try {
-    const s = JSON.parse(localStorage.getItem('pb_app_state'));
-    if (s) {
-      // Deep merge
-      state.tasks = s.tasks || state.tasks;
-      state.milestones = s.milestones || state.milestones;
-      state.currentPhase = s.currentPhase || 1;
-      state.stats = {...state.stats, ...s.stats};
-      state.weeklyDone = s.weeklyDone || {};
-      state.streak = s.streak || 0;
-      state.lastActiveDate = s.lastActiveDate;
-      state.syncCode = s.syncCode;
-      state.syncBlobId = s.syncBlobId;
-      state.lastSyncTime = s.lastSyncTime;
-    }
-  } catch(e) {}
-  // Update streak
-  const today = new Date().toDateString();
-  const yesterday = new Date(Date.now()-86400000).toDateString();
-  if (state.lastActiveDate === today) { /* same day */ }
-  else if (state.lastActiveDate === yesterday) { state.streak++; }
-  else if (state.lastActiveDate) { state.streak = 1; }
-  else { state.streak = 1; }
-  state.lastActiveDate = today;
+function estHR(intensity,age){
+  const maxHR=220-age;
+  const ranges={light:[.50,.60],moderate:[.60,.75],vigorous:[.75,.90]};
+  const r=ranges[intensity]||ranges.moderate;
+  return[Math.round(maxHR*r[0]),Math.round(maxHR*r[1])];
+}
+
+// ═══════════════ STATE ═══════════════
+const SK='pickleboard_v3';
+const DVER=3;
+function ds(){return{sd:new Date().toISOString().slice(0,10),weight:60,age:35,wt:[],wp:{},logs:[],refs:{},achs:[],lt:null,cb:false,_v:DVER}}
+let S;
+function migrate(data){
+  if(!data._v||data._v<DVER){
+    const d=ds();
+    for(const k in d){if(!(k in data))data[k]=d[k]}
+    data._v=DVER;
+  }
+  return data;
+}
+function load(){try{const r=localStorage.getItem(SK);if(r){S=JSON.parse(r);S=migrate(S)}else S=ds()}catch(e){S=ds()}}
+function save(){localStorage.setItem(SK,JSON.stringify(S))}
+function wp(wi){if(!S.wp[wi])S.wp[wi]={c:0,s1:0,s2:0,s3:0,ms:[]};return S.wp[wi]}
+function wc(wi){const p=wp(wi);return p.c&&p.s1&&p.s2&&p.s3?1:0}
+function pc(pi){return W.filter(w=>w.ph===pi).every(w=>wc(w.id))}
+function cw(){if(!S.sd)return 1;const s=new Date(S.sd),n=new Date(),d=Math.floor((n-s)/(7*864e5));return Math.min(12,Math.max(1,d+1))}
+function streak(){if(!S.lt)return 0;let c=0,d=new Date(S.lt);while(true){const ds=d.toISOString().slice(0,10);if(S.logs.some(l=>l.date===ds)){c++;d.setDate(d.getDate()-1)}else break}return c}
+function dsl(){if(!S.lt)return -1;const today=new Date().toISOString().slice(0,10);const last=new Date(S.lt).toISOString().slice(0,10);if(today===last)return 0;return Math.floor((new Date(today)-new Date(last))/864e5)}
+function opct(){let t=48,d=0;for(const w of W){const p=wp(w.id);d+=p.c+p.s1+p.s2+p.s3}return Math.round(d/t*100)}
+function totalCal(){return S.logs.reduce((s,l)=>s+(l.cal||0),0)}
+function weekCal(){
+  const now=new Date(),dow=now.getDay(),mon=new Date(now);mon.setDate(now.getDate()-(dow===0?6:dow-1));mon.setHours(0,0,0,0);
+  return S.logs.filter(l=>new Date(l.date)>=mon).reduce((s,l)=>s+(l.cal||0),0);
+}
+function monthCal(){
+  const now=new Date(),y=now.getFullYear(),m=now.getMonth();
+  return S.logs.filter(l=>{const d=new Date(l.date);return d.getFullYear()===y&&d.getMonth()===m}).reduce((s,l)=>s+(l.cal||0),0);
+}
+function avgHRByIntensity(){
+  // Return distribution of intensity sessions
+  const dist={light:0,moderate:0,vigorous:0};
+  S.logs.forEach(l=>{if(l.intensity)dist[l.intensity]=(dist[l.intensity]||0)+1});
+  return dist;
+}
+
+// ═══════════════ ACHIEVEMENTS ═══════════════
+function chk(){
+  const u=id=>{if(!S.achs.includes(id)){S.achs.push(id);toast(`🏅 ${AC.find(a=>a.id===id)?.n}`)}};
+  if(S.logs.length>=1)u('fl');if(wc(1))u('w1');
+  const sk=streak();if(sk>=3)u('s3');if(sk>=7)u('s7');if(sk>=14)u('s14');
+  if(pc(1))u('p1');if(pc(2))u('p2');if(pc(3))u('p3');if(pc(4))u('p4');
+  if(S.logs.length>=10)u('l10');if(S.logs.length>=30)u('l30');
+  if(Object.keys(S.refs).length>=1)u('rf');
+  const tc=totalCal();if(tc>=1000)u('cal1');if(tc>=5000)u('cal5');if(tc>=10000)u('cal10');
+  if(S.wt.length>=5)u('wt5');if(S.wt.length>=10)u('wt10');
   save();
 }
 
-// ===== CLOUD SYNC =====
-const SYNC_API = 'https://jsonblob.com/api/jsonBlob';
-const DIR_BLOB_ID = '019e725f-f60a-7896-901f-9a2fbbce327f';
+// ═══════════════ NAV ═══════════════
+const PT={'dashboard':'总览仪表盘','kanban':'12周看板','training':'训练日志','fitness':'健身数据','anti-quit':'防放弃系统','achievements':'成就徽章','reflection':'周度复盘','rules':'规则速查','sync':'数据同步','settings':'数据管理'};
+let curPage='dashboard';
 
-function updateSyncUI(connected) {
-  const dot = document.getElementById('syncDot');
-  const text = document.getElementById('syncText');
-  const badge = document.getElementById('syncBadge');
-  if (connected) {
-    dot.className = 'sync-dot online';
-    text.textContent = '已同步';
-    badge.textContent = '已连接';
-    badge.style.background = 'var(--green-l)';
-    badge.style.color = 'var(--green)';
-  } else {
-    dot.className = 'sync-dot offline';
-    text.textContent = '本地模式';
-    badge.textContent = '未连接';
-    badge.style.background = '';
-    badge.style.color = '';
+function go(page){
+  document.querySelectorAll('.nav-item').forEach(n=>{n.classList.toggle('active',n.dataset.page===page)});
+  document.querySelectorAll('.tab-item').forEach(t=>{t.classList.toggle('active',t.dataset.page===page)});
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pg-'+page).classList.add('active');
+  document.getElementById('ptitle').textContent=PT[page]||'';
+  document.getElementById('mtitle').textContent=PT[page]||'';
+  curPage=page;
+  render(page);
+  us();
+}
+document.querySelectorAll('.nav-item,.tab-item').forEach(el=>el.addEventListener('click',()=>go(el.dataset.page)));
+document.getElementById('mmenu').querySelectorAll('.nav-item').forEach(el=>el.addEventListener('click',()=>{document.getElementById('mmenu').classList.remove('open');go(el.dataset.page)}));
+
+function us(){
+  const s=streak(),tc=totalCal();
+  document.getElementById('streak-c').textContent=s;document.getElementById('streak-m').textContent=s;
+  document.getElementById('cal-c').textContent=Math.round(tc/1000);document.getElementById('cal-m').textContent=tc>=1000?(tc/1000).toFixed(1)+'k':tc;
+}
+
+function render(p){
+  ({dashboard:rDash,kanban:rKanban,training:rLog,fitness:rFitness,'anti-quit':rQuit,achievements:rAch,reflection:rRef,rules:rRules,sync:rSync,settings:rSet})[p]?.();
+}
+
+function pring(pct,sz=68,sw=5){
+  const r=(sz-sw)/2,c=2*Math.PI*r,o=c-pct/100*c;
+  return `<div class="pring" style="width:${sz}px;height:${sz}px"><svg width="${sz}" height="${sz}"><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="var(--bg)" stroke-width="${sw}"/><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="var(--green)" stroke-width="${sw}" stroke-dasharray="${c}" stroke-dashoffset="${o}" stroke-linecap="round" style="transition:stroke-dashoffset .5s"/></svg><span class="pv">${pct}%</span></div>`;
+}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+
+// ═══════════════ DASHBOARD ═══════════════
+function rDash(){
+  const el=document.getElementById('pg-dashboard'),pct=opct(),cw_i=cw(),sk=streak(),ts=S.logs.length,
+    tm=Math.round(S.logs.reduce((s,l)=>s+(l.dur||0),0)/60),cw_c=W.filter(w=>wc(w.id)).length,
+    tc=totalCal(),wc_cal=weekCal(),q=QS[Math.floor(Math.random()*QS.length)],w0=W[cw_i-1];
+  let wc_h='';
+  for(let i=1;i<=12;i++){const w=W[i-1],p=wp(i),pp=Math.round((p.c+p.s1+p.s2+p.s3)/4*100),d=wc(i),n=i===cw_i;
+    wc_h+=`<button type="button" class="wk ${d?'done':''} ${n?'now':''}" onclick="owm(${i})"><div class="wh"><span class="wn">W${i}</span><span class="badge ${d?'badge-green':n?'badge-accent':'badge-blue'}">${w.pn}</span></div><div class="wt">${w.coach}</div><div class="wp"><div class="bar"><div class="bf" style="width:${pp}%"></div></div><span class="pc">${pp}%</span></div></button>`}
+  el.innerHTML=`
+    <div class="grid-2" style="margin-bottom:10px">
+      <div class="card stat">${pring(pct)}<div class="lbl">总体进度</div></div>
+      <div class="card stat"><div class="val orange">${tc>=1000?(tc/1000).toFixed(1)+'k':tc}</div><div class="lbl">总消耗千卡</div></div>
+      <div class="card stat"><div class="val accent">${ts}</div><div class="lbl">训练次数</div></div>
+      <div class="card stat"><div class="val blue">${tm}</div><div class="lbl">累计时长(时)</div></div>
+    </div>
+    <div class="quote"><div class="qt">"${q.t}"</div><div class="qa">—— ${q.a}</div></div>
+    <div class="card" style="margin-top:10px"><div class="card-title">📌 W${cw_i} · ${w0.pn}</div>
+      <div style="font-size:13px;color:var(--text2);margin-bottom:10px"><b style="color:var(--green)">教练课：</b>${w0.coach}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary btn-sm" onclick="owm(${cw_i})">查看SOP →</button><button class="btn btn-secondary btn-sm" onclick="olm(${cw_i},'self1')">📝 快速记录</button></div>
+    </div>
+    <div class="card"><div class="card-title">📊 12周进度</div><div class="grid-3">${wc_h}</div></div>
+    ${dsl()>=4?`<div class="alert r" style="margin-top:8px"><div class="at">🚨 已间隔${dsl()}天</div>今天练10分钟就能重启引擎，点击"快速记录"开始</div>`:''}`;
+}
+
+// ═══════════════ KANBAN ═══════════════
+function rKanban(){
+  const el=document.getElementById('pg-kanban'),cw_i=cw();
+  let cols='';const pcMap=['','p1','p2','p3','p4'];
+  for(const ph of PH){
+    const ws=W.filter(w=>w.ph===ph.id);let cards='';
+    for(const w of ws){const p=wp(w.id),pp=Math.round((p.c+p.s1+p.s2+p.s3)/4*100),d=wc(w.id),n=w.id===cw_i;
+      const wCal=S.logs.filter(l=>l.wi===w.id).reduce((s,l)=>s+(l.cal||0),0);
+      cards+=`<button type="button" class="wk ${d?'done':''} ${n?'now':''}" onclick="owm(${w.id})"><div class="wh"><span class="wn">W${w.id}</span>${d?'<span class="badge badge-green">✓</span>':n?'<span class="badge badge-accent">当前</span>':''}</div><div class="wt">${w.coach}</div><div class="wp"><div class="bar"><div class="bf" style="width:${pp}%"></div></div><span class="pc">${pp}%</span></div>${wCal?`<div style="font-size:10px;color:var(--orange);margin-top:4px">⚡ ${wCal}千卡</div>`:''}</button>`}
+    cols+=`<div class="kcol ${pcMap[ph.id]}"><div class="kcol-h"><span>${ph.n}</span><span class="ct">${ws.filter(w=>wc(w.id)).length}/${ws.length}</span></div><div class="kcol-b">${cards}</div></div>`}
+  el.innerHTML=`<div style="font-size:12px;color:var(--text3);margin-bottom:10px">点击周卡片查看SOP · 每周显示累计消耗千卡</div><div class="kboard">${cols}</div>`;
+}
+
+// ═══════════════ WEEK MODAL ═══════════════
+function owm(wi){
+  const w=W[wi-1],p=wp(wi);
+  document.getElementById('wm-title').textContent=`W${wi} · ${w.pn}`;
+  document.getElementById('wm-sub').textContent=w.coach;
+  const wCal=S.logs.filter(l=>l.wi===wi).reduce((s,l)=>s+(l.cal||0),0);
+  const wDur=S.logs.filter(l=>l.wi===wi).reduce((s,l)=>s+(l.dur||0),0);
+  const sb=(k,lb,tm)=>{const v=p[k];return`<div class="sop" style="${v?'opacity:.5':''}"><div class="sl">${lb}<span class="st">${tm}</span></div><ul>${w[k].split('；').map(s=>`<li>${s.trim()}</li>`).join('')}</ul><button class="btn ${v?'btn-secondary':'btn-primary'} btn-sm" style="margin-top:8px" onclick="ts(${wi},'${k}')">${v?'✓ 已完成':'完成打卡'}</button></div>`};
+  document.getElementById('wm-body').innerHTML=`
+    ${wCal?`<div class="grid-3" style="margin-bottom:12px"><div class="stat"><div class="val orange">${wCal}</div><div class="lbl">本周千卡</div></div><div class="stat"><div class="val blue">${wDur}</div><div class="lbl">本周分钟</div></div><div class="stat"><div class="val green">${S.logs.filter(l=>l.wi===wi).length}</div><div class="lbl">训练次数</div></div></div>`:''}
+    <div class="card-title" style="margin-bottom:12px">📋 Day 1 · 教练课</div>
+    <div class="sop" style="${p.c?'opacity:.5':''}"><div class="sl">教学内容<span class="st">60分钟</span></div><ul><li><b>重点：</b>${w.coach}</li>${w.kp.map(k=>`<li>✓ ${k}</li>`).join('')}</ul><div style="font-size:11px;color:var(--text3);margin-top:6px;font-style:italic">💡 课后录下教练示范动作</div><button class="btn ${p.c?'btn-secondary':'btn-primary'} btn-sm" style="margin-top:8px" onclick="ts(${wi},'c')">${p.c?'✓ 已完成':'完成打卡'}</button></div>
+    <div class="card-title" style="margin:16px 0 12px">🏠 Day 2-4 · 自我训练</div>
+    ${sb('s1','Day 2 · 自练#1','60-75min')}${sb('s2','Day 3 · 自练#2','60-75min')}${sb('s3','Day 4 · 自练#3','60-75min')}
+    <div style="margin-top:16px"><div class="card-title">🎯 里程碑</div><ul class="ck">${w.ms.map((m,i)=>{const v=p.ms?.[i];return`<li><button type="button" class="cb ${v?'on':''}" onclick="tm(${wi},${i})"></button><span class="ct ${v?'on':''}">${m}</span></li>`}).join('')}</ul></div>`;
+  document.getElementById('wm-foot').innerHTML=`<span style="font-size:12px;color:var(--text3)">W${wi}进度: ${Math.round((p.c+p.s1+p.s2+p.s3)/4*100)}%</span><button class="btn btn-secondary" onclick="cwm()">关闭</button>`;
+  document.getElementById('wmodal').classList.add('open');
+}
+function cwm(){document.getElementById('wmodal').classList.remove('open')}
+function ts(wi,k){const p=wp(wi);p[k]=p[k]?0:1;if(p[k]){S.lt=new Date().toISOString().slice(0,10);const cal=calcCal(k,'moderate',k==='c'?60:67,S.weight||60);S.logs.push({id:Date.now(),date:S.lt,wi,t:k,dur:k==='c'?60:67,mood:'good',intensity:'moderate',cal,notes:'看板打卡'})}save();chk();owm(wi)}
+function tm(wi,i){const p=wp(wi);if(!p.ms)p.ms=[];p.ms[i]=p.ms[i]?0:1;save();chk();owm(wi)}
+
+// ═══════════════ TRAINING LOG ═══════════════
+function rLog(){
+  const el=document.getElementById('pg-training'),logs=[...S.logs].reverse();
+  const tn={c:'教练课',s1:'自练#1',s2:'自练#2',s3:'自练#3'},me={great:'🤩',good:'😊',ok:'😐',bad:'😤'},il=IL;
+  if(!logs.length){el.innerHTML='<div class="empty-state"><div class="ei">📝</div><p style="margin-bottom:14px">还没有训练记录</p><button type="button" class="btn btn-primary btn-sm" onclick="olm('+cw()+',\'self1\')">+ 记录第一次训练</button></div>';return}
+  el.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:13px;color:var(--text2)">共${logs.length}条 · 总消耗 ${totalCal()}千卡</span><button class="btn btn-primary btn-sm" onclick="olm(${cw()},'self1')">+ 新增</button></div>
+  ${logs.map(l=>`<div class="log"><div class="lh"><span class="ld">${l.date} · W${l.wi}</span><div style="display:flex;gap:4px"><span class="badge badge-green">${tn[l.t]||l.t}</span>${l.intensity?`<span class="badge badge-orange">${il[l.intensity]?.l||''}</span>`:''}</div></div><div class="lc">${W[l.wi-1]?.coach||''} ${l.dur?'· '+l.dur+'min':''}</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span style="font-size:12px;color:var(--text3)">${me[l.mood]||''} ${l.notes||''}</span>${l.cal?`<span style="font-size:12px;font-weight:700;color:var(--orange)">${l.calSrc==='watch'?'⌚':'⚡'}${l.cal}千卡</span>`:''}</div></div>`).join('')}`;
+}
+
+let lmS={wi:1,t:'self1',intensity:'moderate',calMode:'auto'};
+function olm(wi,t){
+  lmS={wi,t,intensity:'moderate',calMode:'auto'};
+  document.getElementById('lm-sub').textContent=`W${wi} · ${t==='c'?'教练课':'自练'}`;
+  document.getElementById('lm-body').innerHTML=`
+    <div style="margin-bottom:12px"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">训练类型</label>
+    <select id="lt" style="width:100%;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-s);color:var(--text)" onchange="updateCalEst()">
+      <option value="c" ${t==='c'?'selected':''}>教练课 Day1</option><option value="s1" ${t==='s1'?'selected':''}>自练#1 Day2</option><option value="s2" ${t==='s2'?'selected':''}>自练#2 Day3</option><option value="s3" ${t==='s3'?'selected':''}>自练#3 Day4</option></select></div>
+    <div style="margin-bottom:12px"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:6px">卡路里来源</label>
+    <div style="display:flex;gap:6px">
+      <button type="button" class="btn btn-secondary btn-sm cal-src-label ${lmS.calMode==='auto'?'cal-src-active':''}" style="flex:1" onclick="switchCalMode('auto')">🧮 公式估算</button>
+      <button type="button" class="btn btn-secondary btn-sm cal-src-label ${lmS.calMode==='watch'?'cal-src-active':''}" style="flex:1" onclick="switchCalMode('watch')">⌚ 手表数据</button>
+    </div></div>
+    <div id="intensity-block" style="margin-bottom:12px"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">训练强度</label>
+    <div class="intensity-row">${['light','moderate','vigorous'].map(k=>`<button type="button" class="intensity-btn ${k==='moderate'?'sel':''}" onclick="pickInt(this,'${k}')" data-i="${k}"><div class="int-icon">${IL[k].i}</div><div class="int-label">${IL[k].l}</div><div class="int-desc">${IL[k].d}</div></button>`).join('')}</div></div>
+    <div id="watch-cal-block" style="margin-bottom:12px;display:none"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">手表记录消耗(千卡)</label>
+    <input type="number" id="lwc" value="0" min="0" max="5000" placeholder="输入手表显示的卡路里" style="width:100%;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-s);color:var(--text);font-size:16px;font-weight:700" oninput="document.getElementById('cal-est-val').textContent=this.value||'0'"></div>
+    <div style="margin-bottom:12px"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">时长(分钟)</label>
+    <input type="number" id="ld" value="67" min="10" max="180" style="width:100%;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-s);color:var(--text)" oninput="updateCalEst()"></div>
+    <div style="margin-bottom:12px"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">状态</label>
+    <div style="display:flex;gap:8px" id="mood-row">${['great|🤩超棒','good|😊不错','ok|😐一般','bad|😤糟糕'].map((x,i)=>{const[v,e]=x.split('|');return`<button type="button" class="btn btn-secondary btn-sm" style="flex:1;${i===1?'background:var(--green-bg);border-color:var(--green);color:var(--green)':''}" onclick="pickMood(this,'${v}')" data-m="${v}">${e}</button>`}).join('')}</div><input type="hidden" id="lmood" value="good"></div>
+    <div><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">笔记</label>
+    <textarea id="ln" placeholder="今天练了什么？感觉如何？" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-s);padding:10px;color:var(--text);font-size:14px;min-height:64px"></textarea></div>
+    <div class="cal-est" id="cal-est-box"><div style="font-size:11px;color:var(--text3);margin-bottom:4px" id="cal-est-label">预计消耗</div><div class="cal-num" id="cal-est-val">0</div><div class="cal-unit" id="cal-est-sub">千卡 (基于 ${S.weight||60}kg)</div></div>`;
+  document.getElementById('lmodal').classList.add('open');
+  updateCalEst();
+}
+function switchCalMode(mode){
+  lmS.calMode=mode;
+  document.querySelectorAll('.cal-src-label').forEach(el=>{el.classList.remove('cal-src-active')});
+  document.querySelector(`.cal-src-label:nth-child(${mode==='auto'?1:2})`).classList.add('cal-src-active');
+  document.getElementById('intensity-block').style.display=mode==='auto'?'':'none';
+  document.getElementById('watch-cal-block').style.display=mode==='watch'?'':'none';
+  document.getElementById('cal-est-label').textContent=mode==='auto'?'预计消耗':'手表记录';
+  document.getElementById('cal-est-sub').textContent=mode==='auto'?`千卡 (基于 ${S.weight||60}kg)`:'千卡';
+  if(mode==='watch'){document.getElementById('cal-est-val').textContent=document.getElementById('lwc').value||'0'}
+  else{updateCalEst()}
+}
+let selInt=null,selMood=null;
+function pickInt(el,m){if(selInt)selInt.classList.remove('sel');el.classList.add('sel');selInt=el;lmS.intensity=m;updateCalEst()}
+function pickMood(el,m){if(selMood)selMood.style.cssText='flex:1';el.style.cssText='flex:1;background:var(--green-bg);border-color:var(--green);color:var(--green)';selMood=el;document.getElementById('lmood').value=m}
+function updateCalEst(){
+  if(lmS.calMode==='watch')return;
+  const type=document.getElementById('lt').value;
+  const dur=parseInt(document.getElementById('ld').value)||67;
+  const cal=calcCal(type,lmS.intensity,dur,S.weight||60);
+  document.getElementById('cal-est-val').textContent=cal;
+}
+function clm(){document.getElementById('lmodal').classList.remove('open')}
+function savelog(){
+  const type=document.getElementById('lt').value;
+  const dur=parseInt(document.getElementById('ld').value)||67;
+  const cal=lmS.calMode==='watch'?(parseInt(document.getElementById('lwc').value)||0):calcCal(type,lmS.intensity,dur,S.weight||60);
+  const l={id:Date.now(),date:new Date().toISOString().slice(0,10),wi:lmS.wi,t:type,dur,mood:document.getElementById('lmood').value,intensity:lmS.calMode==='watch'?'moderate':lmS.intensity,cal,notes:document.getElementById('ln').value,calSrc:lmS.calMode};
+  S.logs.push(l);S.lt=l.date;const p=wp(l.wi);p[l.t]=1;save();chk();clm();toast(`✅ 已保存 · 消耗${cal}千卡${lmS.calMode==='watch'?' (手表)':''}`);render(curPage);us();
+}
+
+// ═══════════════ FITNESS PAGE ═══════════════
+function rFitness(){
+  const el=document.getElementById('pg-fitness');
+  const tc=totalCal(),wc=weekCal(),mc=monthCal(),ts=S.logs.length;
+  const avgDur=ts?Math.round(S.logs.reduce((s,l)=>s+(l.dur||0),0)/ts):0;
+  const dist=avgHRByIntensity();
+  const totalSessions=dist.light+dist.moderate+dist.vigorous;
+
+  // Weekly calorie chart (last 8 weeks)
+  let weeklyBars='';
+  for(let i=7;i>=0;i--){
+    const end=new Date();end.setDate(end.getDate()-i*7);
+    const start=new Date(end);start.setDate(start.getDate()-7);
+    start.setHours(0,0,0,0);end.setHours(23,59,59,999);
+    const cal=S.logs.filter(l=>{const d=new Date(l.date);return d>=start&&d<=end}).reduce((s,l)=>s+(l.cal||0),0);
+    const maxH=100;const h=Math.min(maxH,Math.max(4,(cal/Math.max(500,wc*1.5))*maxH));
+    const label=i===0?'本周':i===1?'上周':`-${i}周`;
+    const isToday=i===0;
+    weeklyBars+=`<div class="bar-col${isToday?' bar-day today':''}"><div class="bar-fill" style="height:${h}%;background:${isToday?'var(--green)':'var(--green-l)'}">${cal?`<div class="bar-val">${cal}</div>`:''}</div><div class="bar-label">${label}</div></div>`;
   }
-}
 
-function genCode() {
-  const c = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let r = '';
-  for (let i = 0; i < 6; i++) r += c[Math.floor(Math.random()*c.length)];
-  return r;
-}
-
-async function createSyncRoom() {
-  try {
-    toast('正在创建同步房间...');
-    const code = genCode();
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 15000);
-    const res = await fetch(SYNC_API, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json','Accept':'application/json'},
-      body: JSON.stringify({code, data: state, ts: Date.now()}),
-      signal: ctrl.signal
-    });
-    clearTimeout(timer);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const loc = res.headers.get('Location') || res.headers.get('location');
-    if (!loc) throw new Error('No location header');
-    const blobId = loc.split('/').pop();
-    // Step 2: Register to shared directory
-    try {
-      const dirRes = await fetch(SYNC_API + '/' + DIR_BLOB_ID);
-      let dir = {};
-      if (dirRes.ok) dir = await dirRes.json();
-      dir[code] = {blobId, ts: Date.now()};
-      await fetch(SYNC_API + '/' + DIR_BLOB_ID, {
-        method: 'PUT',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(dir)
-      });
-    } catch(de) { console.warn('Dir register failed', de); }
-    state.syncCode = code;
-    state.syncBlobId = blobId;
-    state.lastSyncTime = Date.now();
-    save();
-    updateSyncUI(true);
-    toast('同步房间已创建！代码：' + code);
-    renderSyncSheet();
-  } catch(e) {
-    if (e.name === 'AbortError') {
-      toast('请求超时，请检查网络后重试');
-    } else {
-      toast('创建失败（' + e.message + '），可尝试手动连接');
-    }
-    renderSyncSheet();
+  // This week daily chart
+  const now=new Date(),dow=now.getDay();
+  let dailyBars='';
+  const dayNames=['日','一','二','三','四','五','六'];
+  for(let i=6;i>=0;i--){
+    const d=new Date(now);d.setDate(now.getDate()-((dow-i+7)%7));
+    const ds=d.toISOString().slice(0,10);
+    const cal=S.logs.filter(l=>l.date===ds).reduce((s,l)=>s+(l.cal||0),0);
+    const maxH=100;const h=Math.min(maxH,Math.max(4,(cal/Math.max(200,wc/3*2))*maxH));
+    const isToday=ds===now.toISOString().slice(0,10);
+    dailyBars+=`<div class="bar-col${isToday?' bar-day today':''}"><div class="bar-fill" style="height:${h}%;background:${isToday?'var(--orange)':'var(--accent)'}">${cal?`<div class="bar-val">${cal}</div>`:''}</div><div class="bar-label">${dayNames[i]}</div></div>`;
   }
-}
 
-function manualConnect() {
-  const codeEl = document.getElementById('manualCode');
-  const blobEl = document.getElementById('manualBlobId');
-  const code = codeEl?.value?.toUpperCase()?.trim();
-  const blobId = blobEl?.value?.trim();
-  if (!code || !blobId) { toast('请填写同步代码和Blob ID'); return; }
-  state.syncCode = code;
-  state.syncBlobId = blobId;
-  state.lastSyncTime = Date.now();
-  save();
-  updateSyncUI(true);
-  toast('手动连接成功！代码：' + code);
-  pushSync();
-  renderSyncSheet();
-}
+  // HR zone distribution
+  const hrW=totalSessions?[dist.light/totalSessions*100,dist.moderate/totalSessions*100,dist.vigorous/totalSessions*100,0,0]:[0,0,0,0,0];
+  const hrLabels=totalSessions?['轻','中','高','','']:['','','','',''];
 
-async function joinByCode() {
-  const input = document.getElementById('joinCodeInput');
-  const code = input?.value?.toUpperCase()?.trim();
-  if (!code || code.length < 4) { toast('请输入有效的同步代码'); return; }
-  toast('正在查找房间...');
-  try {
-    const dirRes = await fetch(SYNC_API + '/' + DIR_BLOB_ID);
-    if (!dirRes.ok) throw new Error('Dir not found');
-    const dir = await dirRes.json();
-    const entry = dir[code];
-    if (!entry) { toast('未找到该房间代码，请检查输入'); return; }
-    // Set connection
-    state.syncCode = code;
-    state.syncBlobId = entry.blobId;
-    state.lastSyncTime = Date.now();
-    save();
-    updateSyncUI(true);
-    toast('已加入房间！正在同步数据...');
-    renderSyncSheet();
-    // Pull data
-    await pullSync();
-  } catch(e) {
-    toast('连接失败：' + (e.message || '网络错误'));
-    console.error(e);
+  // Weight sparkline
+  const wts=[...S.wt].reverse().slice(-14);
+  let wtSpark='';
+  if(wts.length>1){
+    const vals=wts.map(w=>w.v);
+    const mn=Math.min(...vals),mx=Math.max(...vals),rng=mx-mn||1;
+    wtSpark=`<div class="wt-spark">${vals.map((v,i)=>`<div class="spark-bar" style="height:${Math.max(10,((v-mn)/rng)*100)}%;${i===vals.length-1?'background:var(--green);opacity:1':''}"></div>`).join('')}</div>`;
   }
-}
 
-async function pushSync() {
-  if (!state.syncBlobId) return;
-  try {
-    document.getElementById('syncDot').className = 'sync-dot syncing';
-    document.getElementById('syncText').textContent = '同步中...';
-    await fetch(SYNC_API + '/' + state.syncBlobId, {
-      method: 'PUT',
-      headers: {'Content-Type':'application/json','Accept':'application/json'},
-      body: JSON.stringify({code:state.syncCode, data:state, ts:Date.now()})
-    });
-    state.lastSyncTime = Date.now();
-    save();
-    updateSyncUI(true);
-  } catch(e) {
-    updateSyncUI(false);
-    console.error('Sync push failed', e);
-  }
-}
-
-async function pullSync() {
-  if (!state.syncBlobId) return;
-  try {
-    document.getElementById('syncDot').className = 'sync-dot syncing';
-    document.getElementById('syncText').textContent = '拉取中...';
-    const res = await fetch(SYNC_API + '/' + state.syncBlobId, {
-      headers: {'Accept':'application/json'}
-    });
-    if (!res.ok) throw new Error('Pull failed');
-    const cloud = await res.json();
-    if (cloud.ts > (state.lastSyncTime || 0) && cloud.data) {
-      state.tasks = cloud.data.tasks || state.tasks;
-      state.milestones = cloud.data.milestones || state.milestones;
-      state.stats = {...state.stats, ...cloud.data.stats};
-      state.weeklyDone = cloud.data.weeklyDone || {};
-      state.streak = cloud.data.streak || state.streak;
-      state.currentPhase = cloud.data.currentPhase || 1;
-      state.lastSyncTime = cloud.ts;
-      save();
-      renderAll();
-      toast('数据已从云端更新');
-    }
-    state.lastSyncTime = Date.now();
-    save();
-    updateSyncUI(true);
-  } catch(e) {
-    updateSyncUI(false);
-    console.error('Sync pull failed', e);
-  }
-}
-
-// Auto sync
-setInterval(() => {
-  if (state.syncBlobId && navigator.onLine) {
-    pushSync();
-  }
-}, 60000);
-
-// Check online status
-window.addEventListener('online', () => { if(state.syncBlobId) pullSync(); });
-window.addEventListener('offline', () => { updateSyncUI(false); });
-
-// ===== NAVIGATION =====
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const page = item.dataset.page;
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    document.getElementById('page-' + page).classList.add('active');
-    item.classList.add('active');
+  // Weight trend
+  const wtsAll=[...S.wt].reverse();
+  let wtRows='';
+  wtsAll.slice(-10).reverse().forEach((w,i)=>{
+    const prev=wtsAll[wtsAll.indexOf(w)-1];
+    let diff='';let cls='same';
+    if(prev){const d=w.v-prev.v;if(d<0){diff=`▼${Math.abs(d).toFixed(1)}`;cls='down'}else if(d>0){diff=`▲${d.toFixed(1)}`;cls='up'}else{diff='—';cls='same'}}
+    wtRows+=`<div class="wt-row"><div class="wt-date">${w.d}</div><div class="wt-val">${w.v}kg</div><div class="wt-diff ${cls}">${diff}</div></div>`;
   });
-});
 
-// ===== RENDER FUNCTIONS =====
-function renderAll() {
-  renderDashboard();
-  renderPhaseTabs();
-  renderKanban();
-  renderMilestones();
-  renderWeekly();
-  updateSyncUI(!!state.syncBlobId);
-}
+  // Equivalents
+  const equivKm=(tc/60*1).toFixed(1);
+  const equivSteps=Math.round(tc/0.04);
 
-function renderDashboard() {
-  // Greeting
-  const h = new Date().getHours();
-  const greet = h < 6 ? '夜深了，早点休息' : h < 12 ? '早上好，媛大人' : h < 18 ? '下午好，媛大人' : '晚上好，媛大人';
-  document.getElementById('greeting').textContent = greet;
-  document.getElementById('streakNum').textContent = state.streak;
-
-  // Stats
-  document.getElementById('sWeekPosts').textContent = state.stats.weekPosts;
-  document.getElementById('sFollowers').textContent = state.stats.followers;
-  document.getElementById('sWeixin').textContent = state.stats.weixin;
-  document.getElementById('sBuffer').textContent = state.stats.buffer;
-
-  // Phase bar
-  const phaseBar = document.getElementById('phaseBar');
-  const totalTasks = state.tasks.length;
-  phaseBar.innerHTML = PHASES.map(p => {
-    const phaseTasks = state.tasks.filter(t => t.phase === p.id);
-    const done = phaseTasks.filter(t => t.status === 'done').length;
-    const pct = phaseTasks.length ? Math.round(done/phaseTasks.length*100) : 0;
-    return `<div class="phase-seg" style="flex:${phaseTasks.length};background:${p.color};opacity:${pct===100?.6:1}" title="${p.name} ${pct}%">
-      <span>${p.name} ${pct}%</span></div>`;
-  }).join('');
-
-  // Today
-  const todayIdx = (new Date().getDay() + 6) % 7;
-  const todayPlan = WEEKLY_PLAN[todayIdx];
-  const weekKey = getWeekKey();
-  const todayCard = document.getElementById('todayCard');
-  todayCard.innerHTML = `
-    <div class="today-header">
-      <h3>今天是${todayPlan.day} · ${todayPlan.label}</h3>
-      <span class="today-tag" style="background:${todayPlan.label.includes('休息')?'var(--green-l)':'var(--purple-l)'};color:${todayPlan.label.includes('休息')?'var(--green)':'var(--purple)'}">${todayPlan.time}</span>
+  el.innerHTML=`
+    <div class="grid-2" style="margin-bottom:10px">
+      <div class="card stat"><div class="val orange">${tc>=1000?(tc/1000).toFixed(1)+'k':tc}</div><div class="lbl">总消耗(千卡)</div><div class="sub">约等于${equivKm}km慢跑</div></div>
+      <div class="card stat"><div class="val accent">${wc}</div><div class="lbl">本周消耗</div><div class="sub">月累计 ${mc}</div></div>
+      <div class="card stat"><div class="val blue">${avgDur}</div><div class="lbl">平均时长(min)</div></div>
+      <div class="card stat"><div class="val green">${equivSteps}</div><div class="lbl">等效步数</div></div>
     </div>
-    <div class="today-tasks">
-      ${todayPlan.tasks.map((t,i) => {
-        const key = weekKey + '-' + todayIdx + '-' + i;
-        const done = state.weeklyDone[key];
-        const colors = {shoot:'var(--coral)',edit:'var(--blue)',post:'var(--teal)',write:'var(--purple)',rest:'var(--green)'};
-        return `<div class="today-task${done?' done':''}" onclick="toggleWeeklyTask('${key}')">
-          <div class="dot" style="background:${colors[t.type]||'var(--purple)'}"></div>
-          ${done?'<s>':''}${t.text}${done?'</s>':''}
-        </div>`;
-      }).join('')}
+
+    <div class="card"><div class="card-title">📊 本周每日消耗</div><div class="cal-bar">${dailyBars}</div><div style="font-size:11px;color:var(--text3);margin-top:8px;text-align:center">本周目标：${Math.round((S.weight||60)*35*4/7)}千卡 (WHO建议周运动消耗)</div></div>
+
+    <div class="card"><div class="card-title">📈 近8周趋势</div><div class="cal-bar">${weeklyBars}</div><div style="font-size:11px;color:var(--text3);margin-top:8px">单位：千卡/周</div></div>
+
+    ${totalSessions?`<div class="card"><div class="card-title">❤️ 训练强度分布</div>
+      <div class="hr-zone">${hrW.map((p,i)=>p>0?`<div class="hz${i+1}" style="width:${p}%" title="${HZ[i].n}">${p>8?HZ[i].n:''}</div>`:'').join('')}</div>
+      <div class="grid-3" style="margin-top:8px">
+        <div class="stat"><div class="val" style="color:#60a5fa">${dist.light||0}</div><div class="lbl">🚶 轻度</div></div>
+        <div class="stat"><div class="val" style="color:#34d399">${dist.moderate||0}</div><div class="lbl">🏃 中度</div></div>
+        <div class="stat"><div class="val" style="color:#f97316">${dist.vigorous||0}</div><div class="lbl">💨 高强度</div></div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-top:8px;text-align:center">建议：匹克球以中高强度为主，搭配20%低强度恢复训练</div>
+    </div>`:''}
+
+    <div class="card"><div class="card-title">⚖️ 体重追踪</div>
+      ${S.weight?`<div style="font-size:12px;color:var(--text2);margin-bottom:8px">当前设置体重：<b style="color:var(--green)">${S.weight}kg</b> · 用于卡路里计算 · 在"数据管理"中修改</div>`:`<div style="font-size:12px;color:var(--text2);margin-bottom:8px">设置体重后才能精确计算卡路里消耗</div>`}
+      ${wtsAll.length?`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:12px;color:var(--text2)">${wtsAll.length}次记录</span><button class="btn btn-primary btn-sm" onclick="openWtModal()">+ 记录体重</button></div>
+        ${wtsAll.length>1?wtSpark:''}
+        ${wtRows}
+      `:`<div class="empty-state" style="padding:20px"><div class="ei">⚖️</div><p style="margin-bottom:10px">记录体重变化，追踪训练效果</p><button class="btn btn-primary btn-sm" onclick="openWtModal()">+ 第一次记录</button></div>`}
     </div>
-  `;
 
-  // Task badge
-  const todoCount = state.tasks.filter(t => t.phase === state.currentPhase && t.status === 'todo').length;
-  document.getElementById('taskBadge').textContent = todoCount || '';
+    <div class="card"><div class="card-title">🎯 卡路里等价参考</div>
+    <div style="font-size:12px;color:var(--text2);line-height:2">
+      你累计消耗的 <b style="color:var(--orange)">${tc}千卡</b> 大约等于：<br>
+      🏃 慢跑 <b>${(tc/60*1).toFixed(1)}公里</b>（60kg体重）<br>
+      🚶 步行 <b>${Math.round(tc/4)}分钟</b>（中等配速）<br>
+      🚴 骑行 <b>${(tc/30*1).toFixed(1)}公里</b>（中等速度）<br>
+      🍕 约 <b>${Math.round(tc/266)}</b> 片披萨的热量<br>
+      🍚 约 <b>${(tc/232).toFixed(1)}</b> 碗米饭的热量
+    </div></div>`;
 }
 
-function renderPhaseTabs() {
-  const tabs = document.getElementById('phaseTabs');
-  tabs.innerHTML = PHASES.map(p => {
-    const count = state.tasks.filter(t => t.phase === p.id && t.status === 'todo').length;
-    return `<div class="phase-tab${state.currentPhase===p.id?' active':''}" onclick="switchPhase(${p.id})">${p.name}${count?' ('+count+')':''}</div>`;
-  }).join('');
+// ═══════════════ WEIGHT TRACKING ═══════════════
+function openWtModal(){
+  const lastW=S.wt.length?S.wt[S.wt.length-1].v:S.weight||60;
+  document.getElementById('wt-body').innerHTML=`
+    <div style="margin-bottom:12px"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">日期</label>
+    <input type="date" id="wt-date" value="${new Date().toISOString().slice(0,10)}" style="width:100%;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-s);color:var(--text)"></div>
+    <div style="margin-bottom:12px"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">体重(kg)</label>
+    <input type="number" id="wt-val" value="${lastW}" min="30" max="200" step="0.1" style="width:100%;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-s);color:var(--text);font-size:20px;text-align:center;font-weight:700">
+    <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:4px">建议每天同一时间称重（如早起后）</div></div>`;
+  document.getElementById('wtmodal').classList.add('open');
+}
+function savewt(){
+  const d=document.getElementById('wt-date').value;
+  const v=parseFloat(document.getElementById('wt-val').value);
+  if(!d||!v||v<30||v>200){toast('❌ 请输入有效的日期和体重');return}
+  S.wt.push({d,v});
+  S.wt.sort((a,b)=>a.d.localeCompare(b.d));
+  save();chk();
+  document.getElementById('wtmodal').classList.remove('open');
+  toast(`✅ 体重已记录：${v}kg`);
+  render(curPage);
 }
 
-function switchPhase(id) {
-  state.currentPhase = id;
-  save();
-  renderPhaseTabs();
-  renderKanban();
-}
+// ═══════════════ ANTI-QUIT ═══════════════
+function rQuit(){
+  const el=document.getElementById('pg-anti-quit'),ds=dsl(),sk=streak(),ts=S.logs.length,cw_i=cw();
 
-function renderKanban() {
-  const filtered = state.tasks.filter(t => t.phase === state.currentPhase);
-  const todo = filtered.filter(t => t.status === 'todo');
-  const doing = filtered.filter(t => t.status === 'doing');
-  const done = filtered.filter(t => t.status === 'done');
+  // ── Risk calculation ──
+  let lv,lc,lt,lp;
+  if(ds<0){lv='safe';lc='var(--green)';lt='🟢 未开始';lp=5}
+  else if(ds<=1){lv='safe';lc='var(--green)';lt='🟢 安全';lp=Math.max(5,10-ds*8)}
+  else if(ds<=3){lv='warn';lc='var(--accent)';lt='🟡 注意 '+ds+'天';lp=40+ds*10}
+  else if(ds<=6){lv='danger';lc='var(--red)';lt='🔴 高危 '+ds+'天';lp=70+ds*3}
+  else{lv='critical';lc='var(--red)';lt='🚨 紧急 '+ds+'天!';lp=95}
+  lp=Math.min(100,lp);
 
-  document.getElementById('taskSummary').textContent = `${todo.length}待办 · ${doing.length}进行中 · ${done.length}完成`;
+  // ── Alert messages ──
+  const als=[];
+  if(ds<0)als.push({c:'g',t:'🚀 准备开始',x:'第一步：找教练或球友，完成第一次上球场。剩下的计划已排好。'});
+  if(ds===0&&ts>0)als.push({c:'g',t:'✅ 今天已训练',x:'保持节奏，连续3天就是小里程碑'});
+  if(ds===1&&ts>0)als.push({c:'g',t:'✅ 状态良好',x:'昨天练过了，今天休息正常。记得明天继续。'});
+  if(ds===2)als.push({c:'y',t:'⚠️ 两天没练',x:'最容易放弃的节点！<br><br><b>建议：</b>今天做最短版本——哪怕20分钟球感+10分钟拉伸。完成就好。'});
+  if(ds===3)als.push({c:'y',t:'⚠️ 三天未练——红线',x:'三天不练，大脑正在降低技能优先级。<br><br><b>行动：</b><br>1. 只想"我现在能做什么"<br>2. 15分钟墙练就能重启<br>3. 想想连续打卡记录'});
+  if(ds>=4&&ds<7)als.push({c:'r',t:'🚨 已间隔'+ds+'天',x:'你正在滑向放弃。但好消息：你还没放弃。<br><br><b>紧急：</b><br>1. 退回上周最简单练习<br>2. 只做10分钟颠球<br>3. 约球友——社交承诺比自律管用'});
+  if(ds>=7)als.push({c:'r',t:'🚨 一周未练',x:'两个真相：<br>1. 一周的自练2-3天能补回来<br>2. <b>现在、立刻、去颠5分钟球。不是明天。</b>'});
+  if(!ts&&ds>=0)als.push({c:'g',t:'🚀 准备开始',x:'第一步：找教练或球友，完成第一次上球场。剩下的计划已排好。'});
 
-  const kanban = document.getElementById('kanban');
-  kanban.innerHTML = renderKanbanCol('待办', todo, 'col-todo', 'amber') +
-                     renderKanbanCol('进行中', doing, 'col-doing', 'blue') +
-                     renderKanbanCol('已完成', done, 'col-done', 'green');
-}
-
-function renderKanbanCol(title, tasks, cls, color) {
-  const tagClass = {ops:'tag-ops',content:'tag-content',growth:'tag-growth',product:'tag-product',brand:'tag-brand'};
-  return `<div class="kanban-col"><div class="${cls}">
-    <div class="kcol-header"><div class="kcol-title"><span class="kcol-count" style="background:var(--${color}-l);color:var(--${color})">${tasks.length}</span>${title}</div></div>
-    ${tasks.map(t => `<div class="task-card${t.status==='done'?' done-card':''}" onclick="cycleTask(${t.id})">
-      <span class="tc-tag ${tagClass[t.tag]||'tag-content'}">${t.tagLabel||t.tag}</span>
-      <div class="tc-title">${t.status==='done'?'✅ ':t.status==='doing'?'🔄 ':''}${t.title}</div>
-      <div class="tc-meta">
-        <span><span class="tc-priority p-${t.priority}"></span>${t.priority==='high'?'紧急':t.priority==='mid'?'一般':'低'}</span>
-        <span>⏱ ${t.time}</span>
-      </div>
-    </div>`).join('')}
-  </div></div>`;
-}
-
-function cycleTask(id) {
-  const t = state.tasks.find(t => t.id === id);
-  if (!t) return;
-  const c = {todo:'doing',doing:'done',done:'todo'};
-  t.status = c[t.status];
-  save();
-  renderKanban();
-  renderPhaseTabs();
-  renderDashboard();
-  if (state.syncBlobId) pushSync();
-}
-
-function renderMilestones() {
-  const list = document.getElementById('msList');
-  const iconBg = {'ms-strategy':'var(--purple-l)','ms-launch':'var(--coral-l)','ms-growth':'var(--amber-l)','ms-product':'var(--teal-l)','ms-brand':'var(--pink-l)'};
-  list.innerHTML = state.milestones.map(m => `
-    <div class="ms-item${m.status==='completed'?' completed':''}" onclick="toggleMs(${m.id})">
-      <div class="ms-icon" style="background:${iconBg[m.type]||'var(--purple-l)'}">${m.icon}</div>
-      <div class="ms-body">
-        <div class="ms-title">${m.status==='completed'?'✅ ':''}${m.title}</div>
-        <div class="ms-desc">${m.desc}</div>
-        <div class="ms-checks">${m.checks.map(c => `<span class="ms-check${m.status==='completed'?' done':''}">${c}</span>`).join('')}</div>
-      </div>
-      <div class="ms-date">${m.date}</div>
-    </div>
-  `).join('');
-}
-
-function toggleMs(id) {
-  const m = state.milestones.find(m => m.id === id);
-  if (!m) return;
-  m.status = m.status === 'completed' ? 'todo' : 'completed';
-  save();
-  renderMilestones();
-  renderDashboard();
-  if (state.syncBlobId) pushSync();
-  toast(m.status === 'completed' ? '🎉 里程碑达成！' : '已取消完成');
-}
-
-function renderWeekly() {
-  const todayIdx = (new Date().getDay() + 6) % 7;
-  const weekKey = getWeekKey();
-  const list = document.getElementById('weeklyList');
-  list.innerHTML = WEEKLY_PLAN.map((d, di) => {
-    const isToday = di === todayIdx;
-    return `<div class="wk-card${isToday?' is-today':''}">
-      <div class="wk-head">
-        <div class="wk-day">${d.day}${isToday?' · 今天':''}</div>
-        <div class="wk-label">${d.label}</div>
-      </div>
-      <div class="wk-time">${d.time}</div>
-      <div class="wk-tasks">
-        ${d.tasks.map((t,ti) => {
-          const key = weekKey + '-' + di + '-' + ti;
-          const done = state.weeklyDone[key];
-          return `<div class="wk-task${done?' done':''}" data-type="${t.type}" onclick="toggleWeeklyTask('${key}')">
-            ${done?'✅':''} ${t.text}
-          </div>`;
-        }).join('')}
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function getWeekKey() {
-  const d = new Date();
-  const start = new Date(d);
-  start.setDate(d.getDate() - d.getDay() + 1);
-  return start.toISOString().slice(0, 10);
-}
-
-function toggleWeeklyTask(key) {
-  state.weeklyDone[key] = !state.weeklyDone[key];
-  save();
-  renderDashboard();
-  renderWeekly();
-  if (state.syncBlobId) pushSync();
-}
-
-// ===== MODAL SHEETS =====
-function openSheet(type) {
-  const overlay = document.getElementById('modalOverlay');
-  const content = document.getElementById('modalContent');
-  overlay.classList.add('show');
-
-  const sheets = {
-    sync: renderSyncSheet,
-    antiquit: renderAntiQuit,
-    'stats-edit': renderStatsEdit,
-    'sop-content': () => renderSOP('content'),
-    'sop-weekly': () => renderSOP('weekly'),
-    'sop-wechat': () => renderSOP('wechat'),
-    'sop-growth': () => renderSOP('growth'),
-  };
-
-  if (sheets[type]) {
-    content.innerHTML = '<div class="modal-handle"></div>' + sheets[type]();
-    if (type === 'sync') bindSyncEvents();
-    if (type === 'stats-edit') bindStatsEvents();
+  // ── Training heatmap (last 8 weeks) ──
+  const dayNames=['一','二','三','四','五','六','日'];
+  let hmHeader=dayNames.map(d=>`<div class="hm-day">${d}</div>`).join('');
+  let hmRows='';
+  for(let w=7;w>=0;w--){
+    const weekStart=new Date();weekStart.setDate(weekStart.getDate()-weekStart.getDay()+1-w*7);
+    const wkNum=Math.max(1,Math.min(12,Math.ceil((7-w+1)/4*12)));
+    let cells='';
+    for(let d=0;d<7;d++){
+      const day=new Date(weekStart);day.setDate(day.getDate()+d);
+      const ds2=day.toISOString().slice(0,10);
+      const dayLogs=S.logs.filter(l=>l.date===ds2);
+      const count=dayLogs.length;
+      const level=count===0?0:count===1?1:count===2?2:count===3?3:4;
+      const isFuture=day>new Date();
+      cells+=`<div class="hm-cell ${isFuture?'hm-0':'hm-'+level}" title="${ds2} · ${count}次">${count||''}</div>`;
+    }
+    const weekLabel=w===0?'本周':w===1?'上周':`-${w}周`;
+    hmRows+=`<div style="display:grid;grid-template-columns:32px repeat(7,1fr);gap:3px;align-items:center;min-width:280px"><div class="hm-wk">${w<2?weekLabel:''}</div>${cells}</div>`;
   }
-}
 
-function closeSheet(e) {
-  if (e.target === document.getElementById('modalOverlay')) {
-    document.getElementById('modalOverlay').classList.remove('show');
+  // ── Weekly completion rate ──
+  let wcRows='';
+  const phaseNames=['基础','进阶','实战','精通'];
+  for(let w=Math.min(12,Math.max(cw_i,1));w>=Math.max(1,cw_i-5);w--){
+    const wStart=new Date();
+    wStart.setDate(wStart.getDate()-wStart.getDay()+1-(w-Math.ceil((12-w+1)*7/4))*7);
+    const p=wp(w);
+    const planned=(p.c?1:0)+(p.s1?1:0)+(p.s2?1:0)+(p.s3?1:0);
+    const actual=S.logs.filter(l=>l.wi===w).length;
+    const rate=planned?Math.round(actual/planned*100):0;
+    const phaseIdx=Math.floor((w-1)/3);
+    const phaseClr=rate>=75?'var(--green)':rate>=50?'var(--accent)':'var(--red)';
+    wcRows+=`<div class="wc-row"><span class="wc-label">W${w}</span><div class="wc-bar-bg"><div class="wc-bar-fill" style="width:${rate}%;background:${phaseClr}"></div></div><span class="wc-val" style="color:${phaseClr}">${actual}/${planned||'—'}</span></div>`;
   }
-}
 
-function renderSyncSheet() {
-  const hasCode = !!state.syncCode && !!state.syncBlobId;
-  return `
-    <div class="modal-title">☁️ 数据同步</div>
-    <div class="sync-panel">
-      <p style="font-size:13px;color:var(--text2);margin-bottom:16px">在手机和电脑之间同步你的所有进度数据。</p>
-      <div style="padding:12px;background:var(--amber-l);border-radius:10px;margin-bottom:16px;text-align:left">
-        <div style="font-size:12px;color:var(--amber);font-weight:600;margin-bottom:6px">推荐方式：导出 → 导入（最稳定）</div>
-        <div style="font-size:12px;color:var(--text2);line-height:1.6">
-          1. 在此设备点击「导出数据」，下载JSON文件<br>
-          2. 将文件传到手机（微信发给自己/airdrop/网盘）<br>
-          3. 手机打开应用，点「导入数据」，选择该文件
-        </div>
-        <div style="display:flex;gap:8px;margin-top:10px">
-          <button class="sync-btn sync-btn-primary" style="flex:1" onclick="exportData()">📥 导出数据</button>
-          <button class="sync-btn sync-btn-secondary" style="flex:1" onclick="importData()">📤 导入数据</button>
-        </div>
-      </div>
-      ${hasCode ? `
-        <div style="margin:12px 0;padding:16px;background:var(--green-l);border-radius:12px;text-align:center">
-          <div style="font-size:13px;color:var(--green);font-weight:600;margin-bottom:8px">✅ 云同步已连接</div>
-          <div style="font-size:28px;font-weight:700;letter-spacing:4px;color:var(--green)">${state.syncCode}</div>
-          <div style="font-size:11px;color:var(--text3);margin-top:6px">在另一台设备上输入此代码即可同步</div>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:12px">
-          <button class="sync-btn sync-btn-primary" style="flex:1" onclick="doSync()">🔄 立即同步</button>
-          <button class="sync-btn sync-btn-secondary" style="flex:1" onclick="disconnectSync()">断开连接</button>
-        </div>
-      ` : `
-        <div style="text-align:left">
-          <div style="font-size:12px;color:var(--text3);margin-bottom:10px">云同步（需要网络能访问jsonblob.com）</div>
-          <button class="sync-btn sync-btn-primary" style="width:100%;padding:14px;margin-bottom:10px" onclick="createSyncRoom()">创建同步房间</button>
-          <div style="margin-top:12px">
-            <div style="font-size:12px;color:var(--text3);margin-bottom:8px">已有同步代码和Blob ID？</div>
-            <input class="sync-code" id="manualCode" placeholder="6位同步代码" maxlength="6" style="width:100%;margin-bottom:6px;font-size:16px">
-            <input class="sync-code" id="manualBlobId" placeholder="Blob ID（UUID格式）" style="width:100%;margin-bottom:8px;font-size:11px;letter-spacing:0">
-            <button class="sync-btn sync-btn-secondary" style="width:100%" onclick="manualConnect()">手动连接</button>
-          </div>
-        </div>
-      `}
-      <div class="sync-status" id="syncStatus">最后同步：${state.lastSyncTime ? new Date(state.lastSyncTime).toLocaleString('zh-CN') : '从未'}</div>
-    </div>
-  `;
-}
+  // ── Risk trend (last 30 days) ──
+  let rtBars='';
+  const now2=new Date();
+  let rtPrevRisk=0;
+  for(let i=29;i>=0;i--){
+    const d=new Date(now2);d.setDate(d.getDate()-i);
+    const ds3=d.toISOString().slice(0,10);
+    const dayLogs=S.logs.filter(l=>l.date===ds3);
+    const daysSince=i;
+    let risk;
+    if(daysSince<=1)risk=Math.max(5,10-daysSince*8);
+    else if(daysSince<=3)risk=40+daysSince*10;
+    else if(daysSince<=6)risk=70+daysSince*3;
+    else risk=95;
+    // Override with actual training - if trained, risk drops
+    if(dayLogs.length>0){risk=Math.max(5,risk-50)}
+    risk=Math.min(100,risk);
+    const h=Math.max(3,risk);
+    const clr=risk<30?'var(--green)':risk<60?'var(--accent)':'var(--red)';
+    const label=i===0?'今':i%7===0?Math.floor(i/7)+'w前':'';
+    rtBars+=`<div class="rt-bar" style="height:${h}%;background:${clr};${i===29||i===0?'opacity:1':'opacity:.6'}" data-v="${Math.round(risk)}%"></div>`;
+  }
 
-function bindSyncEvents() {}
+  // ── Micro-goal restart ──
+  const curPhase=Math.floor((cw_i-1)/3);
+  const phaseGoals=[
+    {icon:'🎾',title:'颠球重启',desc:'先颠球5分钟找回手感，再做10分钟正手击球'},
+    {icon:'💪',title:'墙练恢复',desc:'对墙正反手各20次，注意大陆式握拍'},
+    {icon:'🎯',title:'实战轻打',desc:'约球友打一盘友谊局，不强求输赢'},
+    {icon:'🔥',title:'小场比赛',desc:'打一局短对角，激活比赛感觉'}
+  ];
+  const goal=phaseGoals[Math.min(curPhase,3)];
 
-function doSync() { pullSync().then(() => renderSyncSheet()); }
-function disconnectSync() {
-  state.syncCode = null;
-  state.syncBlobId = null;
-  state.lastSyncTime = null;
-  save();
-  updateSyncUI(false);
-  renderSyncSheet();
-  toast('已断开同步');
-}
+  // ── Personalized motivation ──
+  const motivs=[];
+  if(sk>=7)motivs.push({q:'连续训练'+sk+'天，你已经超越80%的新手',a:'这个连续纪录是你最宝贵的资产'});
+  else if(sk>=3)motivs.push({q:'连续'+sk+'天，再坚持4天就解锁「一周达人」成就',a:'每天进步一点点，一周后你会感谢自己'});
+  else if(sk===0&&ds<0)motivs.push({q:'今天开始你的匹克球之旅',a:'第一步总是最难的，但12周后你会感谢今天的自己'});
+  if(ts>=10)motivs.push({q:'已完成'+ts+'次训练，你的球感在稳步提升',a:'肌肉记忆正在形成，不要让中断打断它'});
+  if(ts>=30)motivs.push({q:'30+次训练！你已经是匹克球爱好者了',a:'享受运动带来的快乐和自信'});
+  const achCount=S.achs.length;
+  if(achCount>=5)motivs.push({q:'已解锁'+achCount+'个成就，证明你一直在前进',a:'每个成就都是你坚持的痕迹'});
+  if(S.refs&&Object.keys(S.refs).length>=1)motivs.push({q:'认真做复盘的习惯让你走得更远',a:'反思让每次训练都有价值'});
+  const motiv=motivs.length?motivs[Math.floor(Date.now()/864e5)%motivs.length]:{q:'坚持打球，成为更好的自己',a:'匹克球不只是运动，是一种生活方式'};
 
-async function joinByCode() {
-  const code = document.getElementById('joinCodeInput')?.value;
-  if (!code || code.length < 4) { toast('请输入有效的同步代码'); return; }
-  toast('正在查找房间...');
-  // Since jsonblob doesn't support search, we need the blob ID
-  // For now, we'll show instructions
-  toast('请输入完整的同步链接（包含blob ID）');
-}
+  // ── Phase-based tip ──
+  const phaseTips=[
+    {icon:'🌱',title:'新手保护期 (W1-3)',desc:'前3周最重要：不求完美，只求到场。能坚持3周，你的大脑会开始把匹克球当作习惯。教练课一定要上，自练做不完也没关系。'},
+    {icon:'📈',title:'技能积累期 (W4-6)',desc:'第4-6周最无聊——你学会了基础但还打不好比赛。熬过去！这时候进步最快，试着和朋友打友谊赛增加趣味性。'},
+    {icon:'⚡',title:'突破瓶颈期 (W7-9)',desc:'第7-9周你可能觉得进步变慢了。这是正常的！实际上你的肌肉记忆在深层巩固。试着加一些比赛对抗来激活练习成果。'},
+    {icon:'🏆',title:'实战精炼期 (W10-12)',desc:'最后阶段，你已经比80%的新手强了。重点从"学动作"转向"打比赛"，享受运动带来的快乐和社交。'}
+  ];
+  const phaseTip=phaseTips[Math.min(curPhase,3)];
 
-function renderAntiQuit() {
-  const pct = state.tasks.length ? Math.round(state.tasks.filter(t=>t.status==='done').length/state.tasks.length*100) : 0;
-  const bufferStatus = state.stats.buffer >= 5 ? '🟢 状态良好' : state.stats.buffer >= 3 ? '🟡 正常运转' : state.stats.buffer >= 1 ? '🟠 橙色预警' : '🔴 红色预警！';
-  return `
-    <div class="modal-title">🛡️ 防放弃面板</div>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:16px">当你觉得"不想拍了""没人看""算了吧"的时候看看这个。</p>
-    <div class="quit-meter">
-      <div class="quit-meter-label"><span>连续发布天数</span><span class="quit-meter-val" style="color:var(--purple)">${state.streak}天</span></div>
-      <div class="quit-bar"><div class="quit-fill" style="width:${Math.min(100,state.streak/21*100)}%;background:var(--purple)"></div></div>
-      <div class="quit-tip">目标：连续21天（养成习惯的最低周期）</div>
-    </div>
-    <div class="quit-meter">
-      <div class="quit-meter-label"><span>总完成率</span><span class="quit-meter-val" style="color:var(--teal)">${pct}%</span></div>
-      <div class="quit-bar"><div class="quit-fill" style="width:${pct}%;background:var(--teal)"></div></div>
-      <div class="quit-tip">目标：≥80%</div>
-    </div>
-    <div class="quit-meter">
-      <div class="quit-meter-label"><span>缓冲库存</span><span class="quit-meter-val" style="color:${state.stats.buffer>=3?'var(--green)':'var(--red)'}">${state.stats.buffer}条</span></div>
-      <div class="quit-bar"><div class="quit-fill" style="width:${Math.min(100,state.stats.buffer/5*100)}%;background:${state.stats.buffer>=3?'var(--green)':'var(--red)'}"></div></div>
-      <div class="quit-tip">${bufferStatus} · 安全线 ≥ 3条</div>
-    </div>
-    <div style="margin-top:16px">
-      <div class="sop-block">
-        <div style="font-size:14px;font-weight:600;margin-bottom:10px">🚨 放弃预警（出现2个以上就要警惕）</div>
-        ${['已经3天没打开看板了','觉得"反正也没人看"','开始找其他新项目','连续跳过拍摄日','缓冲库存归零','开始跟朋友说"我在考虑换方向"'].map(s => `<div style="font-size:13px;color:var(--text2);padding:4px 0">☐ ${s}</div>`).join('')}
-      </div>
-      <div class="sop-block">
-        <div style="font-size:14px;font-weight:600;margin-bottom:10px">💊 应急方案</div>
-        <div class="sop-step"><span class="sop-num">1</span><div class="sop-text"><strong>发库存</strong> — 不用拍新的，发缓冲池的</div></div>
-        <div class="sop-step"><span class="sop-num">2</span><div class="sop-text"><strong>降标准</strong> — 拍一条"状态不好但还是来了"</div></div>
-        <div class="sop-step"><span class="sop-num">3</span><div class="sop-text"><strong>找人说话</strong> — 在球友群约打球</div></div>
-        <div class="sop-step"><span class="sop-num">4</span><div class="sop-text"><strong>看数据</strong> — 翻收藏和评论，有人等你</div></div>
-        <div class="sop-step"><span class="sop-num">5</span><div class="sop-text"><strong>想终点</strong> — 你为什么开始？翻备忘录</div></div>
+  el.innerHTML=`
+    <!-- Risk Index -->
+    <div class="card"><div class="card-title">📊 放弃风险指数</div><div class="qm"><div class="ql"><span>${lt}</span><span>${lp}%</span></div><div class="qb"><div class="qf" style="width:${lp}%;background:${lc}"></div></div><div class="ql"><span style="color:var(--green)">安全</span><span style="color:var(--accent)">注意</span><span style="color:var(--red)">高危</span></div></div>
+    <div class="grid-3" style="margin-top:12px"><div class="stat"><div class="val accent">${ds<0?'—':ds}</div><div class="lbl">距上次(天)</div></div><div class="stat"><div class="val green">${sk}</div><div class="lbl">连续(天)</div></div><div class="stat"><div class="val blue">${ts}</div><div class="lbl">累计(次)</div></div></div></div>
+
+    <!-- Alerts -->
+    ${als.map(a=>`<div class="alert ${a.c}"><div class="at">${a.t}</div>${a.x}</div>`).join('')}
+
+    <!-- Personalized Motivation -->
+    <div class="motivation-box"><div class="mq">${motiv.q}</div><div class="ma">${motiv.a}</div></div>
+
+    ${ds>=2?`
+    <!-- One-click Restart -->
+    <button class="restart-btn" onclick="olm(${cw_i},'self1')">
+      <div class="rb-icon">${goal.icon}</div>
+      <div><div class="rb-title">🎯 ${goal.title}</div><div class="rb-desc">${goal.desc} · 点击记录训练</div></div>
+    </button>`:''}
+
+    <!-- Training Heatmap -->
+    <div class="card" style="margin-top:12px"><div class="card-title">📅 训练日历 · 近8周</div>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><div style="display:grid;grid-template-columns:32px repeat(7,1fr);gap:3px;margin-bottom:2px;min-width:280px"><div></div>${hmHeader}</div>
+      ${hmRows}
+      <div style="display:flex;align-items:center;gap:6px;margin-top:8px;font-size:10px;color:var(--text3)">
+        <span>少</span><div class="hm-cell hm-0" style="width:12px;height:12px"></div><div class="hm-cell hm-1" style="width:12px;height:12px"></div><div class="hm-cell hm-2" style="width:12px;height:12px"></div><div class="hm-cell hm-3" style="width:12px;height:12px"></div><div class="hm-cell hm-4" style="width:12px;height:12px"></div><span>多</span>
       </div>
     </div>
-  `;
-}
 
-function renderStatsEdit() {
-  return `
-    <div class="modal-title">📈 更新数据</div>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:20px">每周只需更新这几个数字。不要多想，记下来就行。</p>
-    <div style="display:flex;flex-direction:column;gap:16px">
-      <div>
-        <label style="font-size:13px;font-weight:500;display:block;margin-bottom:6px">本周已发布（条）</label>
-        <input type="number" id="editWeekPosts" value="${state.stats.weekPosts}" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font-size:16px;font-family:inherit">
-      </div>
-      <div>
-        <label style="font-size:13px;font-weight:500;display:block;margin-bottom:6px">小红书粉丝数</label>
-        <input type="number" id="editFollowers" value="${state.stats.followers}" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font-size:16px;font-family:inherit">
-      </div>
-      <div>
-        <label style="font-size:13px;font-weight:500;display:block;margin-bottom:6px">微信私域新增</label>
-        <input type="number" id="editWeixin" value="${state.stats.weixin}" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font-size:16px;font-family:inherit">
-      </div>
-      <div>
-        <label style="font-size:13px;font-weight:500;display:block;margin-bottom:6px">缓冲库存（条）</label>
-        <input type="number" id="editBuffer" value="${state.stats.buffer}" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font-size:16px;font-family:inherit">
-      </div>
-      <button class="sync-btn sync-btn-primary" style="width:100%;padding:14px" onclick="saveStats()">保存</button>
+    <!-- Weekly Completion -->
+    <div class="card" style="margin-top:12px"><div class="card-title">📊 每周完成率</div>
+      ${wcRows||'<div style="text-align:center;padding:16px;color:var(--text3)">开始训练后显示数据</div>'}
+      <div style="font-size:11px;color:var(--text3);margin-top:8px">显示近6周 · 数字为实际/计划</div>
     </div>
-  `;
+
+    <!-- Risk Trend -->
+    <div class="card" style="margin-top:12px"><div class="card-title">📈 30天风险走势</div>
+      <div class="risk-trend">${rtBars}</div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:4px"><span>30天前</span><span>今天</span></div>
+    </div>
+
+    <!-- Phase Guide -->
+    <div class="card" style="margin-top:12px"><div class="card-title">🗺️ 当前阶段指南</div>
+      <div class="phase-card" style="background:var(--green-bg);border-color:rgba(46,204,113,.2)"><div class="pc-icon">${phaseTip.icon}</div><div><div class="pc-title">${phaseTip.title}</div><div class="pc-desc">${phaseTip.desc}</div></div></div>
+    </div>
+
+    <!-- Recovery Guide -->
+    <div class="card" style="margin-top:12px"><div class="card-title">🔄 中断恢复指南</div>
+    <ul class="rs"><li><h4>接受中断，不自责</h4><p>中断不是失败，放弃才是。你打开这个页面说明你没放弃。</p></li>
+    <li><h4>退一步，不赶进度</h4><p>中断>5天退回上周，>2周退回上一阶段。宁可多花一周巩固。</p></li>
+    <li><h4>把门槛降到零</h4><p>第一天：只做10分钟颠球+5分钟拉伸。目标是"穿上运动鞋"。</p></li>
+    <li><h4>找重启触发器</h4><p>约球友、球拍放门口、设闹钟——用外部信号跨过"不想动"。</p></li>
+    <li><h4>重建连续记录</h4><p>中断清零没关系，新的连续从今天开始。每个小目标都值得庆祝。</p></li></ul></div>`;
 }
 
-function bindStatsEvents() {}
-
-function saveStats() {
-  state.stats.weekPosts = parseInt(document.getElementById('editWeekPosts').value) || 0;
-  state.stats.followers = parseInt(document.getElementById('editFollowers').value) || 0;
-  state.stats.weixin = parseInt(document.getElementById('editWeixin').value) || 0;
-  state.stats.buffer = parseInt(document.getElementById('editBuffer').value) || 0;
-  save();
-  renderDashboard();
-  document.getElementById('modalOverlay').classList.remove('show');
-  toast('✅ 数据已更新');
-  if (state.syncBlobId) pushSync();
+// ═══════════════ ACHIEVEMENTS ═══════════════
+function rAch(){
+  const el=document.getElementById('pg-achievements');
+  el.innerHTML=`<div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:13px;color:var(--text2)">${S.achs.length}/${AC.length} 已解锁</div>
+  ${AC.map(a=>{const u=S.achs.includes(a.id);return`<div class="ach ${u?'on':'lock'}"><div class="ai ${a.c}">${a.i}</div><div><h4>${u?a.n:'???'} ${u?'<span class="badge badge-green">已解锁</span>':''}</h4><p>${a.d}</p></div></div>`}).join('')}`;
 }
 
-function renderSOP(type) {
-  const sops = {
-    content: {
-      title: '📝 内容生产SOP', tip: '⏱ 单条总时长 ≤ 80分钟', tipColor: 'var(--purple)',
-      steps: [
-        {n:'1',title:'选题',sub:'5min：看评论区/竞品/热点，用AI生成3个标题选项'},
-        {n:'2',title:'文案',sub:'15min："先结论后展开"结构，ENTP式金句收尾'},
-        {n:'3',title:'拍摄',sub:'20min：换衣服+拍3遍选最好，允许不完美'},
-        {n:'4',title:'剪辑',sub:'30min：剪映手机版，加字幕+音效'},
-        {n:'5',title:'发布',sub:'10min：三平台同步，结尾固定话术'},
-      ]
-    },
-    weekly: {
-      title: '📊 每周复盘SOP', tip: '⏱ 周复盘 ≤ 30分钟，周五下午', tipColor: 'var(--teal)',
-      steps: [
-        {n:'1',title:'数据看板',sub:'5min：查看各平台数据，重点关注收藏/评论/涨粉'},
-        {n:'2',title:'找出TOP内容',sub:'5min：哪条数据最好？为什么？记录到选题库'},
-        {n:'3',title:'评论区扫雷',sub:'10min：找有价值的评论/问题 = 下周选题'},
-        {n:'4',title:'竞品检查',sub:'5min：看看大丸子、大刚博士发了什么，参考竞品分析文档'},
-        {n:'5',title:'下周计划',sub:'5min：定3个选题+1个额外任务'},
-      ]
-    },
-    wechat: {
-      title: '📱 朋友圈运营SOP', tip: '⚠️ 每天3条，不多不少', tipColor: 'var(--coral)',
-      steps: [
-        {n:'☀️',title:'晨间 8-9点',sub:'AI生成的运动/工作计划截图'},
-        {n:'🌤',title:'午后 14-15点',sub:'打球时的碎片感悟（文字+图），不修图'},
-        {n:'🌙',title:'晚间 21-22点',sub:'学员正反馈/读书心得/今日反思'},
-      ]
-    },
-    growth: {
-      title: '🎯 引流转化SOP', tip: '📈 曝光→互动→私信→加微→社群→付费', tipColor: 'var(--amber)',
-      steps: [
-        {n:'1',title:'视频结尾钩子',sub:'固定话术："评论区扣1，发你新手指南"'},
-        {n:'2',title:'私信承接',sub:'5min内回复，发PDF+"欢迎入坑！"'},
-        {n:'3',title:'引导加微',sub:'"我建了个厦门新手群，要不要一起？"'},
-        {n:'4',title:'社群激活',sub:'每周1次话题/挑战/问题，让群活着'},
-      ]
-    },
+// ═══════════════ REFLECTION ═══════════════
+function rRef(){
+  const el=document.getElementById('pg-reflection'),cw_i=cw(),rf=S.refs[cw_i]||{};
+  let h=`<div class="card"><div class="card-title">📝 W${cw_i} 复盘</div>
+    <div class="ref"><div class="rq">1️⃣ 这周最有成就感的一刻？</div><textarea id="rq1" placeholder="某个动作突然对了、某次对打很流畅……">${rf.q1||''}</textarea></div>
+    <div class="ref"><div class="rq">2️⃣ 最大的困难？</div><textarea id="rq2" placeholder="某个动作不对、体能跟不上……">${rf.q2||''}</textarea></div>
+    <div class="ref"><div class="rq">3️⃣ 下周重点改善？</div><textarea id="rq3" placeholder="一个小而具体的改善目标">${rf.q3||''}</textarea></div>
+    <button class="btn btn-primary btn-full" onclick="sref(${cw_i})">💾 保存复盘</button></div>`;
+  const pw=Object.keys(S.refs).sort((a,b)=>b-a);
+  if(pw.length){h+=`<div class="card"><div class="card-title">📚 历史复盘</div>${pw.map(w=>{const r=S.refs[w];return`<div class="log"><div class="lh"><span class="ld">W${w} · ${r.date||''}</span></div><div class="lc"><b>成就感：</b>${r.q1||'—'}</div><div class="lc"><b>困难：</b>${r.q2||'—'}</div><div class="lc"><b>下周：</b>${r.q3||'—'}</div></div>`}).join('')}</div>`}
+  el.innerHTML=h;
+}
+function sref(wi){S.refs[wi]={q1:document.getElementById('rq1').value,q2:document.getElementById('rq2').value,q3:document.getElementById('rq3').value,date:new Date().toISOString().slice(0,10)};save();chk();toast('✅ 复盘已保存')}
+
+// ═══════════════ RULES ═══════════════
+function rRules(){
+  const el=document.getElementById('pg-rules');
+  el.innerHTML=RL.map(s=>`<div class="card"><div class="card-title">${s.s}</div><div style="overflow-x:auto"><table class="rtbl"><thead><tr>${s.items[0].e?'<th>名称</th><th>英文</th>':'<th>规则</th>'}<th>说明</th>${s.items[0].a?'<th>如何避免</th>':''}</tr></thead><tbody>${s.items.map(i=>`<tr>${i.n?`<td>${i.n}</td>`:''}${i.e?`<td style="color:var(--text3);font-size:11px">${i.e}</td>`:''}<td>${i.d}</td>${i.a?`<td style="color:var(--accent);font-size:11px">${i.a}</td>`:''}</tr>`).join('')}</tbody></table></div></div>`).join('');
+}
+
+// ═══════════════ SYNC ═══════════════
+function rSync(){
+  const el=document.getElementById('pg-sync');const code=genCode();
+  const lastSave=S.lt?'上次训练: '+S.lt+' · 共'+S.logs.length+'条记录 · 总计'+totalCal()+'千卡':'暂无训练记录';
+  el.innerHTML=`
+    <div class="sync-box"><h3>📤 导出同步码</h3><p>将你的所有训练数据压缩成一个同步码。在另一台设备上"导入"即可打通数据。</p>
+    <textarea id="sync-code" readonly>${code}</textarea>
+    <div class="sync-actions"><button type="button" class="btn btn-primary btn-sm" onclick="navigator.clipboard?.writeText(document.getElementById('sync-code').value).then(()=>toast('✅ 已复制到剪贴板')).catch(()=>{document.getElementById('sync-code').select();document.execCommand('copy');toast('✅ 已复制')})">📋 复制同步码</button>
+    <button type="button" class="btn btn-secondary btn-sm" onclick="shareSync()">📤 分享链接</button></div></div>
+    <div class="sync-box"><h3>📥 导入同步码</h3><p>粘贴另一台设备导出的同步码，覆盖当前数据。<b style="color:var(--red)">会覆盖当前所有数据！</b></p>
+    <textarea id="sync-import" placeholder="粘贴同步码到这里……"></textarea>
+    <div class="sync-actions"><button type="button" class="btn btn-primary btn-sm" onclick="importCode()">📥 导入数据</button></div></div>
+    <div class="sync-box"><h3>📁 文件导出/导入</h3><p>导出为JSON文件保存到本地，或从文件导入。适合大容量数据传输，不怕同步码被截断。</p>
+    <div class="sync-actions"><button type="button" class="btn btn-primary btn-sm" onclick="exportFile()">💾 导出JSON文件</button>
+    <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('file-import').click()">📂 从文件导入</button>
+    <input type="file" id="file-import" accept=".json" style="display:none" onchange="importFile(this)"></div></div>
+    <div class="card"><div class="card-title">💡 手机↔电脑同步指南</div><div style="font-size:13px;color:var(--text2);line-height:1.7">
+    <div style="padding:10px;background:var(--bg3);border-radius:var(--radius-s);margin-bottom:10px;font-size:12px">${lastSave}</div>
+    <b>方式一：同步码（小数据量）</b><br>1. 手机上点"复制同步码"<br>2. 电脑上粘贴到"导入同步码"并点击导入<br>3. 反过来也一样<br><br>
+    <b>方式二：文件传输（推荐）</b><br>1. 手机上点"导出JSON文件"下载<br>2. 通过微信/飞书/AirDrop发到电脑<br>3. 电脑上点"从文件导入"选择文件<br><br>
+    <b>方式三：分享链接</b><br>点击"分享链接"生成带数据的URL，对方打开即自动导入<br><br>
+    <b style="color:var(--accent)">⚠️ 注意：</b>同步是覆盖式的，不是合并。后导入的数据会完全替换先前的数据。</div></div>`;
+}
+function genCode(){try{return btoa(unescape(encodeURIComponent(JSON.stringify(S))))}catch(e){return''}}
+function importCode(){
+  const raw=document.getElementById('sync-import').value.trim();
+  if(!raw){toast('❌ 请先粘贴同步码');return}
+  try{const data=JSON.parse(decodeURIComponent(escape(atob(raw))));if(!data.wp&&!data.logs){toast('❌ 同步码格式错误');return}
+    S={...ds(),...data};S=migrate(S);save();toast('✅ 数据已同步，页面刷新中');setTimeout(()=>location.reload(),800)}catch(e){toast('❌ 同步码无效')}
+}
+function exportFile(){
+  const json=JSON.stringify(S,null,2);
+  const blob=new Blob([json],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='pickleboard-data-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  toast('✅ 数据文件已下载');
+}
+function importFile(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const data=JSON.parse(e.target.result);
+      if(!data.wp&&!data.logs){toast('❌ 文件格式错误');return}
+      if(!confirm('导入将覆盖当前所有数据，确定吗？'))return;
+      S={...ds(),...data};S=migrate(S);save();toast('✅ 数据已从文件导入，页面刷新中');setTimeout(()=>location.reload(),800);
+    }catch(err){toast('❌ 文件解析失败')}
   };
-  const sop = sops[type];
-  return `
-    <div class="modal-title">${sop.title}</div>
-    <div style="margin-bottom:16px;padding:10px 14px;background:${sop.tipColor};background:color-mix(in srgb, ${sop.tipColor} 15%, white);border-radius:10px;font-size:13px;color:${sop.tipColor};font-weight:500">${sop.tip}</div>
-    ${sop.steps.map(s => `<div class="sop-step"><span class="sop-num">${s.n}</span><div class="sop-text"><strong>${s.title}</strong><br><span class="sop-sub">${s.sub}</span></div></div>`).join('')}
-  `;
+  reader.readAsText(file);input.value='';
+}
+function shareSync(){const code=genCode();if(!code){toast('❌ 无数据可分享');return}
+  const url=location.href.split('#')[0]+'#sync='+encodeURIComponent(code);
+  if(navigator.share){navigator.share({title:'PickleBoard 数据同步',text:'匹克球训练数据同步码',url:url}).catch(()=>{})}else{navigator.clipboard?.writeText(url).then(()=>toast('✅ 同步链接已复制')).catch(()=>{const ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('✅ 同步链接已复制')})}}
+function checkUrlSync(){const h=location.hash;if(h.startsWith('#sync=')){const code=decodeURIComponent(h.slice(6));if(code){try{const data=JSON.parse(decodeURIComponent(escape(atob(code))));if(data.wp||data.logs){S={...ds(),...data};S=migrate(S);save();location.hash='';toast('✅ 数据已从链接同步')}}catch(e){}}}}
+
+// ═══════════════ SETTINGS ═══════════════
+function rSet(){
+  const el=document.getElementById('pg-settings');
+  el.innerHTML=`
+    <div class="card"><div class="card-title">📅 起始日期</div><p style="font-size:13px;color:var(--text2);margin-bottom:10px">设置第一周训练日期，系统自动计算当前周。</p>
+    <div style="display:flex;gap:8px"><input type="date" id="sd" value="${S.sd}" style="flex:1;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-s);color:var(--text)"><button class="btn btn-primary btn-sm" onclick="S.sd=document.getElementById('sd').value;save();toast('✅ 已更新');render(curPage)">保存</button></div></div>
+    <div class="card"><div class="card-title">⚖️ 身体数据</div><p style="font-size:13px;color:var(--text2);margin-bottom:10px">用于精确计算卡路里消耗（MET公式）</p>
+    <div style="display:flex;gap:10px;margin-bottom:10px"><div style="flex:1"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">体重(kg)</label><input type="number" id="s-weight" value="${S.weight||60}" min="30" max="200" step="0.5" style="width:100%;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-s);color:var(--text)"></div>
+    <div style="flex:1"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">年龄</label><input type="number" id="s-age" value="${S.age||35}" min="10" max="99" style="width:100%;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-s);color:var(--text)"></div></div>
+    <button class="btn btn-primary btn-sm" onclick="S.weight=parseFloat(document.getElementById('s-weight').value)||60;S.age=parseInt(document.getElementById('s-age').value)||35;save();toast('✅ 身体数据已更新');render(curPage)">保存</button>
+    <div style="font-size:11px;color:var(--text3);margin-top:8px">公式：千卡 = MET × 3.5 × 体重(kg) ÷ 200 × 时长(分钟) × 强度系数</div></div>
+    <div class="card"><div class="card-title">📊 数据概览</div><div class="grid-2">
+      <div class="stat"><div class="val green">${S.logs.length}</div><div class="lbl">训练记录</div></div>
+      <div class="stat"><div class="val orange">${totalCal()}</div><div class="lbl">总消耗(千卡)</div></div>
+      <div class="stat"><div class="val blue">${W.filter(w=>wc(w.id)).length}/12</div><div class="lbl">完成周数</div></div>
+      <div class="stat"><div class="val purple">${S.achs.length}/${AC.length}</div><div class="lbl">解锁成就</div></div>
+      <div class="stat"><div class="val accent">${S.wt.length}</div><div class="lbl">体重记录</div></div>
+      <div class="stat"><div class="val green">${Math.round(S.logs.reduce((s,l)=>s+(l.dur||0),0)/60)}</div><div class="lbl">累计(时)</div></div></div></div>
+    <div class="card"><div class="card-title" style="color:var(--red)">🗑 重置数据</div><p style="font-size:13px;color:var(--text2);margin-bottom:10px">清除所有数据，不可撤销。</p><button class="btn btn-danger btn-sm" onclick="if(confirm('确定重置所有数据？')){localStorage.removeItem(SK);location.reload()}">确认重置</button></div>`;
 }
 
-// ===== QUICK ACTIONS =====
-function quickPost() {
-  state.stats.weekPosts = (state.stats.weekPosts || 0) + 1;
-  save();
-  renderDashboard();
-  toast('✅ 已记录发布！本周' + state.stats.weekPosts + '条');
-  if (state.syncBlobId) pushSync();
-}
-function quickBall() { toast('🎾 去打球吧！记录打球次数请在"更新数据"中手动记录'); }
-function quickBuffer() {
-  state.stats.buffer = (state.stats.buffer || 0) + 1;
-  save();
-  renderDashboard();
-  toast('📦 库存+1！当前' + state.stats.buffer + '条');
-  if (state.syncBlobId) pushSync();
-}
-
-// ===== EXPORT/IMPORT =====
-function exportData() {
-  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = '媛大人匹克球数据_' + new Date().toISOString().slice(0,10) + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
-  toast('📥 数据已导出');
-}
-function importData() { document.getElementById('importInput').click(); }
-function handleImport(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    try {
-      const imported = JSON.parse(ev.target.result);
-      if (imported.tasks) state.tasks = imported.tasks;
-      if (imported.milestones) state.milestones = imported.milestones;
-      if (imported.stats) state.stats = {...state.stats, ...imported.stats};
-      if (imported.weeklyDone) state.weeklyDone = imported.weeklyDone;
-      if (imported.streak) state.streak = imported.streak;
-      if (imported.currentPhase) state.currentPhase = imported.currentPhase;
-      save();
-      renderAll();
-      toast('✅ 数据已导入！');
-      if (state.syncBlobId) pushSync();
-    } catch(err) { toast('❌ 文件格式错误'); }
-  };
-  reader.readAsText(file);
-  e.target.value = '';
-}
-
-// ===== TOAST =====
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
-}
-
-// ===== INIT =====
-load();
-renderAll();
+// ═══════════════ INIT ═══════════════
+load();checkUrlSync();chk();rDash();us();
+document.getElementById('wmodal').addEventListener('click',e=>{if(e.target===e.currentTarget)cwm()});
+document.getElementById('lmodal').addEventListener('click',e=>{if(e.target===e.currentTarget)clm()});
+document.getElementById('wtmodal').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open')});
+document.getElementById('mmenu').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open')});
 </script>
 </body>
 </html>
