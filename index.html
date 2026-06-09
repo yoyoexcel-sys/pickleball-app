@@ -7,16 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0f1117">
 <title>匹克球新手修炼手册 · PickleBoard</title>
-<link rel="manifest" href="manifest.json">
-<link rel="apple-mobile-web-app-capable" content="yes">
-<link rel="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="apple-mobile-web-app-title" content="PickleBoard">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f1117'/><text x='50' y='72' text-anchor='middle' font-size='55'>🎾</text></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f1117'/><text x='50' y='72' text-anchor='middle' font-size='55'>🎾</text></svg>">
-<meta name="description" content="匹克球12周训练看板 - 进度追踪、防放弃预警、卡路里记录、成就系统">
-<meta property="og:title" content="PickleBoard · 匹克球训练看板">
-<meta property="og:description" content="12周训练计划、防放弃预警、卡路里追踪、成就徽章，你的匹克球成长伙伴">
-<meta property="og:type" content="website">
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiUGlja2xlQm9hcmQiLCJzaG9ydF9uYW1lIjoiUGlja2xlQm9hcmQiLCJzdGFydF91cmwiOiIuIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMTExNyIsInRoZW1lX2NvbG9yIjoiIzBmMTExNyJ9">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -333,7 +324,7 @@ input,textarea,select{font-family:inherit;outline:none;-webkit-appearance:none}
     <div class="nav-section">其他</div>
     <div class="nav-item" data-page="sync">🔄 数据同步</div>
     <div class="nav-item" data-page="settings">⚙️ 数据管理</div>
-    <div class="sidebar-footer">v3.3 · 朱朱的电量</div>
+    <div class="sidebar-footer">v3.0 · 朱朱的电量</div>
   </nav>
 
   <div class="main">
@@ -880,8 +871,10 @@ function rQuit(){
 
   // ── Risk trend (last 30 days) ──
   let rtBars='';
+  if(ds<0){
+    rtBars='<div style="text-align:center;padding:16px;color:var(--text3)">开始训练后显示走势</div>';
+  }else{
   const now2=new Date();
-  let rtPrevRisk=0;
   for(let i=29;i>=0;i--){
     const d=new Date(now2);d.setDate(d.getDate()-i);
     const ds3=d.toISOString().slice(0,10);
@@ -892,14 +885,12 @@ function rQuit(){
     else if(daysSince<=3)risk=40+daysSince*10;
     else if(daysSince<=6)risk=70+daysSince*3;
     else risk=95;
-    // Override with actual training - if trained, risk drops
     if(dayLogs.length>0){risk=Math.max(5,risk-50)}
     risk=Math.min(100,risk);
     const h=Math.max(3,risk);
     const clr=risk<30?'var(--green)':risk<60?'var(--accent)':'var(--red)';
-    const label=i===0?'今':i%7===0?Math.floor(i/7)+'w前':'';
     rtBars+=`<div class="rt-bar" style="height:${h}%;background:${clr};${i===29||i===0?'opacity:1':'opacity:.6'}" data-v="${Math.round(risk)}%"></div>`;
-  }
+  }}
 
   // ── Micro-goal restart ──
   const curPhase=Math.floor((cw_i-1)/3);
