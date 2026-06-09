@@ -573,10 +573,10 @@ function rDash(){
     wc_h+=`<button type="button" class="wk ${d?'done':''} ${n?'now':''}" onclick="owm(${i})"><div class="wh"><span class="wn">W${i}</span><span class="badge ${d?'badge-green':n?'badge-accent':'badge-blue'}">${w.pn}</span></div><div class="wt">${w.coach}</div><div class="wp"><div class="bar"><div class="bf" style="width:${pp}%"></div></div><span class="pc">${pp}%</span></div></button>`}
   el.innerHTML=`
     <div style="border-radius:var(--radius);overflow:hidden;margin-bottom:12px;position:relative;background:linear-gradient(135deg,#0EA5E9,#38BDF8);box-shadow:var(--shadow-md)">
-      <img src="assets/cover.jpg" style="width:100%;height:180px;object-fit:cover;opacity:.95;display:block" alt="cover">
+      <img src="assets/cover.jpg" style="width:100%;height:180px;object-fit:cover;object-position:top;opacity:.95;display:block" alt="cover">
       <div style="position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(transparent,rgba(12,74,110,.7));color:#fff">
-        <div style="font-size:18px;font-weight:800">PickleBoard 🎾</div>
-        <div style="font-size:12px;opacity:.9;margin-top:2px">12周新手修炼计划 · 夏日清凉版</div>
+        <div style="font-size:18px;font-weight:800;color:#FF6B81;text-shadow:0 1px 3px rgba(0,0,0,.4)">PickleBoard 🎾</div>
+        <div style="font-size:12px;opacity:.9;margin-top:2px;color:#FFE4E1;text-shadow:0 1px 2px rgba(0,0,0,.3)">12周新手修炼计划 · 夏日清凉版</div>
       </div>
     </div>
     <div class="grid-2" style="margin-bottom:10px">
