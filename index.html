@@ -390,7 +390,7 @@ input,textarea,select{font-family:inherit;outline:none;-webkit-appearance:none}
 const W=[
 {id:1,ph:1,pn:'规范与常识',coach:'大陆式握拍+准备姿势',kp:['虎口对准拍柄侧棱','双膝微屈、重心前倾、拍子在胸前方'],s1:'练习握拍切换（正手↔反手↔大陆式各20次）；对镜检查准备姿势；颠球',s2:'增加重复次数；闭眼握拍确认手感；墙前轻拍球感受弹跳',s3:'复习全部内容；对墙轻轻击球（感受拍面触球）',ms:['能正确切换大陆式握拍','准备姿势自然放松','颠球连续15个']},
 {id:2,ph:1,pn:'规范与常识',coach:'球场常识+计分规则+基本移动',kp:['知道厨房区位置和规则','理解双弹跳规则','学会并步移动'],s1:'球场上走一遍各区域；并步移动（左右各10趟）',s2:'模拟发球站位；正反手交替颠球；并步+跨步组合',s3:'综合复习握拍+准备姿势+移动+颠球；约球友体验第一次对打',ms:['清楚球场各区域','理解双弹跳规则','并步移动流畅']},
-{id:3,ph:2,pn:'基础击球',coach:'上手发球(Underhand Serve)',kp:['发球手低于腰线','拍头低于手腕','发对角线','基线后方不压线'],s1:'对墙练习发球动作；慢动作分解：抛球→引拍→击球→随挥，各30次',s2:'逐步加速但保持动作不变；颠球+发球组合',s3:'发球20分钟（目标连续10个合法发球）；平板支撑升级40秒/组',ms:['发球动作符合规则','连续5个合法发球']},
+{id:3,ph:2,pn:'基础击球',coach:'下手发球(Underhand Serve)',kp:['发球手低于腰线','拍头低于手腕','发对角线','基线后方不压线'],s1:'对墙练习发球动作；慢动作分解：抛球→引拍→击球→随挥，各30次',s2:'逐步加速但保持动作不变；颠球+发球组合',s3:'发球20分钟（目标连续10个合法发球）；平板支撑升级40秒/组',ms:['发球动作符合规则','连续5个合法发球']},
 {id:4,ph:2,pn:'基础击球',coach:'正手底线击球(Forehand Drive)',kp:['完整转身引拍→击球点在身体前方→随挥到底','动作路径一致'],s1:'对镜空挥正手50次（强调转身和击球点）；录像对比教练示范',s2:'对墙正手连续击球20分钟（离墙3-4米，打同一高度）',s3:'正手+发球组合练习；横向并步训练',ms:['转身引拍连贯','击球点稳定在身体前方']},
 {id:5,ph:2,pn:'基础击球',coach:'反手底线击球(Backhand Drive)',kp:['双手反手握拍','同样强调转身和击球点','不用手腕发力'],s1:'空挥反手50次；正反手切换（正手10→反手10，循环5组）',s2:'对墙反手15分钟+正手10分钟；不用手腕甩球',s3:'正反手随机切换对墙练习；社交对打中刻意用反手',ms:['反手动作规范','正反手切换无卡顿']},
 {id:6,ph:2,pn:'基础击球',coach:'截击(Volley)正手+反手',kp:['网前不落地击球','拍面固定、动作极小','肩膀和小臂发力'],s1:'空挥截击（极小幅度）正手30+反手30；网前对墙快速轻击',s2:'对墙近距离截击（1.5-2米，快速连续轻击）；底线+截击组合',s3:'发球→底线→模拟上网截击；社交对打中尝试截击',ms:['截击幅度小','拍面稳定不乱甩']},
@@ -574,6 +574,7 @@ function rDash(){
   el.innerHTML=`
     <div style="border-radius:var(--radius);overflow:hidden;margin-bottom:12px;position:relative;background:linear-gradient(135deg,#0EA5E9,#38BDF8);box-shadow:var(--shadow-md)">
       <img src="assets/cover.jpg" style="width:100%;height:180px;object-fit:cover;object-position:top;opacity:.95;display:block" alt="cover">
+      <div style="position:absolute;top:8px;right:10px;font-size:9px;color:rgba(255,255,255,.7);text-shadow:0 1px 2px rgba(0,0,0,.4);text-align:right;line-height:1.4">© 媛大人<br>版权所有 未经许可不得转载</div>
       <div style="position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(transparent,rgba(12,74,110,.7));color:#fff">
         <div style="font-size:18px;font-weight:800;color:#FF6B81;text-shadow:0 1px 3px rgba(0,0,0,.4)">PickleBoard 🎾</div>
         <div style="font-size:12px;opacity:.9;margin-top:2px;color:#FFE4E1;text-shadow:0 1px 2px rgba(0,0,0,.3)">12周新手修炼计划 · 夏日清凉版</div>
